@@ -1,18 +1,22 @@
-<mat-card>
-    <form [formGroup] = "myForm">
-        Value : {{ myForm.value | json}}
+<div class="example-container">
+    <form [formGroup]="chartOptions">
+        
+        <h2>Grid:  </h2>
+        <div>
+            <mat-label>X Axis:  </mat-label>
+            <mat-checkbox [formControl] = "gridXAxisControl"></mat-checkbox>
+        </div>
+        <div>
+            <mat-label>Y Axis:  </mat-label>
+            <mat-checkbox [formControl] = "gridYAxisControl"></mat-checkbox>
+        </div>
+        
+        <h2>Labels:  </h2>
+        <div>
+            <mat-label>Labels:  </mat-label>
+            <mat-checkbox [formControl] = "labelControl"></mat-checkbox>
+        </div>
+        
 
-        <mat-form-field>
-            <mat-label for="firstName">first name</mat-label>
-            <input matInput formControlName = "firstName">
-        </mat-form-field>  
-    
-        <mat-form-field>
-            <mat-label for="comment">comment</mat-label>
-            <textarea matInput formControlName = "comment" id="comment" cols="30" rows="10"></textarea>
-        </mat-form-field> 
-
-        <button mat-raised-button color = "primary">Submit</button>
     </form>
-
-</mat-card>
+</div>

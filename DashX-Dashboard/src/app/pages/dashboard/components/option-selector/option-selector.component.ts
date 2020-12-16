@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { stringify } from '@angular/compiler/src/util';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, MaxLengthValidator } from '@angular/forms';
 
 
 @Component({
@@ -8,16 +9,32 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./option-selector.component.css']
 })
 export class OptionSelectorComponent implements OnInit{
+  
+  chartOptions: FormGroup;
+  hideRequiredControl = new FormControl(false);
+  floatLabelControl = new FormControl('auto');
+  isGridControl = new FormControl(false);
+  gridXAxisControl = new FormControl(false);
+  gridYAxisControl = new FormControl(false);
+  labelControl = new FormControl(false);
+   
 
-  myForm : FormGroup
-  constructor(private fb : FormBuilder){
+  @Output() optionChanged = new EventEmitter<any>(); 
 
+  constructor(private fb: FormBuilder) {
+    
   }
-  ngOnInit(){
-    this.myForm = this.fb.group({
-      firstName : '',
-      comment : ''
+  ngOnInit() {
+
+    this.chartOptions = this.fb.group({
+      XGrid : this.gridXAxisControl,
+      YGrid : this.gridYAxisControl,
+      labels : this.labelControl
+    });
+
+    this.chartOptions.valueChanges.subscribe(()=>{
+      this.optionChanged.emit(this.chartOptions.value);
     })
-    // this.myForm.valueChanges.subscribe(console.log) // subscribe to change event
   }
+
 }

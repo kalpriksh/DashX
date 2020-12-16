@@ -10,6 +10,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from "@angular/material/radio";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatSelectModule } from "@angular/material/select";
 
 import { NgApexchartsModule } from "ng-apexcharts";
 import { from } from 'rxjs';
@@ -27,6 +30,9 @@ import { from } from 'rxjs';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatSelectModule,
 
     FormsModule,
     ReactiveFormsModule

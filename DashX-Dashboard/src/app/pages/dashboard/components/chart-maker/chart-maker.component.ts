@@ -11,7 +11,8 @@ import {
   ApexStroke,
   ApexXAxis,
   ApexFill,
-  ApexTooltip
+  ApexTooltip,
+  ApexGrid
 } from "ng-apexcharts";
 
 export type ChartOptions = {
@@ -25,6 +26,7 @@ export type ChartOptions = {
   tooltip: ApexTooltip;
   stroke: ApexStroke;
   legend: ApexLegend;
+  grid: ApexGrid;
 };
 
 
@@ -35,9 +37,35 @@ export type ChartOptions = {
 })
 export class ChartMakerComponent {
   public chart: Partial<any>
+  XGrid : boolean
+  YGrid : boolean
+  @ViewChild('chartObj') usedChart : ChartComponent;
 
   public ngOnInit(): void {    
     this.chart = this.initChart();
+  }
+
+  updateChart(test){
+    console.log(test)
+    
+    this.usedChart.updateOptions({
+      dataLabels:{
+        enabled : test.labels
+      },
+      grid:{
+        xaxis: {
+          lines: {
+              show: test.XGrid
+          }
+      },   
+      yaxis: {
+          lines: {
+              show: test.YGrid
+          }
+      } 
+      }
+    });
+
   }
 
   public initChart(): Partial<any> {
@@ -65,13 +93,16 @@ export class ChartMakerComponent {
       },
       plotOptions: {
         bar: {
-          horizontal: false,
+          horizontal: true,
           columnWidth: "55%",
           endingShape: "rounded"
         }
       },
+      grid : {
+        show : true
+      },
       dataLabels: {
-        enabled: false
+        enabled: true
       },
       stroke: {
         show: true,
