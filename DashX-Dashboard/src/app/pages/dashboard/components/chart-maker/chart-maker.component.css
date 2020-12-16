@@ -1,0 +1,5 @@
+.chart {
+  min-width: 50vh;
+  margin: 35px auto;
+  overflow: scroll;
+}
