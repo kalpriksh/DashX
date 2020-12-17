@@ -1,4 +1,4 @@
-import { PieChartData } from '../../models/pieChartData';
+import { PieChartData } from '../../../models';
 import { Component, OnInit, Input } from "@angular/core";
 import { ChartComponent } from "ng-apexcharts";
 

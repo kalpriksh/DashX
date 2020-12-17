@@ -9,7 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { DashboardModule } from '../dashboard.module';
+import { DashboardModule } from '../dashboard/dashboard.module';
 
 @NgModule({
   declarations: [SidenavComponent,HeaderComponent],
