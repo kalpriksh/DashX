@@ -11,6 +11,8 @@ import { DashboardModule } from "../app/pages/dashboard/dashboard.module";
 import { MatCardModule } from "@angular/material/card";
 
 import { NgApexchartsModule } from "ng-apexcharts";
+import { SharedModule } from './pages/dashboard/shared/shared.module';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { NgApexchartsModule } from "ng-apexcharts";
     BrowserAnimationsModule,
     DashboardModule,
     MatCardModule,
+    MatSliderModule,
+    SharedModule,
     NgApexchartsModule
   ],
   providers: [],
