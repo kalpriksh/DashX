@@ -13,18 +13,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from "@angular/material/radio";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatSelectModule } from "@angular/material/select";
-
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { from } from 'rxjs';
 
+import { ChartsContainerComponent } from './components/charts-container/charts-container.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { DashboardService } from './services';
 
 @NgModule({
-  declarations: [OptionSelectorComponent, ChartMakerComponent],
+  declarations: [OptionSelectorComponent, ChartMakerComponent, ChartsContainerComponent],
   imports: [
     CommonModule,
     
     NgApexchartsModule,
-    
+    MatToolbarModule,
     MatCardModule,
     MatFormFieldModule,
     MatIconModule,
@@ -33,14 +36,17 @@ import { from } from 'rxjs';
     MatRadioModule,
     MatCheckboxModule,
     MatSelectModule,
-
+    MatGridListModule,
     FormsModule,
     ReactiveFormsModule
   ],
   exports: [
     OptionSelectorComponent,
     ChartMakerComponent,
-    NgApexchartsModule
+   ChartsContainerComponent
+  ],
+  providers: [
+    DashboardService
   ]
 })
 export class DashboardModule { }
