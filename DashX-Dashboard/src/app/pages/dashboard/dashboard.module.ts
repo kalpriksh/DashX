@@ -32,9 +32,6 @@ import { DashboardService } from './services';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
-    MatRadioModule,
-    MatCheckboxModule,
-    MatSelectModule,
     MatGridListModule,
     FormsModule,
     ReactiveFormsModule
