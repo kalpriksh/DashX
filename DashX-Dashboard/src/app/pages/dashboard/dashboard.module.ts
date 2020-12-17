@@ -16,16 +16,15 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { from } from 'rxjs';
-
+import { LineChartComponent} from './components/line-chart/line-chart.component';
 import { ChartsContainerComponent } from './components/charts-container/charts-container.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DashboardService } from './services';
 
 @NgModule({
-  declarations: [OptionSelectorComponent, ChartMakerComponent, ChartsContainerComponent],
+  declarations: [OptionSelectorComponent, ChartMakerComponent, LineChartComponent, ChartsContainerComponent],
   imports: [
     CommonModule,
-    
     NgApexchartsModule,
     MatToolbarModule,
     MatCardModule,
