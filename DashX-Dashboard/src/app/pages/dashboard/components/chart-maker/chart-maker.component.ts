@@ -87,8 +87,6 @@ export class ChartMakerComponent {
       chart: {
         type: "bar",
         height: 375,
-        // width: '100%'
-
       },
       plotOptions: {
         bar: {
