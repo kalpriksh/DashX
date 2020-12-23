@@ -10,7 +10,7 @@ import {
   ApexStroke,
   ApexGrid
 } from "ng-apexcharts";
-import { LineChartData } from '../../../models';
+import { LineChartData } from '../../models';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;

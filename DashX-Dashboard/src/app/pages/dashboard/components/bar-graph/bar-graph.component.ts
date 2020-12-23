@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BarGraphData } from '../../../models/barGraphData';
+import { BarGraphData } from '../../models';
 import {
   ApexAxisChartSeries,
   ApexChart,
