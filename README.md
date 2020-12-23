@@ -18,6 +18,6 @@ Choose from a selection of multiple options like:
 (need to finalize)
 
 ## Custom Query Editor (Future Scope)
-Provides functionality to edit data before using in charts
+Provides functionality to edit data before using it in charts
 
 
