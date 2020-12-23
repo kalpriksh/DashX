@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OptionSelectorComponent } from './components/option-selector/option-selector.component';
-import { ChartMakerComponent } from './components/chart-maker/chart-maker.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms' 
 
@@ -10,9 +8,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { from } from 'rxjs';
+
+import { ChartMakerComponent } from './components/chart-maker/chart-maker.component';
+import { OptionSelectorComponent } from './components/option-selector/option-selector.component';
 import { LineChartComponent} from './components/line-chart/line-chart.component';
 import { ChartsContainerComponent } from './components/charts-container/charts-container.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -32,7 +34,8 @@ import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
     MatButtonModule,
     MatGridListModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCheckboxModule
   ],
   exports: [
     OptionSelectorComponent,
