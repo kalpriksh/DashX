@@ -45,24 +45,23 @@ export class ChartMakerComponent {
     this.chart = this.initChart();
   }
 
-  updateChart(test){
-    console.log(test)
-    
+  updateChart( chartOption ){
+
     this.usedChart.updateOptions({
       dataLabels:{
-        enabled : test.labels
+        enabled : chartOption.labels
       },
       grid:{
         xaxis: {
           lines: {
-              show: test.XGrid
+              show: chartOption.XGrid
           }
       },   
       yaxis: {
           lines: {
-              show: test.YGrid
+              show: chartOption.YGrid
           }
-      } 
+      }
       }
     });
 
