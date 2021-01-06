@@ -1,4 +1,7 @@
 <div>
+  <div>
+    <app-option-selector (optionChanged) = "updateChart($event)"></app-option-selector>
+  </div>
     <apx-chart
       [series]="chart.series"
       [chart]="chart.chart"

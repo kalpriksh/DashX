@@ -22,12 +22,18 @@ export type ChartOptions = {
   templateUrl: './bar-graph.component.html',
   styleUrls: ['./bar-graph.component.css']
 })
-export class BarGraphComponent implements OnInit {
+export class BarGraphComponent implements OnInit{
   public chart: Partial<any>;
   @Input() barGraphData: BarGraphData;
   ngOnInit(): void {
     this.chart = this.initChart(this.barGraphData.name, this.barGraphData.data, this.barGraphData.categories);
   }
+
+  //to update the chart options
+  updateChart(chartOptions){
+    console.log(chartOptions);
+  }
+
   public initChart(name: string, data: number[], categories: string[]): Partial<any> {
    return {
       series: [

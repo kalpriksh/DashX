@@ -1,5 +1,5 @@
 
-<app-option-selector (optionChanged) = "updateChart($event)"></app-option-selector>
+<app-option-selector [defaultChartOptions] ="chart" (optionChanged) = "updateChart($event)"></app-option-selector>
 <mat-card>
 
   <mat-card-title>
@@ -13,8 +13,6 @@
       [dataLabels]="chart.dataLabels"
       [grid]="chart.grid"
       [stroke]="chart.stroke"
-      [title]="chart.title"
-      [responsive]="chart.responsive"
       [grid]="chart.grid"
     ></apx-chart>
 

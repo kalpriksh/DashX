@@ -10,6 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSliderModule } from '@angular/material/slider';
+import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
+
+
 import { NgApexchartsModule } from "ng-apexcharts";
 import { from } from 'rxjs';
 
@@ -35,7 +39,9 @@ import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
     MatGridListModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSliderModule,
+    NgxMatColorPickerModule
   ],
   exports: [
     OptionSelectorComponent,
@@ -43,7 +49,8 @@ import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
    ChartsContainerComponent
   ],
   providers: [
-    DashboardService
+    DashboardService,
+    { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
   ]
 })
 export class DashboardModule { }

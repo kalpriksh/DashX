@@ -1,7 +1,8 @@
+import { BOOL_TYPE, ThrowStmt } from '@angular/compiler/src/output/output_ast';
 import { stringify } from '@angular/compiler/src/util';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, MaxLengthValidator } from '@angular/forms';
-
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild} from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, MaxLengthValidator,NgForm } from '@angular/forms';
+import { ChartOptions } from '../../models/chartOptions';
 
 @Component({
   selector: 'app-option-selector',
@@ -10,31 +11,40 @@ import { FormBuilder, FormGroup, FormControl, MaxLengthValidator } from '@angula
 })
 export class OptionSelectorComponent implements OnInit{
   
-  chartOptions: FormGroup;
-  hideRequiredControl = new FormControl(false);
-  floatLabelControl = new FormControl('auto');
-  isGridControl = new FormControl(false);
-  gridXAxisControl = new FormControl(false);
-  gridYAxisControl = new FormControl(false);
-  labelControl = new FormControl(false);
-   
+  testChartOptions
+  chartOptions_dash: Partial<ChartOptions>;
+  $formChanges
 
+  @Input() defaultChartOptions
   @Output() optionChanged = new EventEmitter<any>(); 
 
+  @ViewChild('optionSelectorForm', { static: true }) optionSelectorForm: NgForm;
+  
   constructor(private fb: FormBuilder) {
-    
   }
-  ngOnInit() {
 
-    this.chartOptions = this.fb.group({
-      XGrid : this.gridXAxisControl,
-      YGrid : this.gridYAxisControl,
-      labels : this.labelControl
-    });
+  //listens to the form changeValue event and update the chart options
+  updateOptions(testForm){
+    // console.log(testForm);
+    console.log(this.testChartOptions); 
+    this.optionChanged.emit(this.testChartOptions);
+  }
 
-    this.chartOptions.valueChanges.subscribe(()=>{
-      this.optionChanged.emit(this.chartOptions.value);
+  ngOnInit(){
+    
+    this.testChartOptions = this.defaultChartOptions
+
+    
+
+    this.$formChanges = this.optionSelectorForm.form.valueChanges.subscribe(x => {
+      setTimeout(() => {
+      })
+      console.log(this.testChartOptions);
+
     })
+
+    
+    console.log(this.defaultChartOptions);
   }
 
 }
