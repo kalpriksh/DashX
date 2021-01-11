@@ -34,7 +34,7 @@ export class OptionSelectorComponent implements OnInit{
     this.InitDefaults();
 
     //subscribe to form value change event
-    this.$formChanges = this.optionSelectorForm.form.valueChanges.subscribe(this.UpdateOptions);1
+    this.$formChanges = this.optionSelectorForm.form.valueChanges.subscribe(this.UpdateOptions);
     }
 
   //#region component methods

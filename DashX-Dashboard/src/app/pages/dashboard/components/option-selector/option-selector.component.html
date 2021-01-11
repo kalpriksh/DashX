@@ -2,7 +2,7 @@
     <button class = "toggle-button" mat-raised-button color = "warn" (click) = "ToggleOptions($event)">Settings</button>
 
     <mat-card class="chart-card" [ngClass]="{'no-display': optionsVisible}" id="Options">
-        <form #optionSelectorForm = "ngForm" (ngSubmit)="UpdateOptions(optionSelectorForm)">
+        <form #optionSelectorForm = "ngForm" (ngSubmit)="UpdateOptions()">
                 
                 <section class="Grid top-pad-1">
                     <mat-checkbox name = "gridXLines" [(ngModel)] = "ChartOptions.grid.xaxis.lines.show">x-Axis</mat-checkbox>&#160;
