@@ -1,0 +1,8 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" position="end" [(opened)] ="opened">
+   Chart Editor
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <button (click)="sidenav.toggle()"> Edit </button>
+    </mat-sidenav-content>
+</mat-sidenav-container>
