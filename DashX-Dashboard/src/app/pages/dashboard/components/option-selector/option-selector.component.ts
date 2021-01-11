@@ -1,5 +1,3 @@
-import { BOOL_TYPE, ThrowStmt } from '@angular/compiler/src/output/output_ast';
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, MaxLengthValidator,NgForm } from '@angular/forms';
 import { ChartOptions } from '../../models/chartOptions';
@@ -11,40 +9,41 @@ import { ChartOptions } from '../../models/chartOptions';
 })
 export class OptionSelectorComponent implements OnInit{
   
-  testChartOptions
-  chartOptions_dash: Partial<ChartOptions>;
+  ChartOptions
+  optionsVisible : boolean
   $formChanges
 
   @Input() defaultChartOptions
   @Output() optionChanged = new EventEmitter<any>(); 
+  @Output() toggleOptions = new EventEmitter<any>();
 
   @ViewChild('optionSelectorForm', { static: true }) optionSelectorForm: NgForm;
   
+  
+  // constructor
   constructor(private fb: FormBuilder) {
   }
 
-  //listens to the form changeValue event and update the chart options
-  updateOptions(testForm){
-    // console.log(testForm);
-    console.log(this.testChartOptions); 
-    this.optionChanged.emit(this.testChartOptions);
-  }
-
   ngOnInit(){
-    
-    this.testChartOptions = this.defaultChartOptions
+    this.ChartOptions = this.defaultChartOptions
+    this.optionsVisible = true
 
-    
+    this.$formChanges = this.optionSelectorForm.form.valueChanges.subscribe(this.UpdateOptions);
+    }
 
-    this.$formChanges = this.optionSelectorForm.form.valueChanges.subscribe(x => {
-      setTimeout(() => {
-      })
-      console.log(this.testChartOptions);
+  //#region component methods
 
-    })
-
-    
-    console.log(this.defaultChartOptions);
+  //listens to the form changeValue event and update the chart options
+  UpdateOptions(){
+    this.optionChanged.emit(this.ChartOptions);
   }
+  
+  // function to emit event to hide or show Options
+  ToggleOptions(clickEvent){
+    this.optionsVisible = !(this.optionsVisible)
+    this.toggleOptions.emit(clickEvent);
+  }
+
+  //#endregion
 
 }

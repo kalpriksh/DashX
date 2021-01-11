@@ -11,6 +11,7 @@ import {
   ApexFill,
   ApexTooltip,
   ApexGrid,
+  ApexTheme
   
 } from "ng-apexcharts";
 
@@ -27,6 +28,7 @@ export type BarChartOptions = {
   stroke: ApexStroke;
   legend: ApexLegend;
   grid: ApexGrid;
+  theme: ApexTheme;
 };
 
 export class BarChartDefault {
@@ -37,7 +39,8 @@ export class BarChartDefault {
       series: [
         {
           name: "Net Profit",
-          data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+          data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
+          color: "green"
         },
         {
           name: "Revenue",
@@ -56,11 +59,11 @@ export class BarChartDefault {
         bar: {
           horizontal: false,
           columnWidth: "55%",
-          endingShape: "rounded",
+          endingShape: "flat",
           colors: {
             ranges: [{
-                from: 0,
-                to: 0,
+                from: 10,
+                to: 40,
                 color: "blue"
             }],
             backgroundBarColors: [],
@@ -104,13 +107,20 @@ export class BarChartDefault {
         ]
       },
       yaxis: {
-        title: {
-            text: "$ (thousands)"
-          }
+       
       },
       fill: {
         opacity: 0
+      },
+      theme: {
+        monochrome: {
+          enabled: false,
+          color: '#255aee',
+          shadeTo: 'light',
+          shadeIntensity: 0.65
+        }
       }
+
     };
   }
   

@@ -1,56 +1,32 @@
 <div class="container">
-    
-    <h2>Options</h2>
-    <form #optionSelectorForm = "ngForm" (ngSubmit)="updateOptions(optionSelectorForm)">
-        <section class="Chart">
-            <h3>Chart:</h3>
-            <label for="chartHeight">Chart Height:</label>
-            <mat-slider min="100" max="500" step="10" [(ngModel)] = "testChartOptions.chart.height" name = "chartHeight"></mat-slider>
-        </section>
+    <button class = "toggle-button" mat-raised-button color = "warn" (click) = "ToggleOptions($event)">Settings</button>
 
-        <section class="Grid">
-            <h3>Grid:</h3>
-            <mat-checkbox name = "gridLines" [(ngModel)] = "testChartOptions.grid.show">Grid</mat-checkbox>&#160;
-            <br>
-            <mat-checkbox name = "gridXLines" [(ngModel)] = "testChartOptions.grid.xaxis.lines.show">x-Axis</mat-checkbox>&#160;
-            <mat-checkbox name = "gridYLines" [(ngModel)] = "testChartOptions.grid.yaxis.lines.show">y-Axis</mat-checkbox>&#160;
-        </section>
+    <mat-card class="chart-card" [ngClass]="{'no-display': optionsVisible}" id="Options">
+        <form #optionSelectorForm = "ngForm" (ngSubmit)="UpdateOptions(optionSelectorForm)">
+                
+                <section class="Grid top-pad-1">
+                    <mat-checkbox name = "gridXLines" [(ngModel)] = "ChartOptions.grid.xaxis.lines.show">x-Axis</mat-checkbox>&#160;
+                    <mat-checkbox name = "gridYLines" [(ngModel)] = "ChartOptions.grid.yaxis.lines.show">y-Axis</mat-checkbox>&#160;
+                </section>
 
-        <section class="Labels">
-            <h3>Labels:</h3>
-            <mat-checkbox name = "gridLines" [(ngModel)] = "testChartOptions.dataLabels.enabled">Data Labels</mat-checkbox>
-        </section>
+                <section class="Labels top-pad-1 bottom-pad-1 ">
+                    <mat-checkbox name = "dataLabels" [(ngModel)] = "ChartOptions.dataLabels.enabled">Data Labels</mat-checkbox>
+                </section>
 
-        <!-- can/cannot be array -->
-        <!-- need option to add more series -->
-        <section class="Series">
-            <h3>Series:</h3>
-            <mat-form-field class="example-full-width" *ngFor="let dataSeries of testChartOptions.series; let i = index">
-                <mat-label>{{dataSeries.name}}</mat-label>
-                <input matInput placeholder="Revenue" [(ngModel)] = "dataSeries.name" value = {{dataSeries.name}} name="testSeries{{i}}">
-            </mat-form-field>
-        </section>
+                <section class="Stroke">
+                    <label for="strokeShow">Stroke Display:</label>
+                    <mat-checkbox name = "strokeShow" [(ngModel)] = "ChartOptions.stroke.show"></mat-checkbox>
+                    <br>
+                    <label for="strokeWidth">Stroke Width:</label>
+                    <mat-slider min="0" max="5" step="0.2" [(ngModel)] = "ChartOptions.stroke.width" name = "strokeWidth"></mat-slider>          
+                </section>
 
-        <!-- need to give option to add and remove categories -->
-        <section class="xAxis">
-            <h3>X-Axis:</h3>
-        </section>
-
-        <!-- need to give option to add and remove categories -->
-        <section class="yAxis">
-            <h3>Y-Axis:</h3>
-        </section>
-
-        <section class="Stroke">
-            <h3>Stroke:</h3>
-            <label for="strokeShow">Stroke Display:</label>
-            <mat-checkbox name = "strokeShow" [(ngModel)] = "testChartOptions.stroke.show"></mat-checkbox>
-            <br>
-            <label for="strokeWidth">Stroke Width:</label>
-            <mat-slider min="0" max="5" step="0.2" [(ngModel)] = "testChartOptions.stroke.width" name = "strokeWidth"></mat-slider>          
-        </section>
-        
-
-        <button mat-raised-button color="primary" type="submit">submit</button>
-    </form>
+                <section class="Chart">
+                    <label for="chartHeight">Chart Height:</label>
+                    <mat-slider min="100" max="500" step="10" [(ngModel)] = "ChartOptions.chart.height" name = "chartHeight"></mat-slider>
+                </section>
+                
+                <button mat-raised-button class="top-mar-1" color="primary" type="submit">submit</button>
+        </form>
+    </mat-card>
 </div>

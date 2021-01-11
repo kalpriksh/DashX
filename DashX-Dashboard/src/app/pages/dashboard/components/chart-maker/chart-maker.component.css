@@ -3,3 +3,14 @@
   margin: 35px auto;
   overflow: scroll;
 }
+.container{
+  position: relative;
+}
+.chart-heading{
+  display: inline-flex;
+}
+#option-selector{
+  z-index: 10;
+  position: absolute;
+  right: -0px;
+}

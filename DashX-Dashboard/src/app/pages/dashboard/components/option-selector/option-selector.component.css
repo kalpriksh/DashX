@@ -1,19 +1,22 @@
-.example-container .mat-form-field + .mat-form-field {
-    margin-left: 8px;
-  }
-  
-  .example-container .mat-form-field {
-    width: 220px;
-  }
-  
-  .example-container form {
-    margin-bottom: 20px;
-  }
-  
-  .example-container form > * {
-    margin: 5px 0;
-  }
-  
-  .example-container .mat-radio-button {
-    margin: 0 12px;
-  }
+.container{
+    position: relative;
+}
+.chart-card{
+    width: 250px;
+    padding: 20px;
+}
+.toggle-button{
+    margin-left: 60%;
+}
+.no-display{
+    visibility: hidden;
+}
+.top-pad-1{
+    padding-top: 20px;
+}
+.bottom-pad-1{
+    padding-bottom: 20px;
+}
+.top-mar-1{
+    margin-top: 10px;
+}
