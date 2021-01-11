@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, MaxLengthValidator,NgForm } from '@angular/forms';
-import { ChartOptions } from '../../models/chartOptions';
+import { InputForOptionSelector } from '../../models/chartOptions';
 
 @Component({
   selector: 'app-option-selector',
@@ -9,7 +9,34 @@ import { ChartOptions } from '../../models/chartOptions';
 })
 export class OptionSelectorComponent implements OnInit{
   
-  ChartOptions
+  ChartOptions : InputForOptionSelector = {
+    chart : {
+      height : 0
+    },
+
+    grid : {
+      xaxis : {
+        lines : {
+          show : false
+        }
+      },
+      yaxis : {
+        lines : {
+          show : false
+        }
+      }
+    },
+
+    stroke : {
+      show : false,
+      width : 0
+    },
+
+    dataLabels : {
+      enabled : false
+    }
+
+  }
   optionsVisible : boolean
   $formChanges
 
@@ -25,21 +52,37 @@ export class OptionSelectorComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.ChartOptions = this.defaultChartOptions
+
     this.optionsVisible = true
 
-    this.$formChanges = this.optionSelectorForm.form.valueChanges.subscribe(this.UpdateOptions);
+    //initialize options
+    this.InitDefaults();
+
+    //subscribe to form value change event
+    this.$formChanges = this.optionSelectorForm.form.valueChanges.subscribe(this.UpdateOptions);1
     }
 
   //#region component methods
+  
+  InitDefaults(){
+    console.log("hell");
+    this.ChartOptions.chart.height = this.defaultChartOptions.chart.height != null ? this.defaultChartOptions.chart.height : 0;
+    this.ChartOptions.grid.xaxis.lines.show = this.defaultChartOptions.grid.xaxis.lines.show != null ? this.defaultChartOptions.grid.xaxis.lines.show : false;
+    this.ChartOptions.grid.yaxis.lines.show = this.defaultChartOptions.grid.yaxis.lines.show != null ? this.defaultChartOptions.grid.yaxis.lines.show : false;
+    this.ChartOptions.stroke.show = this.defaultChartOptions.stroke.show != null ? this.defaultChartOptions.stroke.show : false; 
+    this.ChartOptions.stroke.width = this.defaultChartOptions.stroke.width != null ? this.defaultChartOptions.stroke.width : 0;
+    this.ChartOptions.dataLabels.enabled = this.defaultChartOptions.dataLabels.enabled != null ? this.defaultChartOptions.dataLabels.enabled : false;
+  }
 
   //listens to the form changeValue event and update the chart options
   UpdateOptions(){
     this.optionChanged.emit(this.ChartOptions);
   }
   
-  // function to emit event to hide or show Options
+  //function to emit event to hide or show Options
   ToggleOptions(clickEvent){
+    console.log(this.ChartOptions);
+    
     this.optionsVisible = !(this.optionsVisible)
     this.toggleOptions.emit(clickEvent);
   }
