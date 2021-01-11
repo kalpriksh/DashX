@@ -37,6 +37,7 @@ export class OptionSelectorComponent implements OnInit{
     }
 
   }
+  
   optionsVisible : boolean
   $formChanges
 
@@ -65,7 +66,6 @@ export class OptionSelectorComponent implements OnInit{
   //#region component methods
   
   InitDefaults(){
-    console.log("hell");
     this.ChartOptions.chart.height = this.defaultChartOptions.chart.height != null ? this.defaultChartOptions.chart.height : 0;
     this.ChartOptions.grid.xaxis.lines.show = this.defaultChartOptions.grid.xaxis.lines.show != null ? this.defaultChartOptions.grid.xaxis.lines.show : false;
     this.ChartOptions.grid.yaxis.lines.show = this.defaultChartOptions.grid.yaxis.lines.show != null ? this.defaultChartOptions.grid.yaxis.lines.show : false;
@@ -81,8 +81,6 @@ export class OptionSelectorComponent implements OnInit{
   
   //function to emit event to hide or show Options
   ToggleOptions(clickEvent){
-    console.log(this.ChartOptions);
-    
     this.optionsVisible = !(this.optionsVisible)
     this.toggleOptions.emit(clickEvent);
   }
