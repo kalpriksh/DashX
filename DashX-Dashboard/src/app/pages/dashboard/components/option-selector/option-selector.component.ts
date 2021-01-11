@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, MaxLengthValidator,NgForm } from '@angular/forms';
 import { InputForOptionSelector } from '../../models/chartOptions';
+import { defaultsForOptionSelector } from '../../defaults/optionSelectorDefault'
 
 @Component({
   selector: 'app-option-selector',
@@ -9,35 +10,8 @@ import { InputForOptionSelector } from '../../models/chartOptions';
 })
 export class OptionSelectorComponent implements OnInit{
   
-  ChartOptions : InputForOptionSelector = {
-    chart : {
-      height : 0
-    },
+  ChartOptions : InputForOptionSelector = defaultsForOptionSelector
 
-    grid : {
-      xaxis : {
-        lines : {
-          show : false
-        }
-      },
-      yaxis : {
-        lines : {
-          show : false
-        }
-      }
-    },
-
-    stroke : {
-      show : false,
-      width : 0
-    },
-
-    dataLabels : {
-      enabled : false
-    }
-
-  }
-  
   optionsVisible : boolean
   $formChanges
 
