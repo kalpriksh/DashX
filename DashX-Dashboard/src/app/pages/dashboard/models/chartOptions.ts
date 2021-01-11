@@ -1,67 +1,29 @@
-import {
-    ApexAxisChartSeries,
-    ApexChart,
-    ChartComponent,
-    ApexDataLabels,
-    ApexXAxis,
-    ApexPlotOptions,
-    ApexGrid,
-    ApexResponsive,
-    ApexYAxis,
-    ApexLegend,
-    ApexTooltip,
-    ApexTheme,
-    ApexStroke,
-    ApexTitleSubtitle,
-    ApexStates,
-    ApexNoData,
-    ApexMarkers,
-    ApexFill,
-    ApexAnnotations,
+export interface InputForOptionSelector{
+  
+  chart : {
+    height : number
+  },
 
-  } from "ng-apexcharts";
+  grid : {
+    xaxis : {
+      lines : {
+        show: boolean
+      }
+    },
+    yaxis : {
+      lines : {
+        show: boolean
+      }
+    }
+  },
 
+  stroke : {
+    show : boolean,
+    width : number
+  },
 
-  export type ChartOptions = {
-    series: ApexAxisChartSeries;
-    chart: ApexChart;
-    dataLabels: ApexDataLabels;
-    plotOptions: ApexPlotOptions;
-    yaxis: ApexYAxis;
-    xaxis: ApexXAxis;
-    fill: ApexFill;
-    tooltip: ApexTooltip;
-    stroke: ApexStroke;
-    legend: ApexLegend;
-    grid: ApexGrid;
-    markers: ApexMarkers;
-    theme: ApexTheme;
-    responsive: ApexResponsive;
-    title: ApexTitleSubtitle;
-    states: ApexStates;
-    anotations: ApexAnnotations;
-    noData: ApexNoData;
-  };
+  dataLabels : {
+    enabled : boolean
+  }
 
-  // export type DashChartOptions {
-    
-  //   series: ApexAxisChartSeries;
-  //   chart: ApexChart;
-  //   dataLabels: ApexDataLabels;
-  //   plotOptions: ApexPlotOptions;
-  //   yaxis: ApexYAxis;
-  //   xaxis: ApexXAxis;
-  //   fill: ApexFill;
-  //   tooltip: ApexTooltip;
-  //   stroke: ApexStroke;
-  //   legend: ApexLegend;
-  //   grid: ApexGrid;
-  //   markers: ApexMarkers;
-  //   theme: ApexTheme;
-  //   responsive: ApexResponsive;
-  //   title: ApexTitleSubtitle;
-  //   states: ApexStates;
-  //   anotations: ApexAnnotations;
-  //   noData: ApexNoData;
-
-  // }
+}
