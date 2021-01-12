@@ -42,7 +42,14 @@
                 <mat-panel-title>
                 X-axis
                 </mat-panel-title>
-            </mat-expansion-panel-header>                    
+            </mat-expansion-panel-header>  
+            <button mat-button  [matMenuTriggerFor]="menu">
+                X-axis
+                 </button>
+                 <mat-menu #menu="matMenu">
+                   <button mat-menu-item>Item 1</button>
+                   <button mat-menu-item>Item 2</button>
+                </mat-menu>                  
         </mat-expansion-panel>
         
         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -51,10 +58,14 @@
                 Series
                 </mat-panel-title>
             </mat-expansion-panel-header> 
-            <div>
-            <mat-icon>add_circle</mat-icon>
-           Add Series
-        </div>
+                <button mat-button  [matMenuTriggerFor]="menu">
+               <mat-icon>add_circle</mat-icon>
+               Add Series
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>Item 1</button>
+                  <button mat-menu-item>Item 2</button>
+               </mat-menu>
         </mat-expansion-panel>
             
     </mat-accordion>
