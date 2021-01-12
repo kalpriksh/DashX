@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 })
 export class ChartSetupComponent implements OnInit {
   panelOpenState = true;
+  value='';
   ngOnInit(){}
 
 }
