@@ -17,7 +17,6 @@ import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } fro
 import { NgApexchartsModule } from "ng-apexcharts";
 import { from } from 'rxjs';
 
-import { ChartMakerComponent } from './components/chart-maker/chart-maker.component';
 import { OptionSelectorComponent } from './components/option-selector/option-selector.component';
 import { LineChartComponent} from './components/line-chart/line-chart.component';
 import { ChartsContainerComponent } from './components/charts-container/charts-container.component';
@@ -26,7 +25,7 @@ import { DashboardService } from './services';
 import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
 
 @NgModule({
-  declarations: [OptionSelectorComponent, ChartMakerComponent, LineChartComponent, ChartsContainerComponent, BarGraphComponent],
+  declarations: [OptionSelectorComponent, LineChartComponent, ChartsContainerComponent, BarGraphComponent],
   imports: [
     CommonModule,
     NgApexchartsModule,
@@ -45,8 +44,7 @@ import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
   ],
   exports: [
     OptionSelectorComponent,
-    ChartMakerComponent,
-   ChartsContainerComponent
+    ChartsContainerComponent
   ],
   providers: [
     DashboardService,

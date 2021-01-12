@@ -1,5 +1,5 @@
 <div class="container">
-    <button class = "toggle-button" mat-raised-button color = "warn" (click) = "ToggleOptions($event)">Settings</button>
+    <button class = "toggle-button" mat-raised-button color = "warn" (click) = "ToggleOptions($event)">settings</button>
 
     <mat-card class="chart-card" [ngClass]="{'no-display': optionsVisible}" id="Options">
         <form #optionSelectorForm = "ngForm" (ngSubmit)="UpdateOptions()">
@@ -14,8 +14,7 @@
                 </section>
 
                 <section class="Stroke">
-                    <label for="strokeShow">Stroke Display:</label>
-                    <mat-checkbox name = "strokeShow" [(ngModel)] = "ChartOptions.stroke.show"></mat-checkbox>
+                    <mat-checkbox name = "strokeShow" [(ngModel)] = "ChartOptions.stroke.show">Display stroke</mat-checkbox>
                     <br>
                     <label for="strokeWidth">Stroke Width:</label>
                     <mat-slider min="0" max="5" step="0.2" [(ngModel)] = "ChartOptions.stroke.width" name = "strokeWidth"></mat-slider>          

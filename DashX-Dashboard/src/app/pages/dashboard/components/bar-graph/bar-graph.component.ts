@@ -1,21 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { BarGraphData } from '../../models';
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ChartComponent,
-  ApexDataLabels,
-  ApexXAxis,
-  ApexPlotOptions
-} from "ng-apexcharts";
+import { BarChartDefault, BarChartOptions } from '../../defaults/barChartDefault'
+import { ChartComponent } from "ng-apexcharts";
 
-export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  dataLabels: ApexDataLabels;
-  plotOptions: ApexPlotOptions;
-  xaxis: ApexXAxis;
-};
 
 @Component({
   selector: 'app-bar-graph',
@@ -23,40 +10,31 @@ export type ChartOptions = {
   styleUrls: ['./bar-graph.component.css']
 })
 export class BarGraphComponent implements OnInit{
-  public chart: Partial<any>;
+  
+  public chart: Partial<BarChartOptions>;
+  barChartDefaults : BarChartDefault;
+
   @Input() barGraphData: BarGraphData;
+  @ViewChild ('chartObj') chartObj : ChartComponent
+
   ngOnInit(): void {
-    this.chart = this.initChart(this.barGraphData.name, this.barGraphData.data, this.barGraphData.categories);
+    this.barChartDefaults = new BarChartDefault();
+    this.chart = this.initChart()
   }
+
+  //#region component functions
 
   //to update the chart options
-  updateChart(chartOptions){
-    console.log(chartOptions);
+  updateChart( chartOption : Partial<BarChartOptions> ){
+    this.chartObj.updateOptions(
+      chartOption
+    );
+
   }
 
-  public initChart(name: string, data: number[], categories: string[]): Partial<any> {
-   return {
-      series: [
-        {
-          name: name,
-          data: data
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        categories: categories
-      }
-    };
+  public initChart(): Partial<any> {
+   return  this.barChartDefaults.GetData()
   }
+
+  //#endregion
 }

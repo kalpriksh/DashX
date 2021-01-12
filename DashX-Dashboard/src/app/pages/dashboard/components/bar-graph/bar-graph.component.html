@@ -1,12 +1,15 @@
-<div>
-  <div>
-    <app-option-selector (optionChanged) = "updateChart($event)"></app-option-selector>
-  </div>
-    <apx-chart
+<mat-card class="container">
+    <div class="chart-heading"> 
+      <h2>Total Turn Over</h2>
+      <app-option-selector id = "option-selector" [defaultChartOptions] ="chart" (optionChanged) = "updateChart($event)"></app-option-selector>
+    </div>
+
+    <apx-chart #chartObj
       [series]="chart.series"
       [chart]="chart.chart"
       [dataLabels]="chart.dataLabels"
       [plotOptions]="chart.plotOptions"
       [xaxis]="chart.xaxis"
     ></apx-chart>
-  </div>
+
+  </mat-card>

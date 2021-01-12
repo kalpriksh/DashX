@@ -3,32 +3,20 @@ import {
   ApexChart,
   ChartComponent,
   ApexDataLabels,
-  ApexPlotOptions,
-  ApexYAxis,
-  ApexLegend,
-  ApexStroke,
   ApexXAxis,
-  ApexFill,
-  ApexTooltip,
+  ApexPlotOptions,
   ApexGrid,
-  ApexTheme
-  
+  ApexStroke
 } from "ng-apexcharts";
 
-// chart options for bar chart
 export type BarChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
-  yaxis: ApexYAxis;
   xaxis: ApexXAxis;
-  fill: ApexFill;
-  tooltip: ApexTooltip;
-  stroke: ApexStroke;
-  legend: ApexLegend;
-  grid: ApexGrid;
-  theme: ApexTheme;
+  grid : ApexGrid;
+  stroke : ApexStroke;
 };
 
 export class BarChartDefault {
@@ -38,89 +26,40 @@ export class BarChartDefault {
     this.barChartDefaultData = {
       series: [
         {
-          name: "Net Profit",
-          data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
-          color: "green"
-        },
-        {
-          name: "Revenue",
-          data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-        },
-        {
-          name: "Free Cash Flow",
-          data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+          name: 'basic',
+          data:[400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
         }
       ],
       chart: {
         type: "bar",
-        height: 200,
+        height: 350
       },
       plotOptions: {
         bar: {
-          horizontal: false,
-          columnWidth: "55%",
-          endingShape: "flat",
-          colors: {
-            ranges: [{
-                from: 10,
-                to: 40,
-                color: "blue"
-            }],
-            backgroundBarColors: [],
-            backgroundBarOpacity: 1,
-            backgroundBarRadius: 0,
-        }
+          horizontal: true
         }
       },
-      grid : {
-        show : true,
-        xaxis:{
-          lines:{
-            show: false
+      grid :{
+        xaxis : {
+          lines :{
+            show : true
           }
         },
-        yaxis:{
-          lines:{
-            show: true
+        yaxis : {
+          lines :{
+            show : true
           }
         }
       },
-      dataLabels: {
-        enabled: true
+      stroke :{
+
       },
-      stroke: {
-        show: true,
-        width: 5,
-        colors: ["black"]
+      dataLabels: {
+        enabled: false
       },
       xaxis: {
-        categories: [
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct"
-        ]
-      },
-      yaxis: {
-       
-      },
-      fill: {
-        opacity: 0
-      },
-      theme: {
-        monochrome: {
-          enabled: false,
-          color: '#255aee',
-          shadeTo: 'light',
-          shadeIntensity: 0.65
-        }
+        categories: ["South Korea", "Canada", "United Kingdom", "Netherlands", "Italy", "France", "Japan", "United States", "China", "Germany"]
       }
-
     };
   }
   
