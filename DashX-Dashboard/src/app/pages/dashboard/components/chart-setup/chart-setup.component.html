@@ -1,0 +1,36 @@
+ <mat-card class="container">
+    <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Chart Type
+                </mat-panel-title>
+            </mat-expansion-panel-header>                    
+        </mat-expansion-panel>
+    
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                X-axis
+                </mat-panel-title>
+            </mat-expansion-panel-header>                    
+        </mat-expansion-panel>
+        
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Series
+                </mat-panel-title>
+            </mat-expansion-panel-header> 
+        </mat-expansion-panel>
+            
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Add series
+                </mat-panel-title>
+            </mat-expansion-panel-header>                   
+        </mat-expansion-panel>
+    </mat-accordion>
+ <mat-checkbox name = "dataLabels">Switch rows/columns</mat-checkbox> 
+</mat-card>  
