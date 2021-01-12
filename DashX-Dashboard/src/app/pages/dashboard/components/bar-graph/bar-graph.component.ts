@@ -31,7 +31,10 @@ export class BarGraphComponent implements OnInit{
     );
 
   }
-
+  EditChart()
+  {
+    console.log('working');
+  }
   public initChart(): Partial<any> {
    return  this.barChartDefaults.GetData()
   }
