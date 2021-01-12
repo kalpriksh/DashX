@@ -19,7 +19,22 @@
                 <mat-panel-title>
                 Chart Type
                 </mat-panel-title>
-            </mat-expansion-panel-header>                    
+            </mat-expansion-panel-header> 
+            <mat-selection-list [multiple]="false">
+                <mat-list-option>Line Chart</mat-list-option>
+                <mat-divider></mat-divider>
+                <mat-list-option>Bar Chart</mat-list-option>
+                <mat-divider></mat-divider>
+                <mat-list-option>Column Chart</mat-list-option>
+                <mat-divider></mat-divider>
+                <mat-list-option>Area Chart</mat-list-option>
+                <mat-divider></mat-divider>
+                <mat-list-option>Pie Chart</mat-list-option>
+                <mat-divider></mat-divider>
+                <mat-list-option>Map Chart</mat-list-option>
+                <mat-divider></mat-divider>
+                <mat-list-option>Other</mat-list-option>
+            </mat-selection-list>
         </mat-expansion-panel>
     
         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
