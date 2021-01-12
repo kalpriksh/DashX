@@ -20,9 +20,15 @@ import { ChartsContainerComponent } from './components/charts-container/charts-c
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DashboardService } from './services';
 import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
+import { ChartSetupComponent } from './components/chart-setup/chart-setup.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatTabsModule } from '@angular/material/tabs'
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
-  declarations: [OptionSelectorComponent, ChartMakerComponent, LineChartComponent, ChartsContainerComponent, BarGraphComponent],
+  declarations: [OptionSelectorComponent, ChartMakerComponent, LineChartComponent, ChartsContainerComponent, BarGraphComponent, ChartSetupComponent],
   imports: [
     CommonModule,
     NgApexchartsModule,
@@ -35,7 +41,12 @@ import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
     MatGridListModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSliderModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatDividerModule,
+    MatListModule
   ],
   exports: [
     OptionSelectorComponent,
