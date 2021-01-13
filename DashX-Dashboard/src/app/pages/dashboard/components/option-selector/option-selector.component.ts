@@ -1,7 +1,7 @@
-import { stringify } from '@angular/compiler/src/util';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, MaxLengthValidator } from '@angular/forms';
-
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild} from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, MaxLengthValidator,NgForm } from '@angular/forms';
+import { InputForOptionSelector } from '../../models/chartOptions';
+import { defaultsForOptionSelector } from '../../defaults/optionSelectorDefault'
 
 @Component({
   selector: 'app-option-selector',
@@ -10,31 +10,55 @@ import { FormBuilder, FormGroup, FormControl, MaxLengthValidator } from '@angula
 })
 export class OptionSelectorComponent implements OnInit{
   
-  chartOptions: FormGroup;
-  hideRequiredControl = new FormControl(false);
-  floatLabelControl = new FormControl('auto');
-  isGridControl = new FormControl(false);
-  gridXAxisControl = new FormControl(false);
-  gridYAxisControl = new FormControl(false);
-  labelControl = new FormControl(false);
-   
+  ChartOptions : InputForOptionSelector = defaultsForOptionSelector
 
+  optionsVisible : boolean
+  $formChanges
+
+  @Input() defaultChartOptions
   @Output() optionChanged = new EventEmitter<any>(); 
+  @Output() toggleOptions = new EventEmitter<any>();
 
+  @ViewChild('optionSelectorForm', { static: true }) optionSelectorForm: NgForm;
+  
+  
+  // constructor
   constructor(private fb: FormBuilder) {
-    
   }
-  ngOnInit() {
 
-    this.chartOptions = this.fb.group({
-      XGrid : this.gridXAxisControl,
-      YGrid : this.gridYAxisControl,
-      labels : this.labelControl
-    });
+  ngOnInit(){
 
-    this.chartOptions.valueChanges.subscribe(()=>{
-      this.optionChanged.emit(this.chartOptions.value);
-    })
+    this.optionsVisible = true
+
+    //initialize options
+    this.InitDefaults();
+
+    //subscribe to form value change event
+    this.$formChanges = this.optionSelectorForm.form.valueChanges.subscribe(this.UpdateOptions);
+    }
+
+  //#region component methods
+  
+  InitDefaults(){
+    this.ChartOptions.chart.height = this.defaultChartOptions.chart.height != null ? this.defaultChartOptions.chart.height : 0;
+    this.ChartOptions.grid.xaxis.lines.show = this.defaultChartOptions.grid.xaxis.lines.show != null ? this.defaultChartOptions.grid.xaxis.lines.show : false;
+    this.ChartOptions.grid.yaxis.lines.show = this.defaultChartOptions.grid.yaxis.lines.show != null ? this.defaultChartOptions.grid.yaxis.lines.show : false;
+    this.ChartOptions.stroke.show = this.defaultChartOptions.stroke.show != null ? this.defaultChartOptions.stroke.show : false; 
+    this.ChartOptions.stroke.width = this.defaultChartOptions.stroke.width != null ? this.defaultChartOptions.stroke.width : 0;
+    this.ChartOptions.dataLabels.enabled = this.defaultChartOptions.dataLabels.enabled != null ? this.defaultChartOptions.dataLabels.enabled : false;
   }
+
+  //listens to the form changeValue event and update the chart options
+  UpdateOptions(){
+    this.optionChanged.emit(this.ChartOptions);
+  }
+  
+  //function to emit event to hide or show Options
+  ToggleOptions(clickEvent){
+    this.optionsVisible = !(this.optionsVisible)
+    this.toggleOptions.emit(clickEvent);
+  }
+
+  //#endregion
 
 }
