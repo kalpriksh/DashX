@@ -1,4 +1,4 @@
-import { PieChartData } from '../../models';
+import { PieChartData } from '../../../models';
 import { Component, OnInit, Input } from "@angular/core";
 import { ChartComponent } from "ng-apexcharts";
 
@@ -16,7 +16,7 @@ export type ChartOptions = {
 };
 
 @Component({
-  selector: 'app-pie-chart',
+  selector: 'app-pnie-chart',
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.css']
 })
