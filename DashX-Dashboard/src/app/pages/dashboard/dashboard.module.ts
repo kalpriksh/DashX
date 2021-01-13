@@ -51,7 +51,8 @@ import { ChartEditorComponent } from './components/chart-editor/chart-editor.com
     MatExpansionModule,
     MatDividerModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatMenuModule
   ],
   exports: [
     OptionSelectorComponent,
