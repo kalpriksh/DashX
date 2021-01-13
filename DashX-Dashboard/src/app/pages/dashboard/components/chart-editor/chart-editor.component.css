@@ -3,3 +3,6 @@
     position: relative;
     width: 23vw;
 }
+.no-display{
+    display: none;
+}
