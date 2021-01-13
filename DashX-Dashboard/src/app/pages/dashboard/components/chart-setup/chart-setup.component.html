@@ -1,12 +1,11 @@
- <mat-card class="container">
-    <mat-accordion>
+<mat-accordion>
         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                 Chart Title
                 </mat-panel-title>
             </mat-expansion-panel-header>
-            <mat-form-field class="chart-title-field">
+            <mat-form-field>
                 <input matInput type="text" [(ngModel)]="value">
                 <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                   <mat-icon>close</mat-icon>
@@ -67,9 +66,7 @@
                   <button mat-menu-item>Item 2</button>
                </mat-menu>
         </mat-expansion-panel>
-            
     </mat-accordion>
- <mat-card>
+    <mat-card>
  <mat-checkbox name = "dataLabels">Switch rows/columns</mat-checkbox> 
- </mat-card>
-</mat-card>  
+</mat-card>
