@@ -23,12 +23,15 @@ import { OptionSelectorComponent } from './components/option-selector/option-sel
 import { LineChartComponent} from './components/line-chart/line-chart.component';
 import { ChartsContainerComponent } from './components/charts-container/charts-container.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { DashboardService } from './services';
 import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
 import { ChartSetupComponent } from './components/chart-setup/chart-setup.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import { ChartEditorComponent } from './components/chart-editor/chart-editor.component';
+
+//services
+import { DashboardService, ChartEditorService } from './services';
+
 
 @NgModule({
   declarations: [OptionSelectorComponent, LineChartComponent, ChartsContainerComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent],
@@ -60,6 +63,7 @@ import { ChartEditorComponent } from './components/chart-editor/chart-editor.com
   ],
   providers: [
     DashboardService,
+    ChartEditorService,
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
   ]
 })

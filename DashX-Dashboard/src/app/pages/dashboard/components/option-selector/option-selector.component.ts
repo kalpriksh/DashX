@@ -15,6 +15,8 @@ export class OptionSelectorComponent implements OnInit{
   optionsVisible : boolean
   $formChanges
 
+  panelOpenState
+
   @Input() defaultChartOptions
   @Output() optionChanged = new EventEmitter<any>(); 
   @Output() toggleOptions = new EventEmitter<any>();
@@ -27,6 +29,7 @@ export class OptionSelectorComponent implements OnInit{
   }
 
   ngOnInit(){
+    this.panelOpenState = false
 
     this.optionsVisible = true
 
