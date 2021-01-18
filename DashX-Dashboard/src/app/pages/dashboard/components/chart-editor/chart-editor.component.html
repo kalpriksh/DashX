@@ -1,6 +1,8 @@
 <mat-card class="container" [ngClass]="{'no-display': !isEditorOpen}">
     <mat-tab-group>
-        <mat-tab label = "Data">Data</mat-tab>
+        <mat-tab label = "Data">
+            <app-chart-setup></app-chart-setup>
+        </mat-tab>
         <mat-tab label = "Customise">
             <app-option-selector></app-option-selector>
         </mat-tab>
