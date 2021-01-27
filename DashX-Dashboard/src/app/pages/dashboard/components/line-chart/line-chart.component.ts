@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChartEditorService } from '../../services'
+
 
 import {
   ChartComponent,
@@ -10,6 +12,7 @@ import {
   ApexStroke,
   ApexGrid
 } from "ng-apexcharts";
+
 import { LineChartData } from '../../models';
 
 export type ChartOptions = {
@@ -27,45 +30,62 @@ export type ChartOptions = {
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css']
 })
+
 export class LineChartComponent implements OnInit {
-public chart: Partial<any>;
-@Input() lineChartData: LineChartData;
- 
-ngOnInit(): void {
-  this.chart = this.initChart(this.lineChartData.name, this.lineChartData.data, this.lineChartData.categories);
-}
-public initChart(name: string, data: number[], categories: string[]): Partial<any> {
- 
- return{ 
-   series: [
-      {
-        name:name,
-        data: data
-      }
-  ],
-  chart: {
-    height: 350,
-    type: "line",
-    zoom: {
-      enabled: false
-    }
-  },
-  dataLabels: {
-    enabled: false
-  },
-  stroke: {
-    curve: "straight"
-  },
-  grid: {
-    row: {
-      colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-      opacity: 0.5
-    }
-  },
-  xaxis: {
-    categories: categories
+
+  public chart: Partial<ChartOptions>;
+  isEditorOpen : boolean
+
+  @Input() lineChartData: LineChartData;
+  @ViewChild ('chartObj') chartObj : ChartComponent
+
+  constructor(private data : ChartEditorService){
+
   }
-};
-}
+
+  ngOnInit(): void {
+    this.chart = this.initChart();
+    this.data.isEditorOpen_current.subscribe( isOpen => this.isEditorOpen = isOpen )
+  }
+
+  EditChart()
+    {
+      this.data.ToggleEditor(!this.isEditorOpen);
+    }
+    
+  public initChart(): Partial<ChartOptions> {
+  return { 
+    series: [
+        {
+          name:"basic",
+          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+        }
+    ],
+    chart: {
+      height: 350,
+      type: "line",
+      zoom: {
+        enabled: false
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: "straight"
+    },
+    grid: {
+      row: {
+        colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+        opacity: 0.5
+      }
+    },
+    xaxis: {
+      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
+    }
+  };
+
+  }
+
 }
 

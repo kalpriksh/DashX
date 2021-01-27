@@ -1,6 +1,11 @@
-<p>line-chart works!</p>
 <div>
-    <apx-chart
+  <div class="chart-heading"> 
+    <h2>Sales Trend</h2>
+    <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" id="edit-icon" (click) = 'EditChart()'>
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+    <apx-chart #chartObj
       [series]="chart.series"
       [chart]="chart.chart"
       [xaxis]="chart.xaxis"
@@ -9,5 +14,5 @@
       [stroke]="chart.stroke"
       [title]="chart.title"
     ></apx-chart>
-  </div>
+</div>
   
