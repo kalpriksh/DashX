@@ -1,7 +1,10 @@
 <mat-card class="container">
+    
     <div class="chart-heading"> 
       <h2>Total Turn Over</h2>
-      <mat-icon (click) = 'EditChart()' [ngStyle]="{'cursor':' pointer'}" id="edit-icon">edit</mat-icon>
+      <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" id="edit-icon" (click) = 'EditChart()'>
+        <mat-icon>edit</mat-icon>
+      </button>
     </div>
 
     <apx-chart #chartObj

@@ -1,3 +1,5 @@
+import { BaseChart } from '../base'
+
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -19,11 +21,12 @@ export type BarChartOptions = {
   stroke : ApexStroke;
 };
 
-export class BarChartDefault {
-
+export class BarChart extends BaseChart{
+  
   barChartDefaultData : Partial<BarChartOptions>
-  constructor() {
-    this.barChartDefaultData = {
+  constructor(){
+    super()
+    this.barChartDefaultData = this.barChartDefaultData = {
       series: [
         {
           name: 'basic',
@@ -62,15 +65,11 @@ export class BarChartDefault {
       }
     };
   }
-  
-  /**
-   * GetDefaultData
-   * to get the default data for Bar Chart
-   */
-  public GetData() {
-    return this.barChartDefaultData
+  GetDefaults(){
+    return this.barChartDefaultData;
   }
-
+  DataComplete(){
+    
+  }
 }
-
 
