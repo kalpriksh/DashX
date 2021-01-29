@@ -9,7 +9,7 @@
                 </mat-expansion-panel-header>
                 <mat-form-field>
                     <input matInput type="text" [(ngModel)]="SetupData.title.text" [ngModelOptions]="{standalone : true}">
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <button mat-button *ngIf="SetupData.title.text" matSuffix mat-icon-button aria-label="Clear" (click)="SetupData.title.text=''">
                     <mat-icon>close</mat-icon>
                     </button>
                 </mat-form-field>                    
