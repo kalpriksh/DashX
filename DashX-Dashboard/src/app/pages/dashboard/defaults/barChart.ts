@@ -1,6 +1,7 @@
 import { BaseChart } from '../base'
 
 import {
+  ApexTitleSubtitle,
   ApexAxisChartSeries,
   ApexChart,
   ChartComponent,
@@ -12,6 +13,7 @@ import {
 } from "ng-apexcharts";
 
 export type BarChartOptions = {
+  title : ApexTitleSubtitle;
   series: ApexAxisChartSeries;
   chart: ApexChart;
   dataLabels: ApexDataLabels;
@@ -33,6 +35,21 @@ export class BarChart extends BaseChart{
           data:[400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
         }
       ],
+      title: {
+        text: "Placeholder",
+        align: 'left',
+        margin: 10,
+        offsetX: 0,
+        offsetY: 0,
+        floating: false,
+        style: {
+          fontSize:  '23px',
+          fontWeight:  'bold',
+          fontFamily:  undefined,
+          color:  '#263238'
+        },
+      },
+    
       chart: {
         type: "bar",
         height: 350

@@ -15,6 +15,7 @@ export class BarGraphComponent implements OnInit{
   public chart: Partial<BarChartOptions>;
   barChartDefaults : BarChart;
   isEditorOpen : boolean
+  EditorData
 
   @Input() barGraphData: BarGraphData;
   @ViewChild ('chartObj') chartObj : ChartComponent;
@@ -24,9 +25,19 @@ export class BarGraphComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
     this.barChartDefaults = new BarChart();
     this.chart = this.initChart()
     this.data.isEditorOpen_current.subscribe( isOpen => this.isEditorOpen = isOpen )
+    this.data.editorData_current.subscribe( graphData => {
+      console.log(graphData)
+      this.EditorData = graphData
+      if(this.chartObj != null){
+        this.updateChart(graphData)
+      }
+
+    })
+
   }
 
   //#region component functions
