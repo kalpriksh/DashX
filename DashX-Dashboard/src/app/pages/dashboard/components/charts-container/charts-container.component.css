@@ -1,5 +1,5 @@
 .chart-container{
-    height: 91vh;
+    min-height: 91vh;
     position: relative;
     overflow: hidden;
 }
