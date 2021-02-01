@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { BarGraphData } from '../../models';
-import { BarChart, BarChartOptions } from '../../defaults/barChart'
+import { BarChart, BarChartOptions } from '../../component-classes/barChart'
 import { ChartComponent } from "ng-apexcharts";
 import { ChartEditorService } from '../../services'
+import { DataHandler } from '../../helpers'
 
 
 @Component({
@@ -30,7 +31,7 @@ export class BarGraphComponent implements OnInit{
     this.chart = this.initChart()
     this.data.isEditorOpen_current.subscribe( isOpen => this.isEditorOpen = isOpen )
     this.data.editorData_current.subscribe( graphData => {
-      console.log(graphData)
+      
       this.EditorData = graphData
       if(this.chartObj != null){
         this.updateChart(graphData)
@@ -60,4 +61,5 @@ export class BarGraphComponent implements OnInit{
   }
 
   //#endregion
+
 }

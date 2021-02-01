@@ -16,9 +16,10 @@ export class ChartEditorComponent implements OnInit {
   constructor(private data : ChartEditorService) { }
 
   ngOnInit(): void {
-    // subscripton to chartEditor service
+    //subscripton to chartEditor service
     this.data.isEditorOpen_current.subscribe(isOpen => this.isEditorOpen = isOpen )
     this.data.editorData_current.subscribe( chartData => this.EditorData = chartData )
+    
 
     //sharing data with child components i.e chart-setup | option-editor
   }

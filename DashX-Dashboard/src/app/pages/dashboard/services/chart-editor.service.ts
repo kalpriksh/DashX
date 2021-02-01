@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs'
-import { BarChartOptions, BarChart } from '../defaults' 
+import { BarChartOptions, BarChart } from '../component-classes' 
 
 @Injectable({
   providedIn: 'root'

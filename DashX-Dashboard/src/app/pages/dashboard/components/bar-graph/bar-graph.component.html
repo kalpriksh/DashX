@@ -1,18 +1,18 @@
 <mat-card class="container">
-    
-    <div class="chart-heading"> 
-      <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" id="edit-icon" (click) = 'EditChart()'>
-        <mat-icon>edit</mat-icon>
-      </button>
-    </div>
 
-    <apx-chart #chartObj
-      [title] = "chart.title"
-      [series]="chart.series"
-      [chart]="chart.chart"
-      [dataLabels]="chart.dataLabels"
-      [plotOptions]="chart.plotOptions"
-      [xaxis]="chart.xaxis"
-    ></apx-chart>
+  <div class="chart-heading"> 
+    <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" id="edit-icon" (click) = 'EditChart()'>
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+
+  <apx-chart #chartObj
+    [title] = "chart.title"
+    [series]="chart.series"
+    [chart]="chart.chart"
+    [dataLabels]="chart.dataLabels"
+    [plotOptions]="chart.plotOptions"
+    [xaxis]="chart.xaxis"
+  ></apx-chart>
 
   </mat-card>
