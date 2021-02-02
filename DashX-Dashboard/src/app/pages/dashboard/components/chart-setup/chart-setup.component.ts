@@ -23,8 +23,9 @@ export class ChartSetupComponent implements OnInit {
 
   //#region UI variables
   seriesNames : string[];
+  addedSeries : SeriesData;
   seriesList : SeriesData[];
-  categoryList : any[]
+  categoryList : any[];
   //#endregion
 
   constructor(private chartData : ChartEditorService){}
@@ -57,24 +58,28 @@ export class ChartSetupComponent implements OnInit {
     this.seriesNames = this.ChartSetup.GetSeriesName();
   }
 
-  AddSeries(name : string){
+  AddSeries(seriesName : string){
     /**
      * adds series to the ui    
      * adds series to the chartData object
      */
     // default case
-    if(name == "null"){
+    if(seriesName == "null"){
       alert("need to add data file")
     }
     else{
-      const series  = this.BarChart.CreateNewSeries(name, this.ChartSetup.GetSeriesData(name));
+      this.addedSeries = this.BarChart.CreateNewSeries(seriesName, this.ChartSetup.GetSeriesData(seriesName));
+
+      // to prevent call by reference
+      let seriesToPush : SeriesData = {
+        name : this.addedSeries.name,
+        data : this.addedSeries.data
+      } 
 
       // update seriesList UI
-      this.seriesList.push(series)
-
+      this.seriesList.push(seriesToPush)
       // update setup data
-      this.SetupData.series.push(series);
-      
+      this.SetupData.series.push(seriesToPush)
       // update chart
       this.chartData.EditorDataUpdated(this.SetupData)
     }
