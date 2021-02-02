@@ -32,10 +32,11 @@ import { ChartEditorComponent } from './components/chart-editor/chart-editor.com
 //services
 import { DashboardService, ChartEditorService } from './services';
 import { ReadExcelDirective } from './directives/read-excel.directive';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 
 
 @NgModule({
-  declarations: [OptionSelectorComponent, LineChartComponent, ChartsContainerComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective],
+  declarations: [OptionSelectorComponent, LineChartComponent, PieChartComponent, ChartsContainerComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective],
 
   imports: [
     CommonModule,
