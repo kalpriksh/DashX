@@ -1,6 +1,8 @@
 import { BaseChart } from '../base'
+import { SeriesData } from '../models'
 
 import {
+  ApexTitleSubtitle,
   ApexAxisChartSeries,
   ApexChart,
   ChartComponent,
@@ -12,6 +14,7 @@ import {
 } from "ng-apexcharts";
 
 export type BarChartOptions = {
+  title : ApexTitleSubtitle;
   series: ApexAxisChartSeries;
   chart: ApexChart;
   dataLabels: ApexDataLabels;
@@ -23,23 +26,37 @@ export type BarChartOptions = {
 
 export class BarChart extends BaseChart{
   
+  seriesData : SeriesData
+
   barChartDefaultData : Partial<BarChartOptions>
   constructor(){
     super()
     this.barChartDefaultData = this.barChartDefaultData = {
       series: [
-        {
-          name: 'basic',
-          data:[400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        }
+       
       ],
+      title: {
+        text: "Placeholder",
+        align: 'left',
+        margin: 10,
+        offsetX: 0,
+        offsetY: 0,
+        floating: false,
+        style: {
+          fontSize:  '23px',
+          fontWeight:  'bold',
+          fontFamily:  undefined,
+          color:  '#263238'
+        },
+      },
+    
       chart: {
         type: "bar",
         height: 350
       },
       plotOptions: {
         bar: {
-          horizontal: true
+          horizontal: false
         }
       },
       grid :{
@@ -50,7 +67,7 @@ export class BarChart extends BaseChart{
         },
         yaxis : {
           lines :{
-            show : true
+            show : false
           }
         }
       },
@@ -61,15 +78,25 @@ export class BarChart extends BaseChart{
         enabled: false
       },
       xaxis: {
-        categories: ["South Korea", "Canada", "United Kingdom", "Netherlands", "Italy", "France", "Japan", "United States", "China", "Germany"]
+        categories: []
       }
     };
+
+    this.seriesData = {
+      name : "",
+      data : []
+    }
   }
   GetDefaults(){
     return this.barChartDefaultData;
   }
   DataComplete(){
     
+  }
+  CreateNewSeries(name : string , data){
+    this.seriesData.name = name;
+    this.seriesData.data = data;
+    return this.seriesData;
   }
 }
 

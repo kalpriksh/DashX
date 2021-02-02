@@ -22,4 +22,8 @@ export class ChartsContainerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  dataFromEvent(e){
+    console.log(e);
+  }
+
 }

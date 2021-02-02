@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, MaxLengthValidator,NgForm } from '@angular/forms';
 import { InputForOptionSelector } from '../../models/chartOptions';
-import { defaultsForOptionSelector } from '../../defaults/optionSelectorDefault'
+import { defaultsForOptionSelector } from '../../component-classes/optionSelectorDefault'
 
 @Component({
   selector: 'app-option-selector',

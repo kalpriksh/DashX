@@ -1,72 +1,102 @@
-<mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                Chart Title
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <mat-form-field>
-                <input matInput type="text" [(ngModel)]="value">
-                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                  <mat-icon>close</mat-icon>
-                </button>
-              </mat-form-field>                    
-        </mat-expansion-panel>
+    <mat-accordion>
+        <input type="file" ReadExcel (dataReadEvent) = "OnSheetUpload($event)">
+        <form #myForm = "ngForm" (keydown) = "EnterSubmit($event, myForm.form)">
 
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                Chart Type
-                </mat-panel-title>
-            </mat-expansion-panel-header> 
-            <mat-selection-list [multiple]="false">
-                <mat-list-option>Line Chart</mat-list-option>
-                <mat-divider></mat-divider>
-                <mat-list-option>Bar Chart</mat-list-option>
-                <mat-divider></mat-divider>
-                <mat-list-option>Column Chart</mat-list-option>
-                <mat-divider></mat-divider>
-                <mat-list-option>Area Chart</mat-list-option>
-                <mat-divider></mat-divider>
-                <mat-list-option>Pie Chart</mat-list-option>
-                <mat-divider></mat-divider>
-                <mat-list-option>Map Chart</mat-list-option>
-                <mat-divider></mat-divider>
-                <mat-list-option>Other</mat-list-option>
-            </mat-selection-list>
-        </mat-expansion-panel>
-    
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                X-axis
-                </mat-panel-title>
-            </mat-expansion-panel-header>  
-            <button mat-button  [matMenuTriggerFor]="menu">
-                X-axis
-                 </button>
-                 <mat-menu #menu="matMenu">
-                   <button mat-menu-item>Item 1</button>
-                   <button mat-menu-item>Item 2</button>
-                </mat-menu>                  
-        </mat-expansion-panel>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    Chart Title
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-form-field>
+                    <input matInput type="text" [(ngModel)]="SetupData.title.text" [ngModelOptions]="{standalone : true}">
+                    <button mat-button *ngIf="SetupData.title.text" matSuffix mat-icon-button aria-label="Clear" (click)="SetupData.title.text=''">
+                    <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>                    
+            </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    Chart Type
+                    </mat-panel-title>
+                </mat-expansion-panel-header> 
+                <mat-selection-list [multiple]="false">
+                    <mat-list-option>Line Chart</mat-list-option>
+                    <mat-divider></mat-divider>
+                    <mat-list-option>Bar Chart</mat-list-option>
+                    <mat-divider></mat-divider>
+                    <mat-list-option>Column Chart</mat-list-option>
+                    <mat-divider></mat-divider>
+                    <mat-list-option>Area Chart</mat-list-option>
+                    <mat-divider></mat-divider>
+                    <mat-list-option>Pie Chart</mat-list-option>
+                    <mat-divider></mat-divider>
+                    <mat-list-option>Map Chart</mat-list-option>
+                    <mat-divider></mat-divider>
+                    <mat-list-option>Other</mat-list-option>
+                </mat-selection-list>
+            </mat-expansion-panel>
         
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                Series
-                </mat-panel-title>
-            </mat-expansion-panel-header> 
+            <!-- <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    X-axis
+                    </mat-panel-title>
+                </mat-expansion-panel-header>  
                 <button mat-button  [matMenuTriggerFor]="menu">
-               <mat-icon>add_circle</mat-icon>
-               Add Series
-                </button>
-                <mat-menu #menu="matMenu">
-                  <button mat-menu-item>Item 1</button>
-                  <button mat-menu-item>Item 2</button>
-               </mat-menu>
-        </mat-expansion-panel>
+                    X-axis
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>Item 1</button>
+                        <button mat-menu-item>Item 2</button>
+                    </mat-menu>                  
+            </mat-expansion-panel> -->
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    X Axis
+                    </mat-panel-title>
+                </mat-expansion-panel-header>  
+                <button mat-button  [matMenuTriggerFor]="menu">
+                    <mat-icon>add_circle</mat-icon>
+                        Category
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <div *ngFor="let item of seriesNames">
+                            <button mat-menu-item (click) = "AddCategory(item)">    
+                                {{item}} <mat-icon>add_to_queue</mat-icon>
+                            </button>
+                        </div>
+                    </mat-menu>                  
+            </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    Series
+                    </mat-panel-title>
+                </mat-expansion-panel-header>  
+                <button mat-button  [matMenuTriggerFor]="seriesMenu">
+                    <mat-icon>add_circle</mat-icon>
+                    Series
+                    </button>
+                    <mat-menu #seriesMenu="matMenu">
+                        <div *ngFor="let item of seriesNames">
+                            <button mat-menu-item (click) = "AddSeries(item)">
+                                {{item}} <mat-icon>add_to_queue</mat-icon>
+                            </button>
+                        </div>
+                    </mat-menu>                  
+            </mat-expansion-panel>
+            
+            
+
+        </form>
     </mat-accordion>
-    <mat-card>
- <mat-checkbox name = "dataLabels">Switch rows/columns</mat-checkbox> 
+
+<mat-card>
+    <mat-checkbox name = "dataLabels">Switch rows/columns</mat-checkbox> 
 </mat-card>
