@@ -38,21 +38,6 @@
                     <mat-list-option>Other</mat-list-option>
                 </mat-selection-list>
             </mat-expansion-panel>
-        
-            <!-- <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                    X-axis
-                    </mat-panel-title>
-                </mat-expansion-panel-header>  
-                <button mat-button  [matMenuTriggerFor]="menu">
-                    X-axis
-                    </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item>Item 1</button>
-                        <button mat-menu-item>Item 2</button>
-                    </mat-menu>                  
-            </mat-expansion-panel> -->
 
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
@@ -83,6 +68,16 @@
                     <mat-icon>add_circle</mat-icon>
                     Series
                     </button>
+                    <div *ngFor="let series of seriesList">
+                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" >
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                Series : {{series.name}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            series customization option to be placed here
+                        </mat-expansion-panel>
+                    </div>
                     <mat-menu #seriesMenu="matMenu">
                         <div *ngFor="let item of seriesNames">
                             <button mat-menu-item (click) = "AddSeries(item)">
