@@ -1,10 +1,10 @@
 import { BaseChart } from '../base'
+import { PieChartData } from '../models';
 import {
     ApexNonAxisChartSeries,
     ApexResponsive,
     ApexChart
   } from "ng-apexcharts";
-import { SeriesData } from '../models';
   
   export type PieChartOptions = {
     series: ApexNonAxisChartSeries;
@@ -14,7 +14,7 @@ import { SeriesData } from '../models';
   };
 // class for defining the behavior and rules for the given chart type
 export class PieChart extends BaseChart{
-    seriesData : SeriesData
+    seriesData : PieChartData
 
     pieChartDefaultData : Partial<PieChartOptions>
     constructor(){
@@ -43,8 +43,8 @@ export class PieChart extends BaseChart{
     };
     
     this.seriesData = {
-        name : "",
-        data : []
+        series : [],
+        labels : []
       }
     }
     GetDefaults(){
@@ -53,9 +53,9 @@ export class PieChart extends BaseChart{
     DataComplete(){
       
     }
-    CreateNewSeries(name : string , data){
-      this.seriesData.name = name;
-      this.seriesData.data = data;
+    CreateNewSeriesForPieChart(name : number[] , data){
+      this.seriesData.series = name;
+      this.seriesData.labels = data;
       return this.seriesData;
     }
   }
