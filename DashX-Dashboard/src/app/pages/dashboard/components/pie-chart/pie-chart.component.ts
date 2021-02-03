@@ -10,7 +10,7 @@ import { PieChart, PieChartOptions } from '../../component-classes/pieChart';
   styleUrls: ['./pie-chart.component.css']
 })
 export class PieChartComponent implements OnInit {
-  public chart: Partial<any>;
+  public chart: Partial<PieChartOptions>;
   @Input() pieChartData: PieChartData;  
   pieChartDefaults : PieChart;
   isEditorOpen : boolean
