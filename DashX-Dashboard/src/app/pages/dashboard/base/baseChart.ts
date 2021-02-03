@@ -12,5 +12,5 @@ export abstract class  BaseChart{
 
     // to create new series for the data
     CreateNewSeries(name : string, data : []){}
-
+    CreateNewSeriesForPieChart(name : number[], data : []){}
 }
