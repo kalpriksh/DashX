@@ -1,11 +1,12 @@
 import { DashboardService } from "../../services";
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { LineChartData, PieChartData, BarGraphData } from '../../models';
 
 @Component({
   selector: 'app-charts-container',
   templateUrl: './charts-container.component.html',
-  styleUrls: ['./charts-container.component.css']
+  styleUrls: ['./charts-container.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ChartsContainerComponent implements OnInit {
   

@@ -48,8 +48,7 @@ export class PieChartComponent implements OnInit {
   }
   
   // to open chart editor
-  EditChart()
-  {
+  EditChart(){
     this.data.ToggleEditor(!this.isEditorOpen);
   }
 

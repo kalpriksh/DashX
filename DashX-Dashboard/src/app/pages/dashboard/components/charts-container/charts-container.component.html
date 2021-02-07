@@ -1,6 +1,52 @@
 
 <div class='chart-container'>
   <app-chart-editor id = 'chart-editor'></app-chart-editor>
-  <app-bar-graph></app-bar-graph>
+
+  <mat-grid-list cols="4" rowHeight="150px" gutterSize = "10px">
+    <mat-grid-tile
+    [rowspan] = '1'
+    [colspan] = '1'
+    >
+    <app-kpi kpiName = "Quaterly Revenue" kpiIcon = "show_chart" kpiMetric = "200"></app-kpi>
+    </mat-grid-tile>
+    
+
+    <mat-grid-tile
+    [rowspan] = '1'
+    [colspan] = '1'
+    >
+    <app-kpi></app-kpi>
+    </mat-grid-tile>
+
+    <mat-grid-tile
+    [rowspan] = '1'
+    [colspan] = '1'
+    >
+    <app-kpi></app-kpi>
+    </mat-grid-tile>
+    
+    <mat-grid-tile
+    [rowspan] = '1'
+    [colspan] = '1'
+    >
+    <app-kpi></app-kpi>
+    </mat-grid-tile>
+
+    <mat-grid-tile
+    [rowspan] = '3'
+    [colspan] = '2'
+    >
+    <app-bar-graph></app-bar-graph>
+    </mat-grid-tile>
+
+    <mat-grid-tile
+    [rowspan] = '3'
+    [colspan] = '2'
+    >
+    <app-pie-chart></app-pie-chart>
+    </mat-grid-tile>
+  
+  </mat-grid-list>
+
 </div>
  
