@@ -1,10 +1,17 @@
-<p>pie-chart works!</p>
+<mat-card class="container">
+  <div class="chart-heading"> 
+    <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" id="edit-icon" (click) = 'EditChart()'>
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
 <div>
-    <apx-chart
+    <apx-chart #chartObj
       [series]="chart.series"
       [chart]="chart.chart"
       [labels]="chart.labels"
       [responsive]="chart.responsive"
     ></apx-chart>
   </div>
-  
+
+
+  </mat-card>

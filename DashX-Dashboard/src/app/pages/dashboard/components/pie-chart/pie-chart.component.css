@@ -1,0 +1,21 @@
+.container{
+    position: relative;
+}
+.chart-heading{
+    display: inline-flex;
+}
+#option-selector{
+    z-index: 10;
+    position: absolute;
+    right: -0px;
+}
+#chart-editor{
+    height: 100%;
+    z-index: 10;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+#edit-icon{
+    margin-left: 10px;
+}
