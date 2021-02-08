@@ -1,5 +1,6 @@
 import { BaseChart } from '../base'
-import { SeriesData } from '../models'
+import { SeriesData, CategoryData } from '../models'
+
 
 import {
   ApexTitleSubtitle,
@@ -26,77 +27,91 @@ export type BarChartOptions = {
 
 export class BarChart extends BaseChart{
   
+  chartId : number  
   seriesData : SeriesData
+  categoryData : CategoryData
+  
 
   barChartDefaultData : Partial<BarChartOptions>
-  constructor(){
+  constructor(chartId? : number, chartData? : Partial<BarChartOptions>){
     super()
-    this.barChartDefaultData = this.barChartDefaultData = {
-      series: [
-       
-      ],
-      title: {
-        text: "Placeholder",
-        align: 'left',
-        margin: 10,
-        offsetX: 0,
-        offsetY: 0,
-        floating: false,
-        style: {
-          fontSize:  '23px',
-          fontWeight:  'bold',
-          fontFamily:  undefined,
-          color:  '#263238'
+
+    if(chartId && chartData){
+      this.barChartDefaultData = chartData
+    }
+    else{
+      this.barChartDefaultData = this.barChartDefaultData = {
+        series: [
+        ],
+        title: {
+          text: "Placeholder",
+          align: 'left',
+          margin: 10,
+          offsetX: 0,
+          offsetY: 0,
+          floating: false,
+          style: {
+            fontSize:  '23px',
+            fontWeight:  'bold',
+            fontFamily:  undefined,
+            color:  '#263238'
+          },
         },
-      },
-    
-      chart: {
-        type: "bar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false
-        }
-      },
-      grid :{
-        xaxis : {
-          lines :{
-            show : true
+      
+        chart: {
+          type: "bar",
+          height: 350
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false
           }
         },
-        yaxis : {
-          lines :{
-            show : false
+        grid :{
+          xaxis : {
+            lines :{
+              show : true
+            }
+          },
+          yaxis : {
+            lines :{
+              show : false
+            }
           }
+        },
+        stroke :{
+  
+        },
+        dataLabels: {
+          enabled: false
+        },
+        xaxis: {
+          categories: []
         }
-      },
-      stroke :{
+      };
+    }
 
-      },
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        categories: []
-      }
-    };
-
+    // init series data
     this.seriesData = {
       name : "",
       data : []
     }
+
   }
+
   GetDefaults(){
     return this.barChartDefaultData;
   }
+
   DataComplete(){
     
   }
+
   CreateNewSeries(name : string , data){
     this.seriesData.name = name;
     this.seriesData.data = data;
     return this.seriesData;
   }
+ 
 }
 

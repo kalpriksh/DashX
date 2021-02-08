@@ -13,99 +13,79 @@ export class ChartSetupComponent implements OnInit {
   
   panelOpenState = true;
 
-  // binds SetupData to the UI
-  SetupData
+  // binds _chartSetupData to the UI
+  _chartSetupData
 
   //#region classes
-  ChartSetup : ChartSetup;
-  BarChart : BarChart;
+  chartSetup : ChartSetup;
+  barChart : BarChart;
   //#endregion
 
   //#region UI variables
   seriesNames : string[];
+  categoryNames : string[];
   addedSeries : SeriesData;
   seriesList : SeriesData[];
   categoryList : any[];
+  chartType : string; //test variable
   //#endregion
 
   constructor(private chartData : ChartEditorService){}
 
   ngOnInit(){
-    this.chartData.editorData_current.subscribe(chartData => this.SetupData = chartData)
+    this.chartData.editorData_current.subscribe(chartData => this._chartSetupData = chartData)
     this.seriesNames = ["null"]
     this.seriesList = []
     this.categoryList = []
-    this.BarChart = new BarChart();
+    this.barChart = new BarChart();
+    this.chartSetup = new ChartSetup();
+  }
+
+  test(event){
+    console.log(event);
+    this.UpdateChartSetup(event.value)
   }
 
   EnterSubmit(event, form){
     if (event.keyCode == 13) {
-      this.chartData.EditorDataUpdated(this.SetupData)
+      this.chartData.EditorDataUpdated(this._chartSetupData)
     }
-  }
-
-  OnSheetUpload(workBookData){
-    /**
-     * init ChartSetup class
-     * takes entire workbook processes it and returns required data
-     */
-    this.ChartSetup = new ChartSetup(workBookData);
-    this.UpdateChartSetup();
   }
 
   // updates the component UI
-  UpdateChartSetup(){
-    this.seriesNames = this.ChartSetup.GetSeriesName();
+  UpdateChartSetup(chartType){
+    this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series");
+    this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
   }
 
-  AddSeries(seriesName : string){
+  AddData(dataTypeName : string, dataType : string){
     /**
-     * adds series to the ui    
-     * adds series to the chartData object
+     * adds series/category to the ui    
+     * adds series/categot to the chartData object
      */
     // default case
-    if(seriesName == "null"){
+    if(dataTypeName == "null"){
       alert("need to add data file")
     }
-    else{
-      this.addedSeries = this.BarChart.CreateNewSeries(seriesName, this.ChartSetup.GetSeriesData(seriesName));
-
+    else {
+      this.addedSeries = this.barChart.CreateNewSeries(dataTypeName, this.chartSetup.GetSeriesData(this.chartType, dataType, dataTypeName));
       // to prevent call by reference
-      let seriesToPush : SeriesData = {
+      let dataToPush : SeriesData = {
         name : this.addedSeries.name,
         data : this.addedSeries.data
       } 
-
       // update seriesList UI
-      this.seriesList.push(seriesToPush)
       // update setup data
-      this.SetupData.series.push(seriesToPush)
+      if(dataType == 'series'){
+        this._chartSetupData.series.push(dataToPush)
+        this.seriesList.push(dataToPush)
+      }
+      else if(dataType == 'category'){
+        this._chartSetupData.xaxis.categories = dataToPush.data;
+        this.categoryList.push(dataToPush)
+      }
       // update chart
-      this.chartData.EditorDataUpdated(this.SetupData)
-    }
-  }
-
-  
-  AddCategory(name : string){
-    /**
-     * adds series to the ui    
-     * adds series to the chartData object
-     */
-    // default case
-    if(name == "null"){
-      alert("need to add data file")
-    }
-    else{
-      const categoryData = this.ChartSetup.GetSeriesData(name);
-
-      // update seriesList UI
-      this.categoryList = categoryData;
-
-      // update setup data
-      this.SetupData.xaxis.categories = categoryData;
-      
-      // update chart
-      this.chartData.EditorDataUpdated(this.SetupData)
+      this.chartData.EditorDataUpdated(this._chartSetupData)
     }
   }
 
