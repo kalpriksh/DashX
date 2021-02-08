@@ -1,5 +1,9 @@
     <mat-accordion>
-        <input type="file" ReadExcel (dataReadEvent) = "OnSheetUpload($event)">
+        <mat-radio-group aria-label="Select an option" [(ngModel)] = "chartType" (change) = "test($event)">
+            <mat-radio-button value="Bar">Bar Data</mat-radio-button>
+            <mat-radio-button value="Pie">Pie Data</mat-radio-button>
+          </mat-radio-group>
+        
         <form #myForm = "ngForm" (keydown) = "EnterSubmit($event, myForm.form)">
 
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -9,8 +13,8 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <mat-form-field>
-                    <input matInput type="text" [(ngModel)]="SetupData.title.text" [ngModelOptions]="{standalone : true}">
-                    <button mat-button *ngIf="SetupData.title.text" matSuffix mat-icon-button aria-label="Clear" (click)="SetupData.title.text=''">
+                    <input matInput type="text" [(ngModel)]="_chartSetupData.title.text" [ngModelOptions]="{standalone : true}">
+                    <button mat-button *ngIf="_chartSetupData.title.text" matSuffix mat-icon-button aria-label="Clear" (click)="_chartSetupData.title.text=''">
                     <mat-icon>close</mat-icon>
                     </button>
                 </mat-form-field>                    
@@ -50,8 +54,8 @@
                         Category
                     </button>
                     <mat-menu #menu="matMenu">
-                        <div *ngFor="let item of seriesNames">
-                            <button mat-menu-item (click) = "AddCategory(item)">    
+                        <div *ngFor="let item of categoryNames">
+                            <button mat-menu-item (click) = "AddData(item, 'category')">    
                                 {{item}} <mat-icon>add_to_queue</mat-icon>
                             </button>
                         </div>
@@ -80,7 +84,7 @@
                     </div>
                     <mat-menu #seriesMenu="matMenu">
                         <div *ngFor="let item of seriesNames">
-                            <button mat-menu-item (click) = "AddSeries(item)">
+                            <button mat-menu-item (click) = "AddData(item,'series')">
                                 {{item}} <mat-icon>add_to_queue</mat-icon>
                             </button>
                         </div>

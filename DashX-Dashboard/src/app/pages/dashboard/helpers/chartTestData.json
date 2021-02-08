@@ -1,0 +1,11 @@
+{
+    "Bar" : {
+        "category" : {
+            "Name" : ["South Korea","Canada","United Kingdom","Netherlands","Italy","France","Japan","United States","China","Germany"]
+        },
+        "series" : {
+            "Population" : ["500","500","500","500","500","500","500","500","500","500"],
+            "Area" : ["300","300","300","300","300","300","300","300","300","300"]
+        }
+    }
+}
