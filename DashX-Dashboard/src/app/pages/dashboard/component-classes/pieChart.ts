@@ -17,11 +17,14 @@ import {
 // class for defining the behavior and rules for the given chart type
 export class PieChart extends BaseChart{
     seriesData : PieChartData
-
-    pieChartDefaultData : Partial<PieChartOptions>
-    constructor(chartId? : number){
+    chartData : Partial<PieChartOptions>    
+    constructor(chartId? : number, chartData? : Partial<PieChartOptions>){
       super()
-    this.pieChartDefaultData = {
+      if(chartId && chartData){
+        this.chartData = chartData
+      }
+      else{
+    this.chartData = {
       title: {
         text: "Pie Chart",
         align: 'left',
@@ -56,6 +59,7 @@ export class PieChart extends BaseChart{
         }
       ]
     };
+  }
 
     this.chartType = "Pie"
     this.chartId = chartId // unique chart id should be generated for each chart
@@ -66,7 +70,7 @@ export class PieChart extends BaseChart{
       }
     }
     GetDefaults(){
-      return this.pieChartDefaultData;
+      return this.chartData;
     }
     DataComplete(){
       
