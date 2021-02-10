@@ -14,29 +14,37 @@ import { DataHandler } from '../../helpers'
 export class BarGraphComponent implements OnInit{
   
   public chart: Partial<BarChartOptions>;
-  barChartDefaults : BarChart;
+  barChart : BarChart;
   isEditorOpen : boolean
-  EditorData
+  chartData : Partial<BarChartOptions>
+  editorState
 
   @Input() barGraphData: BarGraphData;
   @ViewChild ('chartObj') chartObj : ChartComponent;
 
-  constructor(private data : ChartEditorService){
+  constructor(private editorData : ChartEditorService){
 
   }
 
   ngOnInit(): void {
 
-    this.barChartDefaults = new BarChart();
+    this.barChart = new BarChart(101);
     this.chart = this.initChart()
-    this.data.isEditorOpen_current.subscribe( isOpen => this.isEditorOpen = isOpen )
-    this.data.editorData_current.subscribe( graphData => {
-      
-      this.EditorData = graphData
-      if(this.chartObj != null){
-        this.updateChart(graphData)
-      }
+    
+    // on toggle edit chart
+    this.editorData.isEditorOpen_current.subscribe(_editorState => {
+      this.isEditorOpen = _editorState[0]
+      this.editorState = _editorState
+    })
 
+    // on data modified event
+    this.editorData.editorData_current.subscribe( _chartObject => {
+      
+      this.chartData = _chartObject
+      if(this.chartObj != null){
+        this.updateChart(_chartObject.chartData)
+        this.barChart = _chartObject
+      }
     })
 
   }
@@ -51,13 +59,28 @@ export class BarGraphComponent implements OnInit{
   }
   
   // to open chart editor
-  EditChart()
-  {
-    this.data.ToggleEditor(!this.isEditorOpen);
+  EditChart(){
+    debugger
+    if(this.isEditorOpen){
+      //if editor is already open
+      if(this.editorState[1] == this.barChart.chartId){
+        // chart data is already loaded on the editor
+        this.editorData.ToggleEditor(!this.editorState[0], this.barChart.chartId);
+      } 
+      else{
+        // need to load chart data on editor
+        this.editorData.ToggleEditor(this.editorState[0], this.barChart.chartId)
+        this.editorData.EditorDataUpdated(this.barChart)
+      }
+    }
+    else{
+      this.editorData.ToggleEditor(!this.editorState[0], this.barChart.chartId)
+      this.editorData.EditorDataUpdated(this.barChart)
+    }
   }
 
   public initChart(): Partial<any> {
-   return  this.barChartDefaults.GetDefaults()
+   return  this.barChart.GetDefaults()
   }
 
   //#endregion
