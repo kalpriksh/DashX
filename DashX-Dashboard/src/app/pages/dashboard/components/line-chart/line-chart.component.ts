@@ -35,6 +35,7 @@ export class LineChartComponent implements OnInit {
 
   public chart: Partial<ChartOptions>;
   isEditorOpen : boolean
+  editorState
 
   @Input() lineChartData: LineChartData;
   @ViewChild ('chartObj') chartObj : ChartComponent
@@ -45,16 +46,19 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.chart = this.initChart();
-    this.data.isEditorOpen_current.subscribe( isOpen => this.isEditorOpen = isOpen )
+    this.data.isEditorOpen_current.subscribe( _editorState => {
+      this.isEditorOpen = _editorState[0]
+      this.editorState = _editorState
+    })
   }
 
   EditChart()
     {
-      this.data.ToggleEditor(!this.isEditorOpen);
+      this.data.ToggleEditor(!this.isEditorOpen, 666); // chartID modifications need when line chart is being implemented
     }
     
   public initChart(): Partial<ChartOptions> {
-  return { 
+  return {
     series: [
         {
           name:"basic",
