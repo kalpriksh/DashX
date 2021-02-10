@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs'
-import { BarChartOptions, BarChart } from '../component-classes' 
+import { BehaviorSubject } from 'rxjs';
+import { BaseChart } from "../base";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChartEditorService {
 
-  barchart : BarChart
-  private isEditorOpen = new BehaviorSubject<boolean>(false);
+  private isEditorOpen = new BehaviorSubject<[boolean,number]>([false, 0]);
   isEditorOpen_current = this.isEditorOpen.asObservable();
 
   private editorData
   editorData_current
 
-  ToggleEditor(isEditorOpen:boolean){
-    this.isEditorOpen.next(isEditorOpen);
+  ToggleEditor(isEditorOpen:boolean, chartID : number){
+    this.isEditorOpen.next([isEditorOpen, chartID]);
   }
 
   EditorDataUpdated(editorData){
@@ -27,9 +26,7 @@ export class ChartEditorService {
       for bar chart
       currently default observable value is barChart's default
      */
-    this.barchart = new BarChart();
-    this.editorData = new BehaviorSubject<Partial<BarChartOptions>>(this.barchart.GetDefaults());
-    this.editorData_current = this.editorData.asObservable();
-
+    this.editorData = new BehaviorSubject<any>(null)
+    this.editorData_current = this.editorData.asObservable()
   }
 }

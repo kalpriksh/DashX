@@ -27,20 +27,19 @@ export type BarChartOptions = {
 
 export class BarChart extends BaseChart{
   
-  chartId : number  
   seriesData : SeriesData
   categoryData : CategoryData
-  
 
-  barChartDefaultData : Partial<BarChartOptions>
+  chartData : Partial<BarChartOptions>
+
   constructor(chartId? : number, chartData? : Partial<BarChartOptions>){
     super()
-
+    
     if(chartId && chartData){
-      this.barChartDefaultData = chartData
+      this.chartData = chartData
     }
     else{
-      this.barChartDefaultData = this.barChartDefaultData = {
+      this.chartData = this.chartData = {
         series: [
         ],
         title: {
@@ -91,6 +90,8 @@ export class BarChart extends BaseChart{
       };
     }
 
+    this.chartId = chartId
+    this.chartType = "Bar"
     // init series data
     this.seriesData = {
       name : "",
@@ -100,7 +101,7 @@ export class BarChart extends BaseChart{
   }
 
   GetDefaults(){
-    return this.barChartDefaultData;
+    return this.chartData;
   }
 
   DataComplete(){

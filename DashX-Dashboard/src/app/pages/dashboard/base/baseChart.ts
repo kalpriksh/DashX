@@ -1,6 +1,26 @@
 //this abstract class should be inherited by all the chart classes
-export abstract class  BaseChart{
+export class BaseChart{
 
+    
+    //#region properties
+    private _chartType : string;
+    public get chartType() : string {
+        return this._chartType;
+    }
+    public set chartType(v : string) {
+        this._chartType = v;
+    }
+    
+    
+    private _chartId : number;
+    public get chartId() : number {
+        return this._chartId;
+    }
+    public set chartId(v : number) {
+        this._chartId = v;
+    }
+    //#endregion
+    
     // ctor
     constructor(){}
 

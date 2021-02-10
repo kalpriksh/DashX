@@ -56,7 +56,7 @@
                     <mat-menu #menu="matMenu">
                         <div *ngFor="let item of categoryNames">
                             <button mat-menu-item (click) = "AddData(item, 'category')">    
-                                {{item}} <mat-icon>add_to_queue</mat-icon>
+                                {{item}} <mat-icon>playlist_add</mat-icon>
                             </button>
                         </div>
                     </mat-menu>                  
@@ -85,10 +85,21 @@
                     <mat-menu #seriesMenu="matMenu">
                         <div *ngFor="let item of seriesNames">
                             <button mat-menu-item (click) = "AddData(item,'series')">
-                                {{item}} <mat-icon>add_to_queue</mat-icon>
+                                {{item}} <mat-icon>playlist_add</mat-icon>
                             </button>
                         </div>
                     </mat-menu>                  
+            </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    Labels
+                    </mat-panel-title>
+                </mat-expansion-panel-header> 
+                <mat-selection-list [multiple]="false">
+                    
+                </mat-selection-list>
             </mat-expansion-panel>
             
             

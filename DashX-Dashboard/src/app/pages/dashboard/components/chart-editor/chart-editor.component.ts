@@ -8,20 +8,19 @@ import { ChartEditorService } from '../../services'
 })
 export class ChartEditorComponent implements OnInit {
   
-  isEditorOpen : boolean;
-
-  //data which can be modified by the user
-  EditorData
+  editorState : [boolean, number];
+  isEditorOpen
 
   constructor(private data : ChartEditorService) { }
 
   ngOnInit(): void {
-    //subscripton to chartEditor service
-    this.data.isEditorOpen_current.subscribe(isOpen => this.isEditorOpen = isOpen )
-    this.data.editorData_current.subscribe( chartData => this.EditorData = chartData )
-    
 
-    //sharing data with child components i.e chart-setup | option-editor
+    //subscripton to chartEditor service
+     this.data.isEditorOpen_current.subscribe(_editorState => {
+      this.editorState = _editorState
+      this.isEditorOpen = _editorState[0]
+    })
+
   }
 
 }

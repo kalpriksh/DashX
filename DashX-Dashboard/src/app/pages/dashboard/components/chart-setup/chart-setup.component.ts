@@ -30,15 +30,29 @@ export class ChartSetupComponent implements OnInit {
   chartType : string; //test variable
   //#endregion
 
+  chartObject
+
   constructor(private chartData : ChartEditorService){}
 
   ngOnInit(){
-    this.chartData.editorData_current.subscribe(chartData => this._chartSetupData = chartData)
+    this.barChart = new BarChart();
+
+    this.chartData.editorData_current.subscribe(_chartObject =>{
+      if(_chartObject){
+
+        this._chartSetupData = _chartObject.GetDefaults()
+        this.chartObject = _chartObject 
+        console.log(_chartObject.GetDefaults());
+        
+      } else {
+        this._chartSetupData = this.barChart.GetDefaults()
+      }
+    })
+    
     this.seriesNames = ["null"]
     this.seriesList = []
     this.categoryList = []
-    this.barChart = new BarChart();
-    this.chartSetup = new ChartSetup();
+    this.chartSetup = new ChartSetup()
   }
 
   test(event){
@@ -48,13 +62,14 @@ export class ChartSetupComponent implements OnInit {
 
   EnterSubmit(event, form){
     if (event.keyCode == 13) {
-      this.chartData.EditorDataUpdated(this._chartSetupData)
+      this.chartObject.Defaults = this._chartSetupData
+      this.chartData.EditorDataUpdated(this.chartObject)
     }
   }
 
   // updates the component UI
   UpdateChartSetup(chartType){
-    this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series");
+    this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series")
     this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
   }
 
@@ -85,7 +100,8 @@ export class ChartSetupComponent implements OnInit {
         this.categoryList.push(dataToPush)
       }
       // update chart
-      this.chartData.EditorDataUpdated(this._chartSetupData)
+      this.chartObject.Defaults = this._chartSetupData
+      this.chartData.EditorDataUpdated(this.chartObject)
     }
   }
 

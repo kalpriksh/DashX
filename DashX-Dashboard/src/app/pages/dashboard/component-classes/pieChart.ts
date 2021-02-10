@@ -1,12 +1,14 @@
 import { BaseChart } from '../base'
 import { PieChartData } from '../models';
 import {
+    ApexTitleSubtitle,
     ApexNonAxisChartSeries,
     ApexResponsive,
     ApexChart
   } from "ng-apexcharts";
   
   export type PieChartOptions = {
+    title : ApexTitleSubtitle;
     series: ApexNonAxisChartSeries;
     chart: ApexChart;
     responsive: ApexResponsive[];
@@ -17,10 +19,23 @@ export class PieChart extends BaseChart{
     seriesData : PieChartData
 
     pieChartDefaultData : Partial<PieChartOptions>
-    constructor(){
+    constructor(chartId? : number){
       super()
     this.pieChartDefaultData = {
-          
+      title: {
+        text: "Pie Chart",
+        align: 'left',
+        margin: 10,
+        offsetX: 0,
+        offsetY: 0,
+        floating: false,
+        style: {
+          fontSize:  '23px',
+          fontWeight:  'bold',
+          fontFamily:  undefined,
+          color:  '#263238'
+        },
+      },
       series: [44, 55, 13, 43, 22],
       chart: {
         width: 380,
@@ -41,7 +56,10 @@ export class PieChart extends BaseChart{
         }
       ]
     };
-    
+
+    this.chartType = "Pie"
+    this.chartId = chartId // unique chart id should be generated for each chart
+
     this.seriesData = {
         series : [],
         labels : []
