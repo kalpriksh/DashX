@@ -7,18 +7,24 @@ export class DataHandler {
     GetKeys(chartType, dataType){
         if(chartType == "Bar"){
             return Object.keys(dummyData["Bar"][dataType])
-        } else if(chartType == "Pie"){
+        } 
+        if(chartType == "Pie"){
             return Object.keys(dummyData["Pie"][dataType])
+        } 
+        else {
+            return null
         }
     }
 
     GetValuesAll(chartType : string, dataType? : string, keyName? : string){
         if(chartType == "Bar"){
             return dummyData["Bar"][dataType][keyName]
-        } else if(chartType == 'Pie'){
+        } 
+        if(chartType == "Pie"){
             return dummyData["Pie"][dataType][keyName]
-        }
-        else{
+        } 
+        else {
+
             return null
         }
     }
