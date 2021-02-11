@@ -2,10 +2,7 @@ import * as dummyData from "../helpers/chartTestData.json"
 
 export class DataHandler {
     
-    JSON_obj
-    constructor() {
-
-    }
+    constructor() {}
     
     GetKeys(chartType, dataType){
         if(chartType == "Bar"){
@@ -19,7 +16,7 @@ export class DataHandler {
         }
     }
 
-    GetValuesAll(chartType : string, dataType : string, keyName : string){
+    GetValuesAll(chartType : string, dataType? : string, keyName? : string){
         if(chartType == "Bar"){
             return dummyData["Bar"][dataType][keyName]
         } 
@@ -27,6 +24,7 @@ export class DataHandler {
             return dummyData["Pie"][dataType][keyName]
         } 
         else {
+
             return null
         }
     }
