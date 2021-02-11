@@ -38,13 +38,17 @@ export class BarGraphComponent implements OnInit{
     })
 
     // on data modified event
-    this.editorData.editorData_current.subscribe( _chartObject => {
-      
-      this.chartData = _chartObject
+    this.editorData.editorData_current.subscribe( _modifiedChartObject => {
+
       if(this.chartObj != null){
-        this.updateChart(_chartObject.chartData)
-        this.barChart = _chartObject
+        //update if chartType and chartID is the same
+        if(_modifiedChartObject.chartType == this.barChart.chartType && _modifiedChartObject.chartId == this.barChart.chartId){
+          this.chartData = _modifiedChartObject
+          this.updateChart(_modifiedChartObject.chartData)
+          this.barChart = _modifiedChartObject
+        }
       }
+
     })
 
   }
