@@ -114,9 +114,9 @@ export class ChartSetupComponent implements OnInit {
           labels : this.addedSeries.labels,
           series : this.addedSeries.series
         } 
-       if (dataType == 'labels'){
-          this._chartSetupData.xaxis.categories = dataToPush.labels;
-          this.categoryList.push(dataToPush)
+       if (dataType == 'category'){
+          this._chartSetupData.xaxis.categories = dataToPush.data;
+          this.pieCategoryList.push(dataToPush)
         }
         else
         if(dataType == 'series'){
