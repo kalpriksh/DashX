@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ChartEditorService } from '../../services'
-import { ChartSetup } from '../../component-classes';
-import { SeriesData } from '../../models';
-import { BarChart } from '../../component-classes';
-
+import { ChartSetup, PieChart, BarChart } from '../../component-classes';
+import { PieChartData, SeriesData } from '../../models';
 @Component({
   selector: 'app-chart-setup',
   templateUrl: './chart-setup.component.html',
@@ -19,13 +17,15 @@ export class ChartSetupComponent implements OnInit {
   //#region classes
   chartSetup : ChartSetup;
   barChart : BarChart;
+  pieChart: PieChart;
   //#endregion
 
   //#region UI variables
   seriesNames : string[];
   categoryNames : string[];
-  addedSeries : SeriesData;
-  seriesList : SeriesData[];
+  labels: string[];
+  addedSeries : any;
+  seriesList : any[];
   categoryList : any[];
   chartType : string; //test variable
   //#endregion
@@ -36,18 +36,23 @@ export class ChartSetupComponent implements OnInit {
 
   ngOnInit(){
     this.barChart = new BarChart();
-
+    this.pieChart = new PieChart();
+    
     this.chartData.editorData_current.subscribe(_chartObject =>{
       if(_chartObject){
 
         this._chartSetupData = _chartObject.GetDefaults()
         this.chartObject = _chartObject 
         console.log(_chartObject.GetDefaults());
-        
-      } else {
-        this._chartSetupData = this.barChart.GetDefaults()
+      } 
+      else
+      if(this.chartType == "Bar") {
+        this._chartSetupData = this.barChart.GetDefaults()}
+
+      else if(this.chartType == "Pie"){
+        this._chartSetupData = this.pieChart.GetDefaults();}
       }
-    })
+    )
     
     this.seriesNames = ["null"]
     this.seriesList = []
@@ -71,6 +76,7 @@ export class ChartSetupComponent implements OnInit {
   UpdateChartSetup(chartType){
     this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series")
     this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
+    this.labels = this.chartSetup.GetSeriesName(chartType, "labels")
   }
 
   AddData(dataTypeName : string, dataType : string){
@@ -82,15 +88,15 @@ export class ChartSetupComponent implements OnInit {
     if(dataTypeName == "null"){
       alert("need to add data file")
     }
-    else {
+    else 
+    if (this.chartType == "Bar")
+    {  
       this.addedSeries = this.barChart.CreateNewSeries(dataTypeName, this.chartSetup.GetSeriesData(this.chartType, dataType, dataTypeName));
       // to prevent call by reference
       let dataToPush : SeriesData = {
         name : this.addedSeries.name,
         data : this.addedSeries.data
       } 
-      // update seriesList UI
-      // update setup data
       if(dataType == 'series'){
         this._chartSetupData.series.push(dataToPush)
         this.seriesList.push(dataToPush)
@@ -99,11 +105,33 @@ export class ChartSetupComponent implements OnInit {
         this._chartSetupData.xaxis.categories = dataToPush.data;
         this.categoryList.push(dataToPush)
       }
+    }
+      if(this.chartType == "Pie")
+      {
+        this.addedSeries = this.pieChart.CreateNewSeriesForPieChart(dataTypeName, this.chartSetup.GetSeriesData(this.chartType, dataType, dataTypeName));
+        // to prevent call by reference
+        let dataToPush : PieChartData = {
+          labels : this.addedSeries.labels,
+          series : this.addedSeries.series
+        } 
+       if (dataType == 'labels'){
+          this._chartSetupData.xaxis.categories = dataToPush.labels;
+          this.categoryList.push(dataToPush)
+        }
+        else
+        if(dataType == 'series'){
+          this._chartSetupData.series.push(dataToPush)
+          this.seriesList.push(dataToPush)
+        }
+      }
+      // update seriesList UI
+      // update setup data
+
+
       // update chart
       this.chartObject.Defaults = this._chartSetupData
       this.chartData.EditorDataUpdated(this.chartObject)
     }
-  }
 
   SaveChartData(){
     /**

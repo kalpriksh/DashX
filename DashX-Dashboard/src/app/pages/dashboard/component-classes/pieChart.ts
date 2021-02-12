@@ -75,7 +75,7 @@ export class PieChart extends BaseChart{
     DataComplete(){
       
     }
-    CreateNewSeriesForPieChart(name : number[] , data){
+    CreateNewSeriesForPieChart(name , data){
       this.seriesData.series = name;
       this.seriesData.labels = data;
       return this.seriesData;
