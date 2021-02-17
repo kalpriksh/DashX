@@ -11,12 +11,18 @@ export class DataHandler {
             } else {
                 return null
             }
-        } else if(chartType == "Pie"){
+        } else if(chartType == "Pie") {
             if(dummyData["Pie"][dataType]){
                 return Object.keys(dummyData["Pie"][dataType])
             } else {
                 return null
             }
+        } else if(chartType == "Line") {
+          if(dummyData["Line"][dataType]){
+              return Object.keys(dummyData["Line"][dataType])
+          } else {
+              return null
+          }
         } 
         else {
             return null
@@ -29,9 +35,11 @@ export class DataHandler {
         } 
         if(chartType == "Pie"){
             return dummyData["Pie"][dataType][keyName]
-        } 
+        }
+        if(chartType == "Line"){
+          return dummyData["Line"][dataType][keyName]
+        }
         else {
-
             return null
         }
     }

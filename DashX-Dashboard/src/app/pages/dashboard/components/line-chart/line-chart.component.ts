@@ -1,29 +1,8 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ChartEditorService } from '../../services'
+import { LineChart, LineChartOptions } from '../../component-classes'
+import { ChartComponent } from "ng-apexcharts";
 
-
-import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexDataLabels,
-  ApexTitleSubtitle,
-  ApexStroke,
-  ApexGrid
-} from "ng-apexcharts";
-
-import { LineChartData } from '../../models';
-
-export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  xaxis: ApexXAxis;
-  dataLabels: ApexDataLabels;
-  grid: ApexGrid;
-  stroke: ApexStroke;
-  title: ApexTitleSubtitle;
-};
 
 @Component({
   selector: 'app-line-chart',
@@ -33,62 +12,73 @@ export type ChartOptions = {
 
 export class LineChartComponent implements OnInit {
 
-  public chart: Partial<ChartOptions>;
+  public chart: Partial<LineChartOptions>;
+  lineChart : LineChart;
   isEditorOpen : boolean
+  chartData : Partial<LineChartComponent>
   editorState
 
-  @Input() lineChartData: LineChartData;
+  @Input() lineChartData: Partial<LineChartOptions>;
   @ViewChild ('chartObj') chartObj : ChartComponent
 
-  constructor(private data : ChartEditorService){
-
-  }
+  constructor(private editorData : ChartEditorService){}
 
   ngOnInit(): void {
-    this.chart = this.initChart();
-    this.data.isEditorOpen_current.subscribe( _editorState => {
+
+    this.lineChart = new LineChart(103);
+    this.chart = this.initChart()
+    
+    // on toggle edit chart
+    this.editorData.isEditorOpen_current.subscribe(_editorState => {
       this.isEditorOpen = _editorState[0]
       this.editorState = _editorState
     })
+
+    // on data modified event
+    this.editorData.editorData_current.subscribe( _modifiedChartObject => {
+
+      if(this.chartObj != null){
+        //update if chartType and chartID is the same
+        if(_modifiedChartObject.chartType == this.lineChart.chartType && _modifiedChartObject.chartId == this.lineChart.chartId){
+          this.chartData = _modifiedChartObject
+          this.updateChart(_modifiedChartObject.chartData)
+          this.lineChart = _modifiedChartObject
+        }
+      }
+    })
+
   }
 
-  EditChart()
-    {
-      this.data.ToggleEditor(!this.isEditorOpen, 666); // chartID modifications need when line chart is being implemented
-    }
-    
-  public initChart(): Partial<ChartOptions> {
-  return {
-    series: [
-        {
-          name:"basic",
-          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        }
-    ],
-    chart: {
-      height: 350,
-      type: "line",
-      zoom: {
-        enabled: false
-      }
-    },
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      curve: "straight"
-    },
-    grid: {
-      row: {
-        colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-        opacity: 0.5
-      }
-    },
-    xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
-    }
-  };
+  //to update the chart options
+  updateChart( chartOption : Partial<LineChartOptions> ){
+    this.chartObj.updateOptions(
+      chartOption
+    );
+  }
 
+  // to open chart editor
+  EditChart(){
+    
+    if(this.isEditorOpen){
+      //if editor is already open
+      if(this.editorState[1] == this.lineChart.chartId){
+        // chart data is already loaded on the editor
+        this.editorData.ToggleEditor(!this.editorState[0], this.lineChart.chartId);
+      } 
+      else{
+        // need to load chart data on editor
+        this.editorData.ToggleEditor(this.editorState[0], this.lineChart.chartId)
+        this.editorData.EditorDataUpdated(this.lineChart)
+      }
+    }
+    else{
+      this.editorData.ToggleEditor(!this.editorState[0], this.lineChart.chartId)
+      this.editorData.EditorDataUpdated(this.lineChart)
+    }
+  }
+
+  public initChart(): Partial<LineChartOptions> {
+    return this.lineChart.GetDefaults();
   }
 
 }

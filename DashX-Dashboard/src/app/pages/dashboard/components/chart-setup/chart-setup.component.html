@@ -2,6 +2,7 @@
         <mat-radio-group aria-label="Select an option" [(ngModel)] = "chartTypeData" (change) = "test($event)">
             <mat-radio-button value="Bar">Bar Data</mat-radio-button>
             <mat-radio-button value="Pie">Pie Data</mat-radio-button>
+            <mat-radio-button value="Line">Line Data</mat-radio-button>
           </mat-radio-group>
         
         <form #myForm = "ngForm" (keydown) = "EnterSubmit($event, myForm.form)">
