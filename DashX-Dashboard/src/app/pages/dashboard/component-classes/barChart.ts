@@ -29,7 +29,6 @@ export class BarChart extends BaseChart{
   
   seriesData : SeriesData
   categoryData : CategoryData
-
   chartData : Partial<BarChartOptions>
 
   constructor(chartId? : number, chartData? : Partial<BarChartOptions>){
@@ -43,7 +42,7 @@ export class BarChart extends BaseChart{
         series: [
         ],
         title: {
-          text: "Placeholder",
+          text: "Bar Chart",
           align: 'left',
           margin: 10,
           offsetX: 0,
@@ -105,7 +104,6 @@ export class BarChart extends BaseChart{
   }
 
   DataComplete(){
-    
   }
 
   CreateNewSeries(name : string , data){
