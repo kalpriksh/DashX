@@ -25,7 +25,7 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.lineChart = new LineChart(101);
+    this.lineChart = new LineChart(103);
     this.chart = this.initChart()
     
     // on toggle edit chart
