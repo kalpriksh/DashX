@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ChartEditorService } from '../../services'
-import { ChartSetup, PieChart, BarChart } from '../../component-classes';
+import { ChartSetup, PieChart, BarChart, BarChartOptions, PieChartOptions } from '../../component-classes';
 import { PieChartData, SeriesData } from '../../models';
 @Component({
   selector: 'app-chart-setup',
@@ -13,24 +13,25 @@ export class ChartSetupComponent implements OnInit {
 
   // binds _chartSetupData to the UI
   _chartSetupData
+  _chartObject
 
   //#region classes
-  chartSetup : ChartSetup;
-  barChart : BarChart;
-  pieChart: PieChart;
+  chartSetup : ChartSetup
+  barChart : BarChart
+  pieChart: PieChart
   //#endregion
 
   //#region UI variables
   seriesNames : string[];
   categoryNames : string[];
-  labels: string[];
+  labelList: string[];
   addedSeries : any;
   seriesList : any[];
   categoryList : any[];
-  chartType : string; //test variable
+  chartTypeData : string; //test variable
+  chartTypesList : string[];
   //#endregion
-
-  chartObject
+  
 
   constructor(private chartData : ChartEditorService){}
 
@@ -39,59 +40,76 @@ export class ChartSetupComponent implements OnInit {
     this.pieChart = new PieChart();
     
     this.chartData.editorData_current.subscribe(_chartObject =>{
-      if(_chartObject){
-
-        this._chartSetupData = _chartObject.GetDefaults()
-        this.chartObject = _chartObject 
-        console.log(_chartObject.GetDefaults());
-      } 
-      else
-      if(this.chartType == "Bar") {
-        this._chartSetupData = this.barChart.GetDefaults()}
-
-      else if(this.chartType == "Pie"){
-        this._chartSetupData = this.pieChart.GetDefaults();}
+      this.initVariables()
+      this.LoadData(_chartObject)
       }
     )
     
-    this.seriesNames = ["null"]
-    this.seriesList = []
-    this.categoryList = []
-    this.chartSetup = new ChartSetup()
+    this.initVariables()
+    this.chartSetup = new ChartSetup();
+    this.chartTypesList = ["Bar","Line","Column","Map","Pie"]
+
+  }
+  
+  initVariables(){
+    this.seriesNames = ["null"];
+    this.seriesList = [];
+    this.categoryList = [];
+    this.labelList = [];
   }
 
   test(event){
-    console.log(event);
     this.UpdateChartSetup(event.value)
+  }
+
+   // updates the component UI
+   UpdateChartSetup(chartType){
+    this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series")
+    this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
+    this.labelList = this.chartSetup.GetSeriesName(chartType, "labels")
   }
 
   EnterSubmit(event, form){
     if (event.keyCode == 13) {
-      this.chartObject.Defaults = this._chartSetupData
-      this.chartData.EditorDataUpdated(this.chartObject)
+      this._chartObject.Defaults = this._chartSetupData
+      this.chartData.EditorDataUpdated(this._chartObject)
     }
   }
 
-  // updates the component UI
-  UpdateChartSetup(chartType){
-    this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series")
-    this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
-    this.labels = this.chartSetup.GetSeriesName(chartType, "labels")
+  LoadData(chartObject){
+
+    if(chartObject){
+
+      if(chartObject.chartType == "Bar") {
+        let _barChart : BarChart = chartObject
+        let _chartData : Partial<BarChartOptions> = _barChart.chartData
+        this.seriesList =  _chartData.series
+        this.categoryList = _chartData.xaxis.categories
+        this._chartSetupData = _chartData
+      }
+      else if(chartObject.chartType == "Pie"){
+        let _pieChart : PieChart = chartObject
+        let _chartData : Partial<PieChartOptions> = _pieChart.chartData
+        this._chartSetupData = _chartData
+      }
+      this._chartObject = chartObject
+    }
+
   }
 
   AddData(dataTypeName : string, dataType : string){
     /**
      * adds series/category to the ui    
-     * adds series/categot to the chartData object
+     * adds series/category to the chartData object
      */
     // default case
     if(dataTypeName == "null"){
       alert("need to add data file")
     }
     else 
-    if (this.chartType == "Bar")
-    {  
-      this.addedSeries = this.barChart.CreateNewSeries(dataTypeName, this.chartSetup.GetSeriesData(this.chartType, dataType, dataTypeName));
+    if (this._chartObject.chartType == "Bar")
+    {
+      this.addedSeries = this.barChart.CreateNewSeries(dataTypeName, this.chartSetup.GetSeriesData(this._chartObject.chartType, dataType, dataTypeName));
       // to prevent call by reference
       let dataToPush : SeriesData = {
         name : this.addedSeries.name,
@@ -106,17 +124,17 @@ export class ChartSetupComponent implements OnInit {
         this.categoryList.push(dataToPush)
       }
     }
-      if(this.chartType == "Pie")
+      if(this.chartTypeData == "Pie")
       {
-        this.addedSeries = this.pieChart.CreateNewSeriesForPieChart(dataTypeName, this.chartSetup.GetSeriesData(this.chartType, dataType, dataTypeName));
+        this.addedSeries = this.pieChart.CreateNewSeriesForPieChart(dataTypeName, this.chartSetup.GetSeriesData(this.chartTypeData, dataType, dataTypeName));
         // to prevent call by reference
         let dataToPush : PieChartData = {
           labels : this.addedSeries.labels,
           series : this.addedSeries.series
         } 
        if (dataType == 'category'){
-          this._chartSetupData.xaxis.categories = dataToPush.data;
-          this.pieCategoryList.push(dataToPush)
+          this._chartSetupData.xaxis.categories = dataToPush.labels;
+          this.categoryList.push(dataToPush)
         }
         else
         if(dataType == 'series'){
@@ -126,11 +144,9 @@ export class ChartSetupComponent implements OnInit {
       }
       // update seriesList UI
       // update setup data
-
-
       // update chart
-      this.chartObject.Defaults = this._chartSetupData
-      this.chartData.EditorDataUpdated(this.chartObject)
+      this._chartObject.chartData = this._chartSetupData
+      this.chartData.EditorDataUpdated(this._chartObject)
     }
 
   SaveChartData(){
