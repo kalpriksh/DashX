@@ -37,10 +37,6 @@ chartData : Partial<LineChartOptions>
       else{
           this.chartData = this.chartData = {
               series: [
-                  {
-                    name:"basic",
-                    data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-                  }
               ],
               title: {
                 text: "Line Chart",
@@ -75,7 +71,7 @@ chartData : Partial<LineChartOptions>
                 opacity: 0.5}
               },
               xaxis: {
-                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
+                categories: []
               }
           };
       }
