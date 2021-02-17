@@ -13,7 +13,8 @@
             "Teams" : ["Team A", "Team B", "Team C", "Team D", "Team E"]
         },
         "series": {
-            "Score" : ["44", "55", "13", "43", "22"]
+            "Score" : [44, 55, 13, 43, 22]
+
         }
     },
     "Line" : {

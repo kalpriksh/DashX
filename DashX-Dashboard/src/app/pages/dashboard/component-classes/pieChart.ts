@@ -65,8 +65,9 @@ export class PieChart extends BaseChart{
     this.chartId = chartId // unique chart id should be generated for each chart
 
     this.seriesData = {
-        series : [],
-        labels : []
+      labels : [],
+        series : []
+        
       }
     }
     GetDefaults(){
@@ -75,9 +76,10 @@ export class PieChart extends BaseChart{
     DataComplete(){
       
     }
-    CreateNewSeriesForPieChart(series , labels){
-      this.seriesData.series = series;
+    CreateNewSeriesForPieChart(labels , series){
+      
       this.seriesData.labels = labels;
+      this.seriesData.series = series;
       return this.seriesData;
     }
   }
