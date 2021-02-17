@@ -1,5 +1,4 @@
 import { DataHandler } from "../helpers";
-import { WorkBook } from "xlsx"
 import { SeriesData } from '../models';
 import { CategoryData } from '../models';
 import { BarChart } from "../component-classes/barChart"
@@ -37,6 +36,14 @@ export class ChartSetup {
     }
     public set categoryList(v : CategoryData[]) {
         this._categoryList = v;
+    }
+
+    private _labelList : CategoryData[];
+    public get labelList() : CategoryData[] {
+        return this._labelList;
+    }
+    public set labelList(v : CategoryData[]) {
+        this._labelList = v;
     }
     
     //#endregion

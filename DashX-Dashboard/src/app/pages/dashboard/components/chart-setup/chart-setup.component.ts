@@ -25,7 +25,7 @@ export class ChartSetupComponent implements OnInit {
   seriesNames : string[];
   categoryNames : string[];
   labelNames : string[];
-  labelList: string[];
+  labelList: any[];
   addedSeries : any;
   seriesList : any[];
   categoryList : any[];
@@ -70,7 +70,7 @@ export class ChartSetupComponent implements OnInit {
    UpdateChartSetup(chartType){
     this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series")
     this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
-    this.labelList = this.chartSetup.GetSeriesName(chartType, "labels")
+    this.labelNames = this.chartSetup.GetSeriesName(chartType, "labels")
   }
 
   EnterSubmit(event, form){
@@ -149,7 +149,8 @@ export class ChartSetupComponent implements OnInit {
         this.categoryList.push(dataToPush)
       }
     }
-    if(this.chartTypeData == "Pie")
+    else
+    if(this._chartObject.chartType == "Pie")
     {
       this.addedSeries = this.pieChart.CreateNewSeriesForPieChart(dataTypeName, this.chartSetup.GetSeriesData(this.chartTypeData, dataType, dataTypeName));
       // to prevent call by reference
@@ -157,9 +158,10 @@ export class ChartSetupComponent implements OnInit {
         labels : this.addedSeries.labels,
         series : this.addedSeries.series
       } 
-      if (dataType == 'category'){
-        this._chartSetupData.xaxis.categories = dataToPush.labels;
-        this.categoryList.push(dataToPush)
+
+      if (dataType == 'labels'){
+        this._chartSetupData.labels = dataToPush.labels;
+        this.labelList.push(dataToPush)
       }
       else
       if(dataType == 'series'){
