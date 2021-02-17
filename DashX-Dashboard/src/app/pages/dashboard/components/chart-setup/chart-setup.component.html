@@ -1,12 +1,12 @@
     <mat-accordion>
-        <mat-radio-group aria-label="Select an option" [(ngModel)] = "chartType" (change) = "test($event)">
+        <mat-radio-group aria-label="Select an option" [(ngModel)] = "chartTypeData" (change) = "test($event)">
             <mat-radio-button value="Bar">Bar Data</mat-radio-button>
             <mat-radio-button value="Pie">Pie Data</mat-radio-button>
           </mat-radio-group>
         
         <form #myForm = "ngForm" (keydown) = "EnterSubmit($event, myForm.form)">
 
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.title">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                     Chart Title
@@ -14,7 +14,7 @@
                 </mat-expansion-panel-header>
                 <mat-form-field>
                     <input matInput type="text" [(ngModel)]="_chartSetupData.title.text" [ngModelOptions]="{standalone : true}">
-                    <button mat-button *ngIf="_chartSetupData.title.text" matSuffix mat-icon-button aria-label="Clear" (click)="_chartSetupData.title.text=''">
+                    <button mat-button *ngIf="_chartSetupData && _chartSetupData.title.text" matSuffix mat-icon-button aria-label="Clear" (click)="_chartSetupData.title.text=''">
                     <mat-icon>close</mat-icon>
                     </button>
                 </mat-form-field>                    
@@ -26,24 +26,12 @@
                     Chart Type
                     </mat-panel-title>
                 </mat-expansion-panel-header> 
-                <mat-selection-list [multiple]="false">
-                    <mat-list-option>Line Chart</mat-list-option>
-                    <mat-divider></mat-divider>
-                    <mat-list-option>Bar Chart</mat-list-option>
-                    <mat-divider></mat-divider>
-                    <mat-list-option>Column Chart</mat-list-option>
-                    <mat-divider></mat-divider>
-                    <mat-list-option>Area Chart</mat-list-option>
-                    <mat-divider></mat-divider>
-                    <mat-list-option>Pie Chart</mat-list-option>
-                    <mat-divider></mat-divider>
-                    <mat-list-option>Map Chart</mat-list-option>
-                    <mat-divider></mat-divider>
-                    <mat-list-option>Other</mat-list-option>
+                <mat-selection-list [multiple]="false" *ngFor="let item of chartTypesList">
+                    <mat-list-option>{{item}}</mat-list-option>
                 </mat-selection-list>
             </mat-expansion-panel>
 
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.xaxis">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                     X Axis
@@ -55,7 +43,7 @@
                     </button>
                     <mat-menu #menu="matMenu">
                         <div *ngFor="let item of categoryNames">
-                            <button mat-menu-item (click) = "AddData(item, 'category')">    
+                            <button mat-menu-item (click) = "AddData(item,'category')">    
                                 {{item}} <mat-icon>playlist_add</mat-icon>
                             </button>
                         </div>
@@ -91,19 +79,16 @@
                     </mat-menu>                  
             </mat-expansion-panel>
 
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.labels">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                     Labels
                     </mat-panel-title>
                 </mat-expansion-panel-header> 
                 <mat-selection-list [multiple]="false">
-                    
                 </mat-selection-list>
             </mat-expansion-panel>
             
-            
-
         </form>
     </mat-accordion>
 
