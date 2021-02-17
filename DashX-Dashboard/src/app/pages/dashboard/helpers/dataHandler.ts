@@ -6,10 +6,17 @@ export class DataHandler {
     
     GetKeys(chartType, dataType){
         if(chartType == "Bar"){
-            return Object.keys(dummyData["Bar"][dataType])
-        } 
-        if(chartType == "Pie"){
-            return Object.keys(dummyData["Pie"][dataType])
+            if(dummyData["Bar"][dataType]){
+                return Object.keys(dummyData["Bar"][dataType])
+            } else {
+                return null
+            }
+        } else if(chartType == "Pie"){
+            if(dummyData["Pie"][dataType]){
+                return Object.keys(dummyData["Pie"][dataType])
+            } else {
+                return null
+            }
         } 
         else {
             return null
