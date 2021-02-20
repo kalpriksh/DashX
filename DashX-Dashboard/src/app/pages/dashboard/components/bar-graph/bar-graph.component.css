@@ -3,6 +3,9 @@
 }
 .chart-heading{
     display: inline-flex;
+    position: absolute;
+    right: 10px;
+    z-index: 10;
 }
 #option-selector{
     z-index: 10;
