@@ -53,6 +53,10 @@ export class ChartSetupComponent implements OnInit {
 
   }
   
+  DeleteSeries(deletedSeries)
+  {
+    this.seriesList = this.seriesList.filter(series => series !== deletedSeries);
+  }
   /**
    * initialize the lists as empty 
    */
