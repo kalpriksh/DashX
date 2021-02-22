@@ -56,11 +56,16 @@ export class ChartSetupComponent implements OnInit {
   DeleteSeries(deletedSeries)
   {
     this.seriesList = this.seriesList.filter(series => series !== deletedSeries);
+    this._chartSetupData.series.pop(deletedSeries)
+    this._chartObject.chartData = this._chartSetupData
+    this.chartData.EditorDataUpdated(this._chartObject)
   }
   DeleteCategory(deletedCategory)
   {  
    this.availableCategoryNames = this.availableCategoryNames.filter(category => category !== deletedCategory);
-    
+   this._chartSetupData.series.pop(deletedCategory)
+   this._chartObject.chartData = this._chartSetupData
+   this.chartData.EditorDataUpdated(this._chartObject)
   }
   DeleteLabels(deletedLabel)
   {}
