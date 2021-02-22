@@ -32,19 +32,31 @@
                 </mat-selection-list>
             </mat-expansion-panel>
 
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.xaxis">
-                <mat-expansion-panel-header>
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.xaxis">                <mat-expansion-panel-header>
                     <mat-panel-title>
-                    X Axis
-                    </mat-panel-title>
+                        X Axis
+                        </mat-panel-title>
                 </mat-expansion-panel-header>  
                 <button mat-button  [matMenuTriggerFor]="menu">
                     <mat-icon>add_circle</mat-icon>
-                        Category
+                    Category
                     </button>
+                    <div *ngFor="let category of availableCategoryNames">
+                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" >
+                            <mat-expansion-panel-header>
+                                <mat-panel-title class = "delete-category"> 
+                                        <button mat-button (click) = 'DeleteCategory(category)'>
+                                          <mat-icon>delete</mat-icon>
+                                        </button>
+                                    Category: {{category.name}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                        </mat-expansion-panel>
+                    </div>
                     <mat-menu #menu="matMenu">
                         <div *ngFor="let item of categoryNames">
-                            <button mat-menu-item (click) = "AddData(item,'category')">    
+                            <button mat-menu-item (click) = "AddData(item,'category')">
                                 <mat-icon>playlist_add</mat-icon>{{item}} 
                             </button>
                         </div>

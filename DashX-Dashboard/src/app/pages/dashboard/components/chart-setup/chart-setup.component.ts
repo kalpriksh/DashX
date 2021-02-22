@@ -10,7 +10,6 @@ import { PieChartData, SeriesData } from '../../models';
 export class ChartSetupComponent implements OnInit {
   
   panelOpenState = true;
-
   // binds _chartSetupData to the UI
   _chartSetupData
   _chartObject
@@ -23,7 +22,8 @@ export class ChartSetupComponent implements OnInit {
 
   //#region UI variables
   seriesNames : string[];
-  categoryNames : string[];
+  categoryNames : any[];
+  availableCategoryNames: any[];
   labelNames : string[];
   labelList: any[];
   addedSeries : any;
@@ -48,21 +48,29 @@ export class ChartSetupComponent implements OnInit {
     
     this.Reset()
     this.chartSetup = new ChartSetup();
-    this.chartTypesList = ["Bar","Line","Column","Map","Pie"]
+    this.chartTypesList = ["Bar","Line","Pie"]
     this.seriesNames = ["null"]
+    this.categoryNames = ["null"]
 
   }
-  
   DeleteSeries(deletedSeries)
   {
     this.seriesList = this.seriesList.filter(series => series !== deletedSeries);
   }
+  DeleteCategory(deletedCategory)
+  {  
+   this.availableCategoryNames = this.availableCategoryNames.filter(category => category !== deletedCategory);
+    
+  }
+  DeleteLabels(deletedLabel)
+  {}
   /**
    * initialize the lists as empty 
    */
   Reset(){
     this.seriesList = [];
     this.categoryList = [];
+    this.availableCategoryNames = [];
     this.labelList = [];
   }
 
@@ -93,7 +101,8 @@ export class ChartSetupComponent implements OnInit {
           this.seriesList.push(...chartData.series);
         }
         if(chartData.xaxis && chartData.xaxis.categories){
-          this.categoryList.push(...chartData.xaxis.categories)
+          this.categoryList.push(...chartData.xaxis.categories);
+          console.log('this.availableCategoryNames',this.availableCategoryNames)
         }
         if(chartData.labels){
           this.labelList.push(...chartData.labels)
@@ -136,7 +145,7 @@ export class ChartSetupComponent implements OnInit {
       alert("need to add data file")
     }
     else 
-    if (this._chartObject.chartType == "Bar" || this._chartObject.chartType == "Line")
+    if (this._chartObject.chartType == "Bar" || this._chartObject.chartType == "Line" || this._chartObject.chartType == "Pie")
     {
       this.addedSeries = this.barChart.CreateNewSeries(dataTypeName, this.chartSetup.GetSeriesData(this._chartObject.chartType, dataType, dataTypeName));
       // to prevent call by reference
@@ -151,28 +160,37 @@ export class ChartSetupComponent implements OnInit {
       else if(dataType == 'category'){
         this._chartSetupData.xaxis.categories = dataToPush.data;
         this.categoryList.push(dataToPush)
-      }
-    }
-    else
-    if(this._chartObject.chartType == "Pie")
-    {
-      this.addedSeries = this.pieChart.CreateNewSeriesForPieChart(dataTypeName, this.chartSetup.GetSeriesData(this.chartTypeData, dataType, dataTypeName));
-      // to prevent call by reference
-      let dataToPush : PieChartData = {
-        labels : this.addedSeries.labels,
-        series : this.addedSeries.series
-      } 
-
-      if (dataType == 'labels'){
-        this._chartSetupData.labels = dataToPush.labels;
-        this.labelList.push(dataToPush)
+        this.availableCategoryNames.push(dataToPush)
+        // this.availableCategoryNames.push(dataToPush)
+        // this._chartSetupData.labels = dataToPush.data;
+        // this.labelList.push(dataToPush)
       }
       else
-      if(dataType == 'series'){
-        this._chartSetupData.series.push(dataToPush)
-        this.seriesList.push(dataToPush)
+      if (dataType == 'labels'){
+        this._chartSetupData.labels = dataToPush.data;
+        this.labelList.push(dataToPush)
       }
     }
+    // else
+    // if(this._chartObject.chartType == "Pie")
+    // {
+    //   this.addedSeries = this.pieChart.CreateNewSeriesForPieChart(dataTypeName, this.chartSetup.GetSeriesData(this.chartTypeData, dataType, dataTypeName));
+    //   // to prevent call by reference
+    //   let dataToPush : PieChartData = {
+    //     labels : this.addedSeries.labels,
+    //     series : this.addedSeries.series
+    //   } 
+
+    //   if (dataType == 'labels'){
+    //     this._chartSetupData.labels = dataToPush.labels;
+    //     this.labelList.push(dataToPush)
+    //   }
+    //   else
+    //   if(dataType == 'series'){
+    //     this._chartSetupData.series.push(dataToPush)
+    //     this.seriesList.push(dataToPush)
+    //   }
+    // }
       // update seriesList UI
       // update setup data
       // update chart
