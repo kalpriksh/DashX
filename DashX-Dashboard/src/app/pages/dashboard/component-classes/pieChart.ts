@@ -1,5 +1,5 @@
 import { BaseChart } from '../base'
-import { PieChartData } from '../models';
+import { CategoryData, PieChartData, SeriesData } from '../models';
 import {
     ApexTitleSubtitle,
     ApexNonAxisChartSeries,
@@ -16,7 +16,8 @@ import {
   };
 // class for defining the behavior and rules for the given chart type
 export class PieChart extends BaseChart{
-    seriesData : PieChartData
+  seriesData : SeriesData
+  categoryData : CategoryData
     chartData : Partial<PieChartOptions>    
     constructor(chartId? : number, chartData? : Partial<PieChartOptions>){
       super()
@@ -65,10 +66,9 @@ export class PieChart extends BaseChart{
     this.chartId = chartId // unique chart id should be generated for each chart
 
     this.seriesData = {
-      labels : [],
-        series : []
-        
-      }
+      name : "",
+      data : []
+    }
     }
     GetDefaults(){
       return this.chartData;
@@ -76,10 +76,9 @@ export class PieChart extends BaseChart{
     DataComplete(){
       
     }
-    CreateNewSeriesForPieChart(labels , series){
-      
-      this.seriesData.labels = labels;
-      this.seriesData.series = series;
+    CreateNewSeries(name : string , data){
+      this.seriesData.name = name;
+      this.seriesData.data = data;
       return this.seriesData;
     }
   }

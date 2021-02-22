@@ -9,7 +9,7 @@
         }
     },
     "Pie" : {
-        "labels": {
+        "label": {
             "Teams" : ["Team A", "Team B", "Team C", "Team D", "Team E"]
         },
         "series": {
