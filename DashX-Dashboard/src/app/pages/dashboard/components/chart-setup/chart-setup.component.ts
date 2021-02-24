@@ -107,7 +107,6 @@ export class ChartSetupComponent implements OnInit {
         }
         if(chartData.xaxis && chartData.xaxis.categories){
           this.categoryList.push(...chartData.xaxis.categories);
-          console.log('this.availableCategoryNames',this.availableCategoryNames)
         }
         if(chartData.labels){
           this.labelList.push(...chartData.labels)
@@ -161,7 +160,6 @@ export class ChartSetupComponent implements OnInit {
       if(dataType == 'series'){
         this.seriesList.push(dataToPush)
         this._chartSetupData.series.push(dataToPush)
-        console.log('labelsdataToPush',dataToPush)
       }
       else if(dataType == 'category'){
         this._chartSetupData.xaxis.categories = dataToPush.data;
@@ -171,9 +169,7 @@ export class ChartSetupComponent implements OnInit {
       else
       if (dataType == 'label'){
         this._chartSetupData.labels = dataToPush.data;
-        console.log('labelsdataToPush',dataToPush.data)
         this.labelList.push(dataToPush)
-        console.log('labelList',this.labelList)
       }
     }
       // update seriesList UI
