@@ -159,7 +159,7 @@ export class ChartSetupComponent implements OnInit {
       } 
       if(dataType == 'series'){
         this.seriesList.push(dataToPush)
-        this._chartSetupData.series.push(dataToPush)
+        this._chartSetupData.series = dataToPush.data
       }
       else if(dataType == 'category'){
         this._chartSetupData.xaxis.categories = dataToPush.data;
