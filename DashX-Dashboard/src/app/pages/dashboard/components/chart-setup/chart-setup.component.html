@@ -32,20 +32,32 @@
                 </mat-selection-list>
             </mat-expansion-panel>
 
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.xaxis">
-                <mat-expansion-panel-header>
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.xaxis">                <mat-expansion-panel-header>
                     <mat-panel-title>
-                    X Axis
-                    </mat-panel-title>
+                        X Axis
+                        </mat-panel-title>
                 </mat-expansion-panel-header>  
                 <button mat-button  [matMenuTriggerFor]="menu">
                     <mat-icon>add_circle</mat-icon>
-                        Category
+                    Category
                     </button>
+                    <div *ngFor="let category of availableCategoryNames">
+                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" >
+                            <mat-expansion-panel-header>
+                                <mat-panel-title class = "delete-category"> 
+                                        <button mat-button (click) = 'DeleteCategory(category)'>
+                                          <mat-icon>delete</mat-icon>
+                                        </button>
+                                    Category: {{category.name}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                        </mat-expansion-panel>
+                    </div>
                     <mat-menu #menu="matMenu">
                         <div *ngFor="let item of categoryNames">
-                            <button mat-menu-item (click) = "AddData(item,'category')">    
-                                {{item}} <mat-icon>playlist_add</mat-icon>
+                            <button mat-menu-item (click) = "AddData(item,'category')">
+                                <mat-icon>playlist_add</mat-icon>{{item}} 
                             </button>
                         </div>
                     </mat-menu>                  
@@ -64,30 +76,53 @@
                     <div *ngFor="let series of seriesList">
                         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" >
                             <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                Series : {{series.name}}
+                                <mat-panel-title class = "delete-series"> 
+                                        <button mat-button (click) = 'DeleteSeries(series)'>
+                                          <mat-icon>delete</mat-icon>
+                                        </button>
+                                    Series : {{series.name}}
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
-                            series customization option to be placed here
                         </mat-expansion-panel>
                     </div>
                     <mat-menu #seriesMenu="matMenu">
                         <div *ngFor="let item of seriesNames">
                             <button mat-menu-item (click) = "AddData(item,'series')">
-                                {{item}} <mat-icon>playlist_add</mat-icon>
+                                <mat-icon>playlist_add</mat-icon>{{item}} 
                             </button>
                         </div>
                     </mat-menu>                  
             </mat-expansion-panel>
 
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.labels">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                     Labels
                     </mat-panel-title>
-                </mat-expansion-panel-header> 
-                <mat-selection-list [multiple]="false">
-                </mat-selection-list>
+                </mat-expansion-panel-header>  
+                <button mat-button  [matMenuTriggerFor]="labelMenu">
+                    <mat-icon>add_circle</mat-icon>
+                    Labels
+                    </button>
+                    <div *ngFor="let label of labelList">
+                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" >
+                            <mat-expansion-panel-header>
+                                <mat-panel-title class = "delete-labels"> 
+                                        <button mat-button (click) = 'DeleteLabel(label)'>
+                                          <mat-icon>delete</mat-icon>
+                                        </button>
+                                        Label : {{label.name}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                        </mat-expansion-panel>
+                    </div>
+                    <mat-menu #labelMenu="matMenu">
+                        <div *ngFor="let item of labelNames">
+                            <button mat-menu-item (click) = "AddData(item,'label')">
+                                <mat-icon>playlist_add</mat-icon>{{item}} 
+                            </button>
+                        </div>
+                    </mat-menu>                  
             </mat-expansion-panel>
             
         </form>

@@ -3,6 +3,7 @@ import { SeriesData } from '../models';
 import { CategoryData } from '../models';
 import { BarChart } from "../component-classes/barChart"
 import { PieChart } from "../component-classes/pieChart"
+import { LabelData } from "../models/labelData";
 
 // class for chart setup component
 export class ChartSetup {
@@ -38,11 +39,11 @@ export class ChartSetup {
         this._categoryList = v;
     }
 
-    private _labelList : CategoryData[];
-    public get labelList() : CategoryData[] {
+    private _labelList : LabelData[];
+    public get labelList() : LabelData[] {
         return this._labelList;
     }
-    public set labelList(v : CategoryData[]) {
+    public set labelList(v : LabelData[]) {
         this._labelList = v;
     }
     

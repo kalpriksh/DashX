@@ -5,3 +5,9 @@
     left: 0;
     top: 0;
 }
+.chart-heading{
+    display: inline-flex;
+    position: absolute;
+    right: 10px;
+    z-index: 10;
+}

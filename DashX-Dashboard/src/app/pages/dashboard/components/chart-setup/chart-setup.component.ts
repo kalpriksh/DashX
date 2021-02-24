@@ -10,7 +10,6 @@ import { PieChartData, SeriesData } from '../../models';
 export class ChartSetupComponent implements OnInit {
   
   panelOpenState = true;
-
   // binds _chartSetupData to the UI
   _chartSetupData
   _chartObject
@@ -23,8 +22,9 @@ export class ChartSetupComponent implements OnInit {
 
   //#region UI variables
   seriesNames : string[];
-  categoryNames : string[];
-  labelNames : string[];
+  categoryNames : any[];
+  availableCategoryNames: any[];
+  labelNames : any[];
   labelList: any[];
   addedSeries : any;
   seriesList : any[];
@@ -48,17 +48,34 @@ export class ChartSetupComponent implements OnInit {
     
     this.Reset()
     this.chartSetup = new ChartSetup();
-    this.chartTypesList = ["Bar","Line","Column","Map","Pie"]
+    this.chartTypesList = ["Bar","Line","Pie"]
     this.seriesNames = ["null"]
+    this.categoryNames = ["null"]
 
   }
-  
+  DeleteSeries(deletedSeries)
+  {
+    this.seriesList = this.seriesList.filter(series => series !== deletedSeries);
+    this._chartSetupData.series.pop(deletedSeries)
+    this._chartObject.chartData = this._chartSetupData
+    this.chartData.EditorDataUpdated(this._chartObject)
+  }
+  DeleteCategory(deletedCategory)
+  {  
+   this.availableCategoryNames = this.availableCategoryNames.filter(category => category !== deletedCategory);
+   this._chartSetupData.series.pop(deletedCategory)
+   this._chartObject.chartData = this._chartSetupData
+   this.chartData.EditorDataUpdated(this._chartObject)
+  }
+  DeleteLabels(deletedLabel)
+  {}
   /**
    * initialize the lists as empty 
    */
   Reset(){
     this.seriesList = [];
     this.categoryList = [];
+    this.availableCategoryNames = [];
     this.labelList = [];
   }
 
@@ -70,7 +87,7 @@ export class ChartSetupComponent implements OnInit {
    UpdateChartSetup(chartType){
     this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series")
     this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
-    this.labelNames = this.chartSetup.GetSeriesName(chartType, "labels")
+    this.labelNames = this.chartSetup.GetSeriesName(chartType, "label")
   }
 
   EnterSubmit(event, form){
@@ -89,7 +106,8 @@ export class ChartSetupComponent implements OnInit {
           this.seriesList.push(...chartData.series);
         }
         if(chartData.xaxis && chartData.xaxis.categories){
-          this.categoryList.push(...chartData.xaxis.categories)
+          this.categoryList.push(...chartData.xaxis.categories);
+          console.log('this.availableCategoryNames',this.availableCategoryNames)
         }
         if(chartData.labels){
           this.labelList.push(...chartData.labels)
@@ -132,7 +150,7 @@ export class ChartSetupComponent implements OnInit {
       alert("need to add data file")
     }
     else 
-    if (this._chartObject.chartType == "Bar" || this._chartObject.chartType == "Line")
+    if (this._chartObject.chartType == "Bar" || this._chartObject.chartType == "Line" || this._chartObject.chartType == "Pie")
     {
       this.addedSeries = this.barChart.CreateNewSeries(dataTypeName, this.chartSetup.GetSeriesData(this._chartObject.chartType, dataType, dataTypeName));
       // to prevent call by reference
@@ -143,30 +161,19 @@ export class ChartSetupComponent implements OnInit {
       if(dataType == 'series'){
         this.seriesList.push(dataToPush)
         this._chartSetupData.series.push(dataToPush)
+        console.log('labelsdataToPush',dataToPush)
       }
       else if(dataType == 'category'){
         this._chartSetupData.xaxis.categories = dataToPush.data;
         this.categoryList.push(dataToPush)
-      }
-    }
-    else
-    if(this._chartObject.chartType == "Pie")
-    {
-      this.addedSeries = this.pieChart.CreateNewSeriesForPieChart(dataTypeName, this.chartSetup.GetSeriesData(this.chartTypeData, dataType, dataTypeName));
-      // to prevent call by reference
-      let dataToPush : PieChartData = {
-        labels : this.addedSeries.labels,
-        series : this.addedSeries.series
-      } 
-
-      if (dataType == 'labels'){
-        this._chartSetupData.labels = dataToPush.labels;
-        this.labelList.push(dataToPush)
+        this.availableCategoryNames.push(dataToPush)
       }
       else
-      if(dataType == 'series'){
-        this._chartSetupData.series.push(dataToPush)
-        this.seriesList.push(dataToPush)
+      if (dataType == 'label'){
+        this._chartSetupData.labels = dataToPush.data;
+        console.log('labelsdataToPush',dataToPush.data)
+        this.labelList.push(dataToPush)
+        console.log('labelList',this.labelList)
       }
     }
       // update seriesList UI

@@ -64,7 +64,6 @@ export class BarGraphComponent implements OnInit{
   
   // to open chart editor
   EditChart(){
-    debugger
     if(this.isEditorOpen){
       //if editor is already open
       if(this.editorState[1] == this.barChart.chartId){
@@ -82,7 +81,6 @@ export class BarGraphComponent implements OnInit{
       this.editorData.EditorDataUpdated(this.barChart)
     }
   }
-
   public initChart(): Partial<any> {
    return  this.barChart.GetDefaults()
   }
