@@ -1,4 +1,4 @@
-export class DashboardContainer{
+export class Dashboard{
   
   //#region Properties
   /**
