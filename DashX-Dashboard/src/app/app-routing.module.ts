@@ -6,7 +6,12 @@ import { ChartsContainerComponent } from './pages/dashboard/components/charts-co
 
 const routes: Routes = [
   {path: 'dashboard/all', component : DashboardContainerComponent},
-  {path: 'dashboard/current', component : ChartsContainerComponent}
+  {path: 'dashboard/current', component : ChartsContainerComponent},
+  {
+    path: "",
+    redirectTo: '/dashboard/all',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
