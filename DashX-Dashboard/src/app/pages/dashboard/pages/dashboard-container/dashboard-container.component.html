@@ -1,1 +1,16 @@
-<p>dashboard-container works!</p>
+
+<div class='dashboard-container'>
+
+  <mat-grid-list cols="4" rowHeight="1:1" gutterSize = "10px" >
+    <div *ngFor="let item of dashboardList">
+      <mat-grid-tile
+      [rowspan] = '1'
+      [colspan] = '1'
+      >  
+        <button mat-raised-button color = 'primary' class = 'test-class-1' (click) = 'OpenDashboard()'>{{item.content}}</button>
+        
+      </mat-grid-tile>
+    </div>
+  </mat-grid-list>
+
+</div>
