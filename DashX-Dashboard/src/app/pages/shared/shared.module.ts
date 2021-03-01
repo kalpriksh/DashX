@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AppRoutingModule, routingComponents } from "../../app-routing.module";
 
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
@@ -15,6 +16,7 @@ import { DashboardModule } from '../dashboard/dashboard.module';
   declarations: [SidenavComponent,HeaderComponent],
   imports: [
     CommonModule,
+    AppRoutingModule,
     MatListModule,
     MatSidenavModule,
     MatIconModule,
