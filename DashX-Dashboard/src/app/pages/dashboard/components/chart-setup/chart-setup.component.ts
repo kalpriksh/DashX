@@ -84,8 +84,8 @@ export class ChartSetupComponent implements OnInit {
     this.labelList = [];
   }
 
-  test(event){
-    this.UpdateChartSetup(event.value)
+  DataSelected(event){
+    this.UpdateChartSetup(event.value);
   }
 
    // updates the component UI

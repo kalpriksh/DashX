@@ -1,5 +1,5 @@
     <mat-accordion>
-        <mat-radio-group aria-label="Select an option" [(ngModel)] = "chartTypeData" (change) = "test($event)">
+        <mat-radio-group aria-label="Select an option" [(ngModel)] = "chartTypeData" (change) = "DataSelected($event)">
             <mat-radio-button value="Bar">Bar Data</mat-radio-button>
             <mat-radio-button value="Pie">Pie Data</mat-radio-button>
             <mat-radio-button value="Line">Line Data</mat-radio-button>
