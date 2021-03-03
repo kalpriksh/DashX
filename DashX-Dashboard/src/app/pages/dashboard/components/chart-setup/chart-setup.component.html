@@ -105,7 +105,7 @@
                     Labels
                     </button>
                     <div *ngFor="let label of labelList">
-                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" >
+                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.labels">
                             <mat-expansion-panel-header>
                                 <mat-panel-title class = "delete-labels"> 
                                         <button mat-button (click) = 'DeleteLabel(label)'>
