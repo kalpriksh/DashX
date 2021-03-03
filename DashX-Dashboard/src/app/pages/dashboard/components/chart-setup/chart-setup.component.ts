@@ -67,8 +67,13 @@ export class ChartSetupComponent implements OnInit {
    this._chartObject.chartData = this._chartSetupData
    this.chartData.EditorDataUpdated(this._chartObject)
   }
-  DeleteLabels(deletedLabel)
-  {}
+  DeleteLabel(deletedLabel)
+  {   
+    this.labelList = this.labelList.filter(category => category !== deletedLabel);
+    this._chartSetupData.series.pop(deletedLabel)
+    this._chartObject.chartData = this._chartSetupData
+    this.chartData.EditorDataUpdated(this._chartObject)
+  }
   /**
    * initialize the lists as empty 
    */
@@ -79,8 +84,8 @@ export class ChartSetupComponent implements OnInit {
     this.labelList = [];
   }
 
-  test(event){
-    this.UpdateChartSetup(event.value)
+  DataSelected(event){
+    this.UpdateChartSetup(event.value);
   }
 
    // updates the component UI
