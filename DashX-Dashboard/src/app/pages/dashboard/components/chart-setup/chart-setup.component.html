@@ -27,8 +27,8 @@
                     Chart Type
                     </mat-panel-title>
                 </mat-expansion-panel-header> 
-                <mat-selection-list [multiple]="false" *ngFor="let item of chartTypesList">
-                    <mat-list-option>{{item}}</mat-list-option>
+                <mat-selection-list [multiple]="false" >
+                    <mat-list-option *ngFor="let item of chartTypesList" aria-label="Select an option" >{{item}}</mat-list-option>
                 </mat-selection-list>
             </mat-expansion-panel>
 
