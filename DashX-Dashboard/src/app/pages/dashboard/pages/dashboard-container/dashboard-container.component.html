@@ -11,6 +11,12 @@
         
       </mat-grid-tile>
     </div>
+    <mat-grid-tile
+    [rowspan] = '1'
+    [colspan] = '1'
+    >  
+      <button mat-button color = 'primary' class = 'test-class-1' (click) = 'OpenDashboard()'><mat-icon class = "icon_large">add_circle</mat-icon></button>
+    </mat-grid-tile>
   </mat-grid-list>
 
 </div>
