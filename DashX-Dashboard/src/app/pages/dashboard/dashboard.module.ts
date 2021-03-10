@@ -29,6 +29,7 @@ import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
 import { ChartSetupComponent } from './components/chart-setup/chart-setup.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ChartEditorComponent } from './components/chart-editor/chart-editor.component';
 
 //services
@@ -37,10 +38,11 @@ import { ReadExcelDirective } from './directives/read-excel.directive';
 
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { KeyPerformanceIndicatorComponent } from './components/key-performance-indicator/key-performance-indicator.component';
+import { NewChartTabDirective } from './directives/new-chart-tab.directive';
 
 
 @NgModule({
-  declarations: [OptionSelectorComponent, LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents],
+  declarations: [OptionSelectorComponent, LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective],
 
   imports: [
     CommonModule,
@@ -63,7 +65,8 @@ import { KeyPerformanceIndicatorComponent } from './components/key-performance-i
     MatListModule,
     MatExpansionModule,
     MatMenuModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule
   ],
   exports: [
     OptionSelectorComponent

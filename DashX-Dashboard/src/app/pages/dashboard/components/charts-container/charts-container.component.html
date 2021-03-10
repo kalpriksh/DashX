@@ -1,3 +1,17 @@
+<div class = "top-toolbar">
+  <mat-toolbar color = 'warn'>
+    <div>
+      <button
+          matTooltip="Add Chart"
+          matTooltipPosition = "below"
+          matTooltipHideDelay="100000"
+          aria-label="Button that displays a tooltip that hides when scrolled out of the container"
+          mat-mini-fab color = 'warn' class = 'test-class-1' (click) = 'showChartTypesList = !showChartTypesList'>
+          <mat-icon id = "addChartIcon">add_circle</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+</div>
 
 <div class='chart-container'>
   <!-- chart editor declared -->
@@ -73,9 +87,14 @@
       [rowspan] = listChartPosition[i][0]
       [colspan] = listChartPosition[i][1]
       >
-      
+      hello
       <!-- need to render charts here dynamically-->
-      <button mat-mini-fab color = 'primary' class = 'test-class-1' (click) = 'showChartTypesList = !showChartTypesList' *ngIf="listChartObjects[i] == 'add'"><mat-icon id = "addChartIcon">add_circle</mat-icon></button>
+      </mat-grid-tile>
+
+      <mat-grid-tile
+      [rowspan] = '3'
+      [colspan] = '2'>
+        <ng-template newChartTab></ng-template>
       </mat-grid-tile>
   </mat-grid-list>
 </div>

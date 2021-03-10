@@ -2,6 +2,11 @@ import { DashboardService } from "../../services";
 import { Component, OnInit, ViewEncapsulation, ViewChild, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { LineChartData, PieChartData, BarGraphData } from '../../models';
 import { Dashboard } from '../../component-classes'
+import { NewChartTabDirective } from '../../directives/new-chart-tab.directive'
+
+//components
+
+import { BarGraphComponent } from '../bar-graph/bar-graph.component'
 
 @Component({
   selector: 'app-charts-container',
@@ -16,7 +21,8 @@ export class ChartsContainerComponent implements OnInit {
    * dashboard object should contain : child chart components
    * chart components needs to loaded dynamically
    */
-  @ViewChild('test', { static: true, read: ViewContainerRef }) entry: ViewContainerRef;
+
+  @ViewChild(NewChartTabDirective, {static: true}) newChart: NewChartTabDirective;
 
   public lineChartData: LineChartData;
   public pieChartData: PieChartData;
@@ -33,15 +39,15 @@ export class ChartsContainerComponent implements OnInit {
   listChartObjects
   listChartPosition
 
-  constructor(private service: DashboardService, private _resolver : ComponentFactoryResolver) {
+  constructor(private service: DashboardService, private componentFactoryResolver : ComponentFactoryResolver) {
     this.lineChartData = this.service.loadLineChartData();
     this.pieChartData = this.service.loadPieChartData();
     this.barGraphData = this.service.loadBarGraphData();
   }
 
   ngOnInit(): void {
-    this.listChartObjects = ["kpi", "kpi", "kpi", "kpi","bar","add"];
-    this.listChartPosition = [[1,1],[1,1],[1,1],[1,1],[3,2],[1,1]];
+    this.listChartObjects = ["kpi", "kpi", "kpi", "kpi","bar"];
+    this.listChartPosition = [[1,1],[1,1],[1,1],[1,1],[3,2]];
     
     this._dashboard = new Dashboard(this.listChartObjects, this.listChartPosition)
     this.DashboardInit(this._dashboard);
@@ -51,17 +57,22 @@ export class ChartsContainerComponent implements OnInit {
     /**
      * initializes the dashboard
      */
-    console.log(dashboardObject);
+    
     
   }
 
   AddChart(chartType){
     /**
-     * add chart type on selection basis
+     * add chart type on selection basis 
+     * dynamically load chart component
      */
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(BarGraphComponent);
+    const viewContainerRef = this.newChart.viewContainerRef;
+    viewContainerRef.clear();
 
-    console.log(chartType);
-    
+    const componentRef = viewContainerRef.createComponent<BarGraphComponent>(componentFactory);
+
+    this.showChartTypesList = false;
   }
   
 
