@@ -1,80 +1,35 @@
 <div class = "top-toolbar">
-  <mat-toolbar color = 'warn'>
+  <mat-toolbar class = "test_pv" color = 'basic'>
     <div>
       <button
-          matTooltip="Add Chart"
-          matTooltipPosition = "below"
-          matTooltipHideDelay="100000"
-          aria-label="Button that displays a tooltip that hides when scrolled out of the container"
-          mat-mini-fab color = 'warn' class = 'test-class-1' (click) = 'showChartTypesList = !showChartTypesList'>
-          <mat-icon id = "addChartIcon">add_circle</mat-icon>
+        mat-button
+        color = 'primary' class = 'test-class-1' (click) = 'showChartTypesList = !showChartTypesList'>
+        Add Chart
       </button>
+      <button
+        mat-button
+        color = 'primary' class = 'test-class-1' (click) = 'showChartTypesList = !showChartTypesList'>
+        Delete Chart
+      </button>
+      <button
+        mat-button
+        color = 'primary' class = 'test-class-1' (click) = 'showChartTypesList = !showChartTypesList'>
+        Save Dashboard
+      </button>
+      <button
+        mat-button
+        color = 'primary' class = 'test-class-1' (click) = 'showChartTypesList = !showChartTypesList'>
+        Reset Dashboard
+      </button>
+
     </div>
   </mat-toolbar>
 </div>
 
 <div class='chart-container'>
   <!-- chart editor declared -->
-  <!-- <app-chart-editor id = 'chart-editor'></app-chart-editor> -->
+  <app-chart-editor id = 'chart-editor'></app-chart-editor>
 
-  <!-- <mat-grid-list cols="4" rowHeight="150px" gutterSize = "7px">
-    <mat-grid-tile
-    [rowspan] = '1'
-    [colspan] = '1'
-    >
-    <app-kpi kpiName = "Quaterly Revenue" kpiIcon = "show_chart" kpiMetric = "200"></app-kpi>
-    </mat-grid-tile>
-    
-
-    <mat-grid-tile
-    [rowspan] = '1'
-    [colspan] = '1'
-    >
-    <app-kpi></app-kpi>
-    </mat-grid-tile>
-
-    <mat-grid-tile
-    [rowspan] = '1'
-    [colspan] = '1'
-    >
-    <app-kpi></app-kpi>
-    </mat-grid-tile>
-    
-    <mat-grid-tile
-    [rowspan] = '1'
-    [colspan] = '1'
-    >
-    <app-kpi></app-kpi>
-    </mat-grid-tile>
-
-    <mat-grid-tile
-    [rowspan] = '3'
-    [colspan] = '2'
-    >
-    <app-bar-graph></app-bar-graph>
-    </mat-grid-tile>
-
-    <mat-grid-tile
-    [rowspan] = '3'
-    [colspan] = '2'
-    >
-    <app-line-chart></app-line-chart>
-    </mat-grid-tile>
-
-    <mat-grid-tile
-    [rowspan] = '3'
-    [colspan] = '2'
-    >
-    <app-pie-chart></app-pie-chart>
-    </mat-grid-tile>
-    <mat-grid-tile
-    [rowspan] = '3'
-    [colspan] = '2'
-    >
-    <button mat-button color = 'primary' (click) = "AddChart(0)" ><mat-icon id="addChartIcon">insert_chart_outlined</mat-icon></button>
-    </mat-grid-tile>
-
-  </mat-grid-list> -->
   <div id = "ddl-chart-types" *ngIf="showChartTypesList">
     <mat-action-list *ngFor="let item of listOfChartTypes" >
       <button mat-list-item (click)="AddChart(item)"><mat-icon>add_to_photos</mat-icon> &#9; {{item}} </button>
@@ -83,13 +38,64 @@
 
   <mat-grid-list cols="4" rowHeight="150px" gutterSize = "7px">
 
-      <mat-grid-tile *ngFor="let item of listChartObjects; let i = index"
-      [rowspan] = listChartPosition[i][0]
-      [colspan] = listChartPosition[i][1]
-      >
-      hello
+      <!-- <mat-grid-tile *ngFor="let item of listChartObjects; let i = index" -->
+      <!-- [rowspan] = listChartPosition[i][0] -->
+      <!-- [colspan] = listChartPosition[i][1] -->
+      <!-- >
+      hello -->
       <!-- need to render charts here dynamically-->
+      <!-- </mat-grid-tile> -->
+
+      <mat-grid-tile
+      [rowspan] = '1'
+      [colspan] = '1'
+      >
+      <app-kpi kpiName = "Quaterly Revenue" kpiIcon = "show_chart" kpiMetric = "200"></app-kpi>
       </mat-grid-tile>
+      
+  
+      <mat-grid-tile
+      [rowspan] = '1'
+      [colspan] = '1'
+      >
+      <app-kpi></app-kpi>
+      </mat-grid-tile>
+  
+      <mat-grid-tile
+      [rowspan] = '1'
+      [colspan] = '1'
+      >
+      <app-kpi></app-kpi>
+      </mat-grid-tile>
+      
+      <mat-grid-tile
+      [rowspan] = '1'
+      [colspan] = '1'
+      >
+      <app-kpi></app-kpi>
+      </mat-grid-tile>
+  
+      <mat-grid-tile
+      [rowspan] = '3'
+      [colspan] = '2'
+      >
+      <app-bar-graph></app-bar-graph>
+      </mat-grid-tile>
+  
+      <mat-grid-tile
+      [rowspan] = '3'
+      [colspan] = '2'
+      >
+      <app-line-chart></app-line-chart>
+      </mat-grid-tile>
+  
+      <mat-grid-tile
+      [rowspan] = '3'
+      [colspan] = '2'
+      >
+      <app-pie-chart></app-pie-chart>
+      </mat-grid-tile>
+      
 
       <mat-grid-tile
       [rowspan] = '3'
