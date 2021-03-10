@@ -43,9 +43,10 @@
 }
 
 .top-toolbar{
+  
 }
 
-.edit-toolbar-options{
-  display: flex;
-  justify-content: center;
+.edit-toolbar-options
+{
+justify-content: flex-end;
 }
