@@ -35,13 +35,7 @@
 <div class='chart-container'>
   <!-- chart editor declared -->
   <app-chart-editor id = 'chart-editor'></app-chart-editor>
-
-  <div id = "ddl-chart-types" *ngIf="showChartTypesList">
-    <mat-action-list *ngFor="let item of listOfChartTypes" >
-      <button mat-list-item (click)="AddChart(item)"><mat-icon>add_to_photos</mat-icon> &#9; {{item}} </button>
-    </mat-action-list>
-  </div>
-
+  
   <mat-grid-list cols="4" rowHeight="150px" gutterSize = "7px">
 
       <!-- <mat-grid-tile *ngFor="let item of listChartObjects; let i = index" -->
