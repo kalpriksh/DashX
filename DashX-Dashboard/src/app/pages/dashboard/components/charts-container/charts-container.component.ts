@@ -32,7 +32,17 @@ export class ChartsContainerComponent implements OnInit {
 
 
   // list of chart types {placeholder}
-  listOfChartTypes = ["Kpi", "Bar", "Pie"]
+  listOfChartTypes = [{
+                        name : "Kpi",
+                        icon : "vpn_key"
+                      }, {
+                        name : "Pie",
+                        icon : "pie_chart"
+                      }, {
+                        name : "Bar",
+                        icon : "bar_chart"
+                      }];
+
   // dashboard object to edit/save
   _dashboard : Dashboard
   // contains the list chart in a dashboard

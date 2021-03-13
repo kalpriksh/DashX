@@ -1,19 +1,13 @@
 <!--drop down menu items-------------------------------- -->
 
-
+<!-- todo : create this using *ngFor -->
 <mat-menu #chartTypeMenu="matMenu">
-  <button mat-menu-item>
-    <mat-icon>bar_chart</mat-icon>
-    <span>Bar</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>pie_chart</mat-icon>
-    <span>Pie</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>vpn_key</mat-icon>
-    <span>KPI</span>
-  </button>
+  <div *ngFor="let chartTypeItem of listOfChartTypes">
+    <button mat-menu-item (click) = "AddChart(chartTypeItem.name)">
+      <mat-icon>{{chartTypeItem.icon}}</mat-icon>
+      <span>{{chartTypeItem.name}}</span>
+    </button>
+  </div>
 </mat-menu>
 
 <!-- -------------------------------------------------- -->
