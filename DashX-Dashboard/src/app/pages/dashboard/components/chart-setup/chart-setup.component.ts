@@ -7,6 +7,7 @@ import { PieChartData, SeriesData } from '../../models';
   templateUrl: './chart-setup.component.html',
   styleUrls: ['./chart-setup.component.css']
 })
+
 export class ChartSetupComponent implements OnInit {
   
   panelOpenState = true;
@@ -62,10 +63,10 @@ export class ChartSetupComponent implements OnInit {
   }
   DeleteCategory(deletedCategory)
   {  
-   this.availableCategoryNames = this.availableCategoryNames.filter(category => category !== deletedCategory);
-   this._chartSetupData.series.pop(deletedCategory)
-   this._chartObject.chartData = this._chartSetupData
-   this.chartData.EditorDataUpdated(this._chartObject)
+    this.availableCategoryNames = this.availableCategoryNames.filter(category => category !== deletedCategory);
+    this._chartSetupData.series.pop(deletedCategory)
+    this._chartObject.chartData = this._chartSetupData
+    this.chartData.EditorDataUpdated(this._chartObject)
   }
   DeleteLabels(deletedLabel)
   {}
@@ -84,7 +85,8 @@ export class ChartSetupComponent implements OnInit {
   }
 
    // updates the component UI
-   UpdateChartSetup(chartType){
+    UpdateChartSetup(chartType){
+      
     this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series")
     this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
     this.labelNames = this.chartSetup.GetSeriesName(chartType, "label")
@@ -102,6 +104,7 @@ export class ChartSetupComponent implements OnInit {
    * chart data
    */
   ChartInit(chartData){
+    
         if(chartData.series){
           this.seriesList.push(...chartData.series);
         }
@@ -113,7 +116,7 @@ export class ChartSetupComponent implements OnInit {
         }
         this._chartSetupData = chartData
   }
-
+  
   LoadData(chartObject){
     if(chartObject){
 
@@ -144,7 +147,7 @@ export class ChartSetupComponent implements OnInit {
      * adds series/category to the chartData object
      */
     // default case
-    debugger
+    
     if(dataTypeName == "null"){
       alert("need to add data file")
     }
@@ -157,9 +160,10 @@ export class ChartSetupComponent implements OnInit {
         name : this.addedSeries.name,
         data : this.addedSeries.data
       } 
+
       if(dataType == 'series'){
         this.seriesList.push(dataToPush)
-        this._chartSetupData.series = dataToPush.data
+        this._chartSetupData.series.push(dataToPush)
       }
       else if(dataType == 'category'){
         this._chartSetupData.xaxis.categories = dataToPush.data;
@@ -172,9 +176,11 @@ export class ChartSetupComponent implements OnInit {
         this.labelList.push(dataToPush)
       }
     }
+
       // update seriesList UI
       // update setup data
       // update chart
+      
       this._chartObject.chartData = this._chartSetupData
       this.chartData.EditorDataUpdated(this._chartObject)
     }
