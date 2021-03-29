@@ -76,7 +76,6 @@ export class ChartSetupComponent implements OnInit {
   Reset(){
     this.seriesList = [];
     this.categoryList = [];
-    this.availableCategoryNames = [];
     this.labelList = [];
   }
 
@@ -89,6 +88,7 @@ export class ChartSetupComponent implements OnInit {
       
     this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series")
     this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
+    this.availableCategoryNames = this.chartSetup.GetSeriesName(chartType, "category")
     this.labelNames = this.chartSetup.GetSeriesName(chartType, "label")
   }
 
@@ -168,7 +168,7 @@ export class ChartSetupComponent implements OnInit {
       else if(dataType == 'category'){
         this._chartSetupData.xaxis.categories = dataToPush.data;
         this.categoryList.push(dataToPush)
-        this.availableCategoryNames.push(dataToPush)
+        this.availableCategoryNames.push(dataToPush.name)
       }
       else
       if (dataType == 'label'){
