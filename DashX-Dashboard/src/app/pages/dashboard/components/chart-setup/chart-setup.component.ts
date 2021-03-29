@@ -25,6 +25,7 @@ export class ChartSetupComponent implements OnInit {
   seriesNames : string[];
   categoryNames : any[];
   availableCategoryNames: any[];
+  availableLabelNames: any[];
   labelNames : any[];
   labelList: any[];
   addedSeries : any;
@@ -64,12 +65,17 @@ export class ChartSetupComponent implements OnInit {
   DeleteCategory(deletedCategory)
   {  
     this.availableCategoryNames = this.availableCategoryNames.filter(category => category !== deletedCategory);
-    this._chartSetupData.series.pop(deletedCategory)
+    this._chartSetupData.categories.pop(deletedCategory)
     this._chartObject.chartData = this._chartSetupData
     this.chartData.EditorDataUpdated(this._chartObject)
   }
-  DeleteLabels(deletedLabel)
-  {}
+  DeleteLabel(deletedLabel)
+  {    console.log(deletedLabel);
+    this.availableLabelNames = this.availableLabelNames.filter(label => label !== deletedLabel);
+    this._chartSetupData.label.pop(deletedLabel)
+    this._chartObject.chartData = this._chartSetupData
+    this.chartData.EditorDataUpdated(this._chartObject)
+  }
   /**
    * initialize the lists as empty 
    */
@@ -89,6 +95,7 @@ export class ChartSetupComponent implements OnInit {
     this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series")
     this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
     this.availableCategoryNames = this.chartSetup.GetSeriesName(chartType, "category")
+    this.availableLabelNames = this.chartSetup.GetSeriesName(chartType, "label")
     this.labelNames = this.chartSetup.GetSeriesName(chartType, "label")
   }
 
@@ -174,6 +181,7 @@ export class ChartSetupComponent implements OnInit {
       if (dataType == 'label'){
         this._chartSetupData.labels = dataToPush.data;
         this.labelList.push(dataToPush)
+        this.availableLabelNames.push(dataToPush.name)
       }
     }
 
