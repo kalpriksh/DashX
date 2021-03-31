@@ -89,8 +89,8 @@ export class ChartSetupComponent implements OnInit {
     this.UpdateChartSetup(event.value)
   }
 
-   // updates the component UI
-    UpdateChartSetup(chartType){
+  // updates the component UI
+  UpdateChartSetup(chartType){
       
     this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series")
     this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
@@ -111,17 +111,39 @@ export class ChartSetupComponent implements OnInit {
    * chart data
    */
   ChartInit(chartData){
-    
-        if(chartData.series){
-          this.seriesList.push(...chartData.series);
-        }
-        if(chartData.xaxis && chartData.xaxis.categories){
-          this.categoryList.push(...chartData.xaxis.categories);
-        }
-        if(chartData.labels){
-          this.labelList.push(...chartData.labels)
-        }
-        this._chartSetupData = chartData
+
+    if(chartData.series){
+      this.UpdateSeriesList(chartData)
+    }
+    if(chartData.xaxis && chartData.xaxis.categories){
+      this.categoryList.push(...chartData.xaxis.categories);
+    }
+    if(chartData.labels){
+      this.labelList.push(...chartData.labels)
+    }
+    this._chartSetupData = chartData
+  }
+
+  /**
+   * to set the seriesList (different for different chart types)
+   * @param chartData chart data
+   */
+  UpdateSeriesList(chartData){
+    if(chartData.chartType == 'Bar'){
+      this.seriesList.push(...chartData.series);
+    }
+    else if(chartData.chartType == 'Pie'){
+
+      let dataToPush : SeriesData = {
+        name : this.addedSeries.name,
+        data : this.addedSeries.data
+      }
+      dataToPush.data = chartData.series;
+      // TODO: Harcoding here, Pie object does not contain series object @pall97
+      dataToPush.name = 'Teams'
+      this.seriesList.push(dataToPush)
+      
+    }
   }
   
   LoadData(chartObject){
@@ -154,12 +176,10 @@ export class ChartSetupComponent implements OnInit {
      * adds series/category to the chartData object
      */
     // default case
-    
     if(dataTypeName == "null"){
       alert("need to add data file")
     }
     else 
-    if (this._chartObject.chartType == "Bar" || this._chartObject.chartType == "Line" || this._chartObject.chartType == "Pie")
     {
       this.addedSeries = this.barChart.CreateNewSeries(dataTypeName, this.chartSetup.GetSeriesData(this._chartObject.chartType, dataType, dataTypeName));
       // to prevent call by reference
@@ -171,6 +191,10 @@ export class ChartSetupComponent implements OnInit {
       if(dataType == 'series'){
         this.seriesList.push(dataToPush)
         this._chartSetupData.series.push(dataToPush)
+        if (this._chartObject.chartType == "Pie"){
+          this._chartSetupData.series = dataToPush.data
+          this.seriesList.push(dataToPush)
+        }
       }
       else if(dataType == 'category'){
         this._chartSetupData.xaxis.categories = dataToPush.data;
@@ -182,13 +206,12 @@ export class ChartSetupComponent implements OnInit {
         this._chartSetupData.labels = dataToPush.data;
         this.labelList.push(dataToPush)
         this.availableLabelNames.push(dataToPush.name)
-      }
+      }   
     }
 
       // update seriesList UI
       // update setup data
       // update chart
-      
       this._chartObject.chartData = this._chartSetupData
       this.chartData.EditorDataUpdated(this._chartObject)
     }
