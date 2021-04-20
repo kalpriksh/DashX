@@ -1,5 +1,5 @@
     <mat-accordion>
-        <mat-radio-group aria-label="Select an option" [(ngModel)] = "chartTypeData" (change) = "test($event)">
+        <mat-radio-group aria-label="Select an option" [(ngModel)] = "chartTypeData" (change) = "DataSelected($event)">
             <mat-radio-button value="Bar">Bar Data</mat-radio-button>
             <mat-radio-button value="Pie">Pie Data</mat-radio-button>
             <mat-radio-button value="Line">Line Data</mat-radio-button>
@@ -27,8 +27,8 @@
                     Chart Type
                     </mat-panel-title>
                 </mat-expansion-panel-header> 
-                <mat-selection-list [multiple]="false" *ngFor="let item of chartTypesList">
-                    <mat-list-option>{{item}}</mat-list-option>
+                <mat-selection-list [multiple]="false" >
+                    <mat-list-option *ngFor="let item of chartTypesList" aria-label="Select an option" >{{item}}</mat-list-option>
                 </mat-selection-list>
             </mat-expansion-panel>
 
@@ -104,8 +104,8 @@
                     <mat-icon>add_circle</mat-icon>
                     Labels
                     </button>
-                    <div *ngFor="let label of availableLabelNames">
-                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" >
+                    <div *ngFor="let label of labelList">
+                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.labels">
                             <mat-expansion-panel-header>
                                 <mat-panel-title class = "delete-labels"> 
                                         <button mat-button (click) = 'DeleteLabel(label)'>

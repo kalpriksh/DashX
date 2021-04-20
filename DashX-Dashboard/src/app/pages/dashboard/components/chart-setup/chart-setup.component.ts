@@ -55,6 +55,7 @@ export class ChartSetupComponent implements OnInit {
     this.categoryNames = ["null"]
 
   }
+  
   DeleteSeries(deletedSeries)
   {
     this.seriesList = this.seriesList.filter(series => series !== deletedSeries);
@@ -62,6 +63,7 @@ export class ChartSetupComponent implements OnInit {
     this._chartObject.chartData = this._chartSetupData
     this.chartData.EditorDataUpdated(this._chartObject)
   }
+
   DeleteCategory(deletedCategory)
   {  
     this.availableCategoryNames = this.availableCategoryNames.filter(category => category !== deletedCategory);
@@ -69,6 +71,7 @@ export class ChartSetupComponent implements OnInit {
     this._chartObject.chartData = this._chartSetupData
     this.chartData.EditorDataUpdated(this._chartObject)
   }
+
   DeleteLabel(deletedLabel)
   {    console.log(deletedLabel);
     this.availableLabelNames = this.availableLabelNames.filter(label => label !== deletedLabel);
@@ -76,6 +79,7 @@ export class ChartSetupComponent implements OnInit {
     this._chartObject.chartData = this._chartSetupData
     this.chartData.EditorDataUpdated(this._chartObject)
   }
+
   /**
    * initialize the lists as empty 
    */
@@ -85,8 +89,8 @@ export class ChartSetupComponent implements OnInit {
     this.labelList = [];
   }
 
-  test(event){
-    this.UpdateChartSetup(event.value)
+  DataSelected(event){
+    this.UpdateChartSetup(event.value);
   }
 
   // updates the component UI
