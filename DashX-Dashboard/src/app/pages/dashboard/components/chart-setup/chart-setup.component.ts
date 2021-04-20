@@ -133,10 +133,10 @@ export class ChartSetupComponent implements OnInit {
    * @param chartData chart data
    */
   UpdateSeriesList(chartData){
-    if(chartData.chartType == 'Bar'){
+    if(chartData.chart.type.toUpperCase() == this.barChart.chartType.toUpperCase()){
       this.seriesList.push(...chartData.series);
     }
-    else if(chartData.chartType == 'Pie'){
+    else if(chartData.chartType.toUpperCase() == this.pieChart.chartType.toUpperCase()){
 
       let dataToPush : SeriesData = {
         name : this.addedSeries.name,
@@ -195,6 +195,7 @@ export class ChartSetupComponent implements OnInit {
       if(dataType == 'series'){
         this.seriesList.push(dataToPush)
         this._chartSetupData.series.push(dataToPush)
+
         if (this._chartObject.chartType == "Pie"){
           this._chartSetupData.series = dataToPush.data
           this.seriesList.push(dataToPush)
