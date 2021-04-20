@@ -24,7 +24,7 @@ export class ChartSetupComponent implements OnInit {
   //#region UI variables
   seriesNames : string[];
   categoryNames : any[];
-  availableCategoryNames: any[];
+  availableCategoryNames: string[];
   availableLabelNames: any[];
   labelNames : any[];
   labelList: any[];
@@ -94,7 +94,7 @@ export class ChartSetupComponent implements OnInit {
       
     this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series")
     this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
-    this.availableCategoryNames = this.chartSetup.GetSeriesName(chartType, "category")
+    this.availableCategoryNames = [];
     this.availableLabelNames = this.chartSetup.GetSeriesName(chartType, "label")
     this.labelNames = this.chartSetup.GetSeriesName(chartType, "label")
   }
