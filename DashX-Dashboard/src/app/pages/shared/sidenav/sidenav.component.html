@@ -17,12 +17,11 @@
     </mat-drawer>
   
     <mat-drawer-content>
-  
+
       <app-header (toggleSideBar$)="drawer.toggle()"></app-header>
-      
-      <app-charts-container></app-charts-container>
+
+      <router-outlet></router-outlet>
   
     </mat-drawer-content>
   
   </mat-drawer-container>
- 

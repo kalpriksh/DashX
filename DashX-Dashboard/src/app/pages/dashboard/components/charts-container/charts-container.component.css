@@ -7,7 +7,7 @@
 #chart-editor{
     height: 100%;
     position: absolute;
-    z-index: 12;
+    z-index: 20;
     right: -0px;
 }
 
@@ -28,4 +28,25 @@
     width: 100%;
     padding: 0;
     margin: 0;
+}
+
+#addChartIcon{
+  transform: scale(2);
+}
+
+#ddl-chart-types {
+  position: absolute;
+  min-width: 200px;
+  z-index: 1;
+  left: 78ex;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 7%), 0 2px 4px rgb(0 0 0 / 7%), 0 4px 8px rgb(0 0 0 / 7%), 0 8px 16px rgb(0 0 0 / 7%), 0 16px 32px rgb(0 0 0 / 7%), 0 32px 64px rgb(0 0 0 / 7%);
+}
+
+.top-toolbar{
+  
+}
+
+.edit-toolbar-options
+{
+justify-content: flex-end;
 }

@@ -56,7 +56,6 @@ export class PieChartComponent implements OnInit {
   
   // to open chart editor
   EditChart(){
-    debugger
     if(this.isEditorOpen){
       //if editor is already open
       if(this.editorState[1] == this.pieChartDefaults.chartId){

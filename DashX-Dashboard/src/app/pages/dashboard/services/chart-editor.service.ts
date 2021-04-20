@@ -17,6 +17,10 @@ export class ChartEditorService {
     this.isEditorOpen.next([isEditorOpen, chartID]);
   }
 
+  /**
+   * (observed function) contains the entire chart data
+   * @param editorData includes the entire chart data 
+   */
   EditorDataUpdated(editorData){
     this.editorData.next(editorData);
   }

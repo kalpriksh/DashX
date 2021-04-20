@@ -1,58 +1,106 @@
+<!--drop down menu items-------------------------------- -->
+
+<!-- todo : create this using *ngFor -->
+<mat-menu #chartTypeMenu="matMenu">
+  <div *ngFor="let chartTypeItem of listOfChartTypes">
+    <button mat-menu-item (click) = "AddChart(chartTypeItem.name)">
+      <mat-icon>{{chartTypeItem.icon}}</mat-icon>
+      <span>{{chartTypeItem.name}}</span>
+    </button>
+  </div>
+</mat-menu>
+
+<!-- -------------------------------------------------- -->
+
+<div class = "top-toolbar">
+  <mat-toolbar class = "edit-toolbar-options" color = 'basic'>
+    <div>
+      <button mat-button color = "primary" [matMenuTriggerFor]="chartTypeMenu">
+        Add Chart
+      </button>
+      <button mat-button color = "primary">
+        Delete Chart
+      </button>
+      <button mat-button color = "primary">
+        Save Chart
+      </button>
+      <button mat-button color = "primary">
+        Reset Chart
+      </button>
+    </div>
+  </mat-toolbar>
+</div>
+
 
 <div class='chart-container'>
+  <!-- chart editor declared -->
   <app-chart-editor id = 'chart-editor'></app-chart-editor>
-
+  
   <mat-grid-list cols="4" rowHeight="150px" gutterSize = "7px">
-    <mat-grid-tile
-    [rowspan] = '1'
-    [colspan] = '1'
-    >
-    <app-kpi kpiName = "Quaterly Revenue" kpiIcon = "show_chart" kpiMetric = "200"></app-kpi>
-    </mat-grid-tile>
-    
 
-    <mat-grid-tile
-    [rowspan] = '1'
-    [colspan] = '1'
-    >
-    <app-kpi></app-kpi>
-    </mat-grid-tile>
+      <!-- <mat-grid-tile *ngFor="let item of listChartObjects; let i = index" -->
+      <!-- [rowspan] = listChartPosition[i][0] -->
+      <!-- [colspan] = listChartPosition[i][1] -->
+      <!-- >
+      hello -->
+      <!-- need to render charts here dynamically-->
+      <!-- </mat-grid-tile> -->
 
-    <mat-grid-tile
-    [rowspan] = '1'
-    [colspan] = '1'
-    >
-    <app-kpi></app-kpi>
-    </mat-grid-tile>
-    
-    <mat-grid-tile
-    [rowspan] = '1'
-    [colspan] = '1'
-    >
-    <app-kpi></app-kpi>
-    </mat-grid-tile>
+      <mat-grid-tile
+      [rowspan] = '1'
+      [colspan] = '1'
+      >
+      <app-kpi kpiName = "Quaterly Revenue" kpiIcon = "show_chart" kpiMetric = "200"></app-kpi>
+      </mat-grid-tile>
+      
+  
+      <mat-grid-tile
+      [rowspan] = '1'
+      [colspan] = '1'
+      >
+      <app-kpi></app-kpi>
+      </mat-grid-tile>
+  
+      <mat-grid-tile
+      [rowspan] = '1'
+      [colspan] = '1'
+      >
+      <app-kpi></app-kpi>
+      </mat-grid-tile>
+      
+      <mat-grid-tile
+      [rowspan] = '1'
+      [colspan] = '1'
+      >
+      <app-kpi></app-kpi>
+      </mat-grid-tile>
+  
+      <mat-grid-tile
+      [rowspan] = '3'
+      [colspan] = '2'
+      >
+      <app-bar-graph></app-bar-graph>
+      </mat-grid-tile>
+  
+      <mat-grid-tile
+      [rowspan] = '3'
+      [colspan] = '2'
+      >
+      <app-line-chart></app-line-chart>
+      </mat-grid-tile>
+  
+      <mat-grid-tile
+      [rowspan] = '3'
+      [colspan] = '2'
+      >
+      <app-pie-chart></app-pie-chart>
+      </mat-grid-tile>
+      
 
-    <mat-grid-tile
-    [rowspan] = '3'
-    [colspan] = '2'
-    >
-    <app-bar-graph></app-bar-graph>
-    </mat-grid-tile>
-
-    <mat-grid-tile
-    [rowspan] = '3'
-    [colspan] = '2'
-    >
-    <app-line-chart></app-line-chart>
-    </mat-grid-tile>
-
-    <mat-grid-tile
-    [rowspan] = '3'
-    [colspan] = '2'
-    >
-    <app-pie-chart></app-pie-chart>
-    </mat-grid-tile>
-
+      <mat-grid-tile
+      [rowspan] = '3'
+      [colspan] = '2'>
+        <ng-template newChartTab></ng-template>
+      </mat-grid-tile>
   </mat-grid-list>
-
 </div>
