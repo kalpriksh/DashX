@@ -86,6 +86,7 @@ export class ChartsContainerComponent implements OnInit {
       const viewContainerRef = this.newChart.viewContainerRef;
       viewContainerRef.clear();
       const componentRef = viewContainerRef.createComponent<BarGraphComponent>(componentFactory);
+      //TODO: update dashboard object
     }
     if(chartType.toUpperCase() == "PIE")
     {
@@ -93,6 +94,7 @@ export class ChartsContainerComponent implements OnInit {
       const viewContainerRef = this.newChart.viewContainerRef;
       viewContainerRef.clear();
       const componentRef = viewContainerRef.createComponent<PieChartComponent>(componentFactory);
+      //TODO: update dashboard object
     }
     if(chartType.toUpperCase() == "KPI")
     {
@@ -100,6 +102,7 @@ export class ChartsContainerComponent implements OnInit {
       const viewContainerRef = this.newChart.viewContainerRef;
       viewContainerRef.clear();
       const componentRef = viewContainerRef.createComponent<KeyPerformanceIndicatorComponent>(componentFactory);
+      //TODO: update dashboard object
     }
 
     this.showChartTypesList = false;
