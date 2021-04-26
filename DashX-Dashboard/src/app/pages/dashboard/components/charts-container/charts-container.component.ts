@@ -7,6 +7,9 @@ import { NewChartTabDirective } from '../../directives/new-chart-tab.directive'
 //components
 
 import { BarGraphComponent } from '../bar-graph/bar-graph.component'
+import { of } from "rxjs";
+import { PieChartComponent } from "../pie-chart/pie-chart.component";
+import { KeyPerformanceIndicatorComponent } from "../key-performance-indicator/key-performance-indicator.component";
 
 @Component({
   selector: 'app-charts-container',
@@ -71,16 +74,33 @@ export class ChartsContainerComponent implements OnInit {
     
   }
 
-  AddChart(chartType){
+  AddChart(chartType : string){
     /**
      * add chart type on selection basis 
      * dynamically load chart component
      */
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(BarGraphComponent);
-    const viewContainerRef = this.newChart.viewContainerRef;
-    viewContainerRef.clear();
 
-    const componentRef = viewContainerRef.createComponent<BarGraphComponent>(componentFactory);
+    if(chartType.toUpperCase() == "BAR")
+    {
+      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(BarGraphComponent);
+      const viewContainerRef = this.newChart.viewContainerRef;
+      viewContainerRef.clear();
+      const componentRef = viewContainerRef.createComponent<BarGraphComponent>(componentFactory);
+    }
+    if(chartType.toUpperCase() == "PIE")
+    {
+      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(PieChartComponent);
+      const viewContainerRef = this.newChart.viewContainerRef;
+      viewContainerRef.clear();
+      const componentRef = viewContainerRef.createComponent<PieChartComponent>(componentFactory);
+    }
+    if(chartType.toUpperCase() == "KPI")
+    {
+      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(KeyPerformanceIndicatorComponent);
+      const viewContainerRef = this.newChart.viewContainerRef;
+      viewContainerRef.clear();
+      const componentRef = viewContainerRef.createComponent<KeyPerformanceIndicatorComponent>(componentFactory);
+    }
 
     this.showChartTypesList = false;
   }
