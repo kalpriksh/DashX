@@ -54,9 +54,6 @@ export class ChartsContainerComponent implements OnInit {
   listChartObjects
   listChartPosition
 
-  // dummy chart data
-  barChartDummyData
-
   constructor(private service: DashboardService, private componentFactoryResolver : ComponentFactoryResolver, private chartComponentService : ChartContainerService) {
     this.lineChartData = this.service.loadLineChartData();
     this.pieChartData = this.service.loadPieChartData();
@@ -74,30 +71,6 @@ export class ChartsContainerComponent implements OnInit {
     
     this._dashboard = new Dashboard(this.listChartObjects, this.listChartPosition)
     this.DashboardInit(this._dashboard);
-
-    // dummy data testing
-    this.barChartDummyData = {
-      series: [
-        {
-          name: "basic",
-          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        }
-      ],
-      xaxis: {
-        categories: [
-          "South Korea",
-          "Canada",
-          "United Kingdom",
-          "Netherlands",
-          "Italy",
-          "France",
-          "Japan",
-          "United States",
-          "China",
-          "Germany"
-        ]
-      }
-    }
 
   }
 
