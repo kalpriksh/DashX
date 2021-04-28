@@ -1,5 +1,5 @@
 import { DashboardService } from "../../services";
-import { Component, OnInit, ViewEncapsulation, ViewChild, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ComponentFactoryResolver, ViewContainerRef, Input } from '@angular/core';
 import { LineChartData, PieChartData, BarGraphData } from '../../models';
 import { Dashboard } from '../../component-classes'
 import { NewChartTabDirective } from '../../directives/new-chart-tab.directive'
@@ -26,6 +26,7 @@ export class ChartsContainerComponent implements OnInit {
    * chart components needs to loaded dynamically
    */
 
+
   @ViewChild(NewChartTabDirective, {static: true}) newChart: NewChartTabDirective;
 
   public lineChartData: LineChartData;
@@ -33,7 +34,7 @@ export class ChartsContainerComponent implements OnInit {
   public barGraphData: BarGraphData;
 
   showChartTypesList = false
-
+  _dashboard : Dashboard 
 
   // list of chart types {placeholder}
   listOfChartTypes = [{
@@ -47,12 +48,8 @@ export class ChartsContainerComponent implements OnInit {
                         icon : "bar_chart"
                       }];
 
-  // dashboard object to edit/save
-  _dashboard : Dashboard
-
-  // contains the list chart in a dashboard
-  listChartObjects
-  listChartPosition
+  // dummy chart data
+  barChartDummyData
 
   constructor(private service: DashboardService, private componentFactoryResolver : ComponentFactoryResolver, private chartComponentService : ChartContainerService) {
     this.lineChartData = this.service.loadLineChartData();
@@ -63,13 +60,47 @@ export class ChartsContainerComponent implements OnInit {
   ngOnInit(): void {
     
 
-    this.listChartObjects = ["kpi", "kpi", "kpi", "kpi","bar"];
-    this.listChartPosition = [[1,1],[1,1],[1,1],[1,1],[3,2]];
+    // this.listChartObjects = ["kpi", "kpi", "kpi", "kpi","bar"];
+    // this.listChartPosition = [[1,1],[1,1],[1,1],[1,1],[3,2]];
 
     // bind deleteChart function to service's delete chart function
     this.chartComponentService.DeleteSelectedChart(this.DeleteChart.bind(this));
-    
-    this._dashboard = new Dashboard(this.listChartObjects, this.listChartPosition)
+
+    // dummy data testing
+    this.barChartDummyData = {
+      series: [
+        {
+          name: "basic",
+          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+        }
+      ],
+      xaxis: {
+        categories: [
+          "South Korea",
+          "Canada",
+          "United Kingdom",
+          "Netherlands",
+          "Italy",
+          "France",
+          "Japan",
+          "United States",
+          "China",
+          "Germany"
+        ]
+      }
+    }
+    // dummy dashboard testing
+    this._dashboard = {charts :[{
+      chartType : "bar",
+      chartID : 6666,
+      position : {
+      col : 2,
+      row : 3
+      },
+      chartData : this.barChartDummyData
+    }]}
+
+    console.log(this._dashboard)
     this.DashboardInit(this._dashboard);
 
   }
@@ -124,7 +155,6 @@ export class ChartsContainerComponent implements OnInit {
      * remove from UI
      * update dashboard
      */
-    this._dashboard.DeleteChart(chartId);
     
   }
 
