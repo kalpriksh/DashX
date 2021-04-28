@@ -20,7 +20,7 @@ export class BarGraphComponent implements OnInit{
   chartData : Partial<BarChartOptions>
   editorState
 
-  @Input() barGraphData;
+  @Input() barGraphData : BarGraphData;
   @ViewChild ('chartObj') chartObj : ChartComponent;
 
   constructor(private editorData : ChartEditorService, private chartContainerService : ChartContainerService){
