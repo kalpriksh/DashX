@@ -3,13 +3,14 @@ import { Component, OnInit, ViewEncapsulation, ViewChild, ComponentFactoryResolv
 import { LineChartData, PieChartData, BarGraphData } from '../../models';
 import { Dashboard } from '../../component-classes'
 import { NewChartTabDirective } from '../../directives/new-chart-tab.directive'
+import { of } from "rxjs";
 
 //components
 
 import { BarGraphComponent } from '../bar-graph/bar-graph.component'
-import { of } from "rxjs";
 import { PieChartComponent } from "../pie-chart/pie-chart.component";
 import { KeyPerformanceIndicatorComponent } from "../key-performance-indicator/key-performance-indicator.component";
+import { ChartContainerService } from "../../services/chart-container.service";
 
 @Component({
   selector: 'app-charts-container',
@@ -48,22 +49,56 @@ export class ChartsContainerComponent implements OnInit {
 
   // dashboard object to edit/save
   _dashboard : Dashboard
+
   // contains the list chart in a dashboard
   listChartObjects
   listChartPosition
 
-  constructor(private service: DashboardService, private componentFactoryResolver : ComponentFactoryResolver) {
+  // dummy chart data
+  barChartDummyData
+
+  constructor(private service: DashboardService, private componentFactoryResolver : ComponentFactoryResolver, private chartComponentService : ChartContainerService) {
     this.lineChartData = this.service.loadLineChartData();
     this.pieChartData = this.service.loadPieChartData();
     this.barGraphData = this.service.loadBarGraphData();
   }
 
   ngOnInit(): void {
+    
+
     this.listChartObjects = ["kpi", "kpi", "kpi", "kpi","bar"];
     this.listChartPosition = [[1,1],[1,1],[1,1],[1,1],[3,2]];
+
+    // bind deleteChart function to service's delete chart function
+    this.chartComponentService.DeleteSelectedChart(this.DeleteChart.bind(this));
     
     this._dashboard = new Dashboard(this.listChartObjects, this.listChartPosition)
     this.DashboardInit(this._dashboard);
+
+    // dummy data testing
+    this.barChartDummyData = {
+      series: [
+        {
+          name: "basic",
+          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+        }
+      ],
+      xaxis: {
+        categories: [
+          "South Korea",
+          "Canada",
+          "United Kingdom",
+          "Netherlands",
+          "Italy",
+          "France",
+          "Japan",
+          "United States",
+          "China",
+          "Germany"
+        ]
+      }
+    }
+
   }
 
   DashboardInit(dashboardObject){
@@ -109,13 +144,15 @@ export class ChartsContainerComponent implements OnInit {
   }
   
 
-  DeleteChart(chartId){
+  DeleteChart(chartId)
+  {
     /**
-     * will be called from chartSetup
+     * will be called from chart itself using chart-container service
      * remove from UI
      * update dashboard
      */
-
+    this._dashboard.DeleteChart(chartId);
+    
   }
 
   UpdateDashboard(){
