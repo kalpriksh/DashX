@@ -4,6 +4,7 @@ import { BarChart, BarChartOptions } from '../../component-classes/barChart'
 import { ChartComponent } from "ng-apexcharts";
 import { ChartEditorService } from '../../services'
 import { DataHandler } from '../../helpers'
+import { ChartContainerService } from '../../services/chart-container.service';
 
 
 @Component({
@@ -19,18 +20,24 @@ export class BarGraphComponent implements OnInit{
   chartData : Partial<BarChartOptions>
   editorState
 
-  @Input() barGraphData: BarGraphData;
+  @Input() barGraphData;
   @ViewChild ('chartObj') chartObj : ChartComponent;
 
-  constructor(private editorData : ChartEditorService){
-
+  constructor(private editorData : ChartEditorService, private chartContainerService : ChartContainerService){
   }
 
   ngOnInit(): void {
 
-    this.barChart = new BarChart(101);
+    this.barChart = new BarChart(parseInt(Math.random().toString(36).substr(2, 9)));
     this.chart = this.initChart()
     
+    // if input is provided then load data
+    if(this.barGraphData)
+    {
+      this.chart.series = this.barGraphData.series;
+      this.chart.xaxis = this.barGraphData.xaxis;
+    }
+
     // on toggle edit chart
     this.editorData.isEditorOpen_current.subscribe(_editorState => {
       this.isEditorOpen = _editorState[0]
@@ -38,13 +45,13 @@ export class BarGraphComponent implements OnInit{
     })
 
     // on data modified event
-    this.editorData.editorData_current.subscribe( _modifiedChartObject => {
+    this.editorData.editorData_current.subscribe(_modifiedChartObject => {
 
       if(this.chartObj != null){
         //update if chartType and chartID is the same
         if(_modifiedChartObject.chartType == this.barChart.chartType && _modifiedChartObject.chartId == this.barChart.chartId){
           this.chartData = _modifiedChartObject
-          this.updateChart(_modifiedChartObject.chartData)
+          this.UpdateChart(_modifiedChartObject.chartData)
           this.barChart = _modifiedChartObject
         }
       }
@@ -54,9 +61,13 @@ export class BarGraphComponent implements OnInit{
   }
 
   //#region component functions
-
-  //to update the chart options
-  updateChart( chartOption : Partial<BarChartOptions> ){
+  
+  public initChart(): Partial<any> {
+    return  this.barChart.GetDefaults()
+  }
+  
+  UpdateChart( chartOption : Partial<BarChartOptions> )
+  {/**to update the chart options */
     this.chartObj.updateOptions(
       chartOption
     );
@@ -81,8 +92,10 @@ export class BarGraphComponent implements OnInit{
       this.editorData.EditorDataUpdated(this.barChart)
     }
   }
-  public initChart(): Partial<any> {
-   return  this.barChart.GetDefaults()
+
+  DeleteChart(chartID)
+  {
+    this.chartContainerService.DeleteChart(chartID);
   }
 
   //#endregion
