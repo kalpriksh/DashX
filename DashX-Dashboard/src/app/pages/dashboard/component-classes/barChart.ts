@@ -1,7 +1,6 @@
 import { BaseChart } from '../base'
 import { SeriesData, CategoryData } from '../models'
 
-
 import {
   ApexTitleSubtitle,
   ApexAxisChartSeries,
@@ -111,6 +110,5 @@ export class BarChart extends BaseChart{
     this.seriesData.data = data;
     return this.seriesData;
   }
- 
 }
 
