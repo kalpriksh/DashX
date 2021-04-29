@@ -13,6 +13,7 @@ import { ChartComponent } from "ng-apexcharts";
 export class LineChartComponent implements OnInit {
 
   public chart: Partial<LineChartOptions>;
+
   lineChart : LineChart;
   isEditorOpen : boolean
   chartData : Partial<LineChartComponent>
@@ -27,6 +28,12 @@ export class LineChartComponent implements OnInit {
 
     this.lineChart = new LineChart(103);
     this.chart = this.initChart()
+
+    if(this.lineChartData)
+    {
+      this.chart.series = this.lineChartData.series;
+      this.chart.xaxis = this.lineChartData.xaxis;
+    }
     
     // on toggle edit chart
     this.editorData.isEditorOpen_current.subscribe(_editorState => {

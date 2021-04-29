@@ -1,5 +1,11 @@
 export interface LineChartData {
-    name: string,
-    data: number[],
-    categories: string[]
+  series : SeriesData[],
+  xaxis : {
+    categories : string[]
+  }
+}
+
+interface SeriesData{
+  name : string,
+  data : number[]
 }
