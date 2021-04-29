@@ -37,70 +37,24 @@
   <app-chart-editor id = 'chart-editor'></app-chart-editor>
   
   <mat-grid-list cols="4" rowHeight="150px" gutterSize = "7px">
-
-      <!-- <mat-grid-tile *ngFor="let item of listChartObjects; let i = index" -->
-      <!-- [rowspan] = listChartPosition[i][0] -->
-      <!-- [colspan] = listChartPosition[i][1] -->
-      <!-- >
-      hello -->
-      <!-- need to render charts here dynamically-->
-      <!-- </mat-grid-tile> -->
-
+    <ng-container *ngFor="let item of _dashboard.charts; let i = index">
       <mat-grid-tile
-      [rowspan] = '1'
-      [colspan] = '1'
-      >
-      <app-kpi kpiName = "Quaterly Revenue" kpiIcon = "show_chart" kpiMetric = "200"></app-kpi>
+        [rowspan] = item.position.row
+        [colspan] = item.position.col
+        >
+        <ng-template [ngIf]="item.chartType=='bar'">
+          <app-bar-graph [barGraphData] = 'item.chartData'></app-bar-graph>
+        </ng-template>
+        <ng-template [ngIf]="item.chartType=='pie'">
+          <app-pie-chart [pieChartData] = 'item.chartData'></app-pie-chart>
+        </ng-template>
+        <ng-template [ngIf]="item.chartType=='kpi'">
+          <app-kpi [kpiData] = 'item.chartData'></app-kpi>
+        </ng-template>
+        <ng-template [ngIf]="item.chartType=='line'">
+          <app-line-chart [lineChartData] = 'item.chartData'></app-line-chart>
+        </ng-template>
       </mat-grid-tile>
-      
-  
-      <mat-grid-tile
-      [rowspan] = '1'
-      [colspan] = '1'
-      >
-      <app-kpi></app-kpi>
-      </mat-grid-tile>
-  
-      <mat-grid-tile
-      [rowspan] = '1'
-      [colspan] = '1'
-      >
-      <app-kpi></app-kpi>
-      </mat-grid-tile>
-      
-      <mat-grid-tile
-      [rowspan] = '1'
-      [colspan] = '1'
-      >
-      <app-kpi></app-kpi>
-      </mat-grid-tile>
-  
-      <mat-grid-tile
-      [rowspan] = '3'
-      [colspan] = '2'
-      >
-      <app-bar-graph></app-bar-graph>
-      </mat-grid-tile>
-  
-      <mat-grid-tile
-      [rowspan] = '3'
-      [colspan] = '2'
-      >
-      <app-line-chart></app-line-chart>
-      </mat-grid-tile>
-  
-      <mat-grid-tile
-      [rowspan] = '3'
-      [colspan] = '2'
-      >
-      <app-pie-chart></app-pie-chart>
-      </mat-grid-tile>
-      
-
-      <mat-grid-tile
-      [rowspan] = '3'
-      [colspan] = '2'>
-        <ng-template newChartTab></ng-template>
-      </mat-grid-tile>
+    </ng-container>
   </mat-grid-list>
 </div>

@@ -4,4 +4,5 @@ export * from './barGraphData'
 export * from './chartOptions'
 export * from './seriesData'
 export * from './categoryData'
+export * from './kpiData'
 

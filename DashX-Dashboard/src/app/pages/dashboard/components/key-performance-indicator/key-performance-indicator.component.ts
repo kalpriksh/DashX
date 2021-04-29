@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { KPI } from "../../component-classes";
+import { KpiData } from "../../models"
 
 @Component({
   selector: 'app-kpi',
@@ -9,14 +10,11 @@ import { KPI } from "../../component-classes";
 export class KeyPerformanceIndicatorComponent implements OnInit {
 
   kpi : KPI
-  @Input() kpiIcon: string
-  @Input() kpiMetric : string
-  @Input() kpiName : string
+  @Input() kpiData: KpiData
   constructor() { }
 
   ngOnInit(): void {
-    this.kpi = new KPI(this.kpiName,this.kpiMetric,this.kpiIcon);
-    
+    this.kpi = new KPI(this.kpiData.name, this.kpiData.metric, this.kpiData.icon);
   }
 
 }
