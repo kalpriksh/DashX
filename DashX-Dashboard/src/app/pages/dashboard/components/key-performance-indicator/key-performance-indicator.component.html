@@ -1,8 +1,8 @@
 <mat-card>
     <div class="container">
-        <mat-card-subtitle><mat-icon>{{kpiIcon}}</mat-icon>{{kpiName}}</mat-card-subtitle>
+        <mat-card-subtitle><mat-icon>{{this.kpiData.icon}}</mat-icon>{{this.kpiData.name}}</mat-card-subtitle>
         <h1 class="center">
-            {{kpiMetric | currency}}
+            {{this.kpiData.metric | currency}}
         </h1>
     </div>
 </mat-card>
