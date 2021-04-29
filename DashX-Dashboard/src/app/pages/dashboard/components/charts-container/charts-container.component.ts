@@ -1,16 +1,17 @@
-import { DashboardService } from "../../services";
 import { Component, OnInit, ViewEncapsulation, ViewChild, ComponentFactoryResolver, ViewContainerRef, Input } from '@angular/core';
-import { LineChartData, PieChartData, BarGraphData } from '../../models';
+import { LineChartData, PieChartData, BarGraphData, KpiData } from '../../models';
 import { Dashboard } from '../../component-classes'
 import { NewChartTabDirective } from '../../directives/new-chart-tab.directive'
 import { of } from "rxjs";
 
 //components
-
 import { BarGraphComponent } from '../bar-graph/bar-graph.component'
 import { PieChartComponent } from "../pie-chart/pie-chart.component";
 import { KeyPerformanceIndicatorComponent } from "../key-performance-indicator/key-performance-indicator.component";
+
+//services
 import { ChartContainerService } from "../../services/chart-container.service";
+import { DashboardService } from "../../services";
 
 @Component({
   selector: 'app-charts-container',
@@ -49,7 +50,10 @@ export class ChartsContainerComponent implements OnInit {
                       }];
 
   // dummy chart data
-  barChartDummyData
+  barChartDummyData : BarGraphData
+  kpiDummyData : KpiData
+  pieChartDummyData : PieChartData
+  lineChartDummyData : LineChartData
 
   constructor(private service: DashboardService, private componentFactoryResolver : ComponentFactoryResolver, private chartComponentService : ChartContainerService) {
     this.lineChartData = this.service.loadLineChartData();
@@ -89,8 +93,28 @@ export class ChartsContainerComponent implements OnInit {
         ]
       }
     }
+    this.kpiDummyData = {
+      name : "Quaterly Revenue",
+      metric : "200",
+      icon : "show_chart"
+    }
+    this.pieChartDummyData = {
+      labels : ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+      series : [44, 55, 13, 43, 22]
+    }
+    this.lineChartDummyData = {
+      series: [{
+        name: "Desktops",
+        data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+      }],
+      xaxis : {
+        categories : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+      }
+    }
+
     // dummy dashboard testing
-    this._dashboard = {charts :[{
+    this._dashboard = {charts :[
+      {
       chartType : "bar",
       chartID : 6666,
       position : {
@@ -98,9 +122,62 @@ export class ChartsContainerComponent implements OnInit {
       row : 3
       },
       chartData : this.barChartDummyData
-    }]}
+    },{
+      chartType : "kpi",
+      chartID : 6666,
+      position : {
+      col : 1,
+      row : 1
+      },
+      chartData : this.kpiDummyData
+    },
+    {
+      chartType : "kpi",
+      chartID : 6666,
+      position : {
+      col : 1,
+      row : 1
+      },
+      chartData : this.kpiDummyData
+    },
+    {
+      chartType : "kpi",
+      chartID : 6666,
+      position : {
+      col : 1,
+      row : 1
+      },
+      chartData : this.kpiDummyData
+    },
+    {
+      chartType : "kpi",
+      chartID : 6666,
+      position : {
+      col : 1,
+      row : 1
+      },
+      chartData : this.kpiDummyData
+    },
+    {
+      chartType : "pie",
+      chartID : 6666,
+      position : {
+      col : 2,
+      row : 2
+      },
+      chartData : this.pieChartDummyData
+    },
+    {
+      chartType : "line",
+      chartID : 6666,
+      position : {
+      col : 2,
+      row : 3
+      },
+      chartData : this.lineChartDummyData
+    }
+  ]}
 
-    console.log(this._dashboard)
     this.DashboardInit(this._dashboard);
 
   }
