@@ -12,12 +12,14 @@ import { PieChart, PieChartOptions } from '../../component-classes/pieChart';
 export class PieChartComponent implements OnInit {
   
   public chart: Partial<PieChartOptions>;
+
   @Input() pieChartData: PieChartData;  
   pieChartDefaults : PieChart;
   isEditorOpen : boolean
   editorState : [boolean, number]
 
   EditorData
+
   @ViewChild ('chartObj') chartObj : ChartComponent;
   constructor(private data : ChartEditorService){
   }
@@ -27,6 +29,12 @@ export class PieChartComponent implements OnInit {
 
     this.pieChartDefaults = new PieChart(102);
     this.chart = this.initChart()
+
+    if(this.pieChartData)
+    {
+      this.chart.series = this.pieChartData.series,
+      this.chart.labels = this.pieChartData.labels
+    }
     
     // on toggle edit chart
     this.data.isEditorOpen_current.subscribe( _editorState =>{ 
