@@ -43,7 +43,7 @@
         [colspan] = item.position.col
         >
         <ng-template [ngIf]="item.chartType=='bar'">
-          <app-bar-graph [barGraphData] = 'item.chartData'></app-bar-graph>
+          <app-bar-graph [barGraphData] = 'item.chartData' (chartId) = "item.chartID = $event"></app-bar-graph>
         </ng-template>
         <ng-template [ngIf]="item.chartType=='pie'">
           <app-pie-chart [pieChartData] = 'item.chartData'></app-pie-chart>

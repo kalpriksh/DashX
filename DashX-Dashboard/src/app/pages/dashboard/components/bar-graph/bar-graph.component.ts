@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { BarGraphData } from '../../models';
 import { BarChart, BarChartOptions } from '../../component-classes/barChart'
 import { ChartComponent } from "ng-apexcharts";
@@ -23,12 +23,17 @@ export class BarGraphComponent implements OnInit{
   @Input() barGraphData : BarGraphData;
   @ViewChild ('chartObj') chartObj : ChartComponent;
 
+  @Output() chartId = new EventEmitter<number>(); 
+
   constructor(private editorData : ChartEditorService, private chartContainerService : ChartContainerService){
   }
 
   ngOnInit(): void {
 
-    this.barChart = new BarChart(parseInt(Math.random().toString(36).substr(2, 9)));
+    this.barChart = new BarChart(100);
+    //emit chart id on chart creation
+    this.chartId.emit(this.barChart.chartId)
+
     this.chart = this.initChart()
     
     // if input is provided then load data
@@ -93,9 +98,9 @@ export class BarGraphComponent implements OnInit{
     }
   }
 
-  DeleteChart(chartID)
+  DeleteChart()
   {
-    this.chartContainerService.DeleteChart(chartID);
+    this.chartContainerService.DeleteChart(this.barChart.chartId);
   }
 
   //#endregion
