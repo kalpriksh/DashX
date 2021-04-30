@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ComponentFactoryResolver, ViewContainerRef, Input } from '@angular/core';
-import { LineChartData, PieChartData, BarGraphData, KpiData } from '../../models';
-import { Dashboard } from '../../component-classes'
+import { LineChartData, PieChartData, BarGraphData, KpiData, Dashboard } from '../../models';
 import { NewChartTabDirective } from '../../directives/new-chart-tab.directive'
 import { of } from "rxjs";
 
@@ -55,131 +54,14 @@ export class ChartsContainerComponent implements OnInit {
   pieChartDummyData : PieChartData
   lineChartDummyData : LineChartData
 
-  constructor(private service: DashboardService, private componentFactoryResolver : ComponentFactoryResolver, private chartComponentService : ChartContainerService) {
-    this.lineChartData = this.service.loadLineChartData();
-    this.pieChartData = this.service.loadPieChartData();
-    this.barGraphData = this.service.loadBarGraphData();
+  constructor(private dashboardService: DashboardService, private componentFactoryResolver : ComponentFactoryResolver, private chartContainerService : ChartContainerService) {
+    this._dashboard = dashboardService.loadDashboardData()
   }
 
   ngOnInit(): void {
-    
-
-    // this.listChartObjects = ["kpi", "kpi", "kpi", "kpi","bar"];
-    // this.listChartPosition = [[1,1],[1,1],[1,1],[1,1],[3,2]];
-
     // bind deleteChart function to service's delete chart function
-    this.chartComponentService.DeleteSelectedChart(this.DeleteChart.bind(this));
-
-    // dummy data testing
-    this.barChartDummyData = {
-      series: [
-        {
-          name: "basic",
-          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        }
-      ],
-      xaxis: {
-        categories: [
-          "South Korea",
-          "Canada",
-          "United Kingdom",
-          "Netherlands",
-          "Italy",
-          "France",
-          "Japan",
-          "United States",
-          "China",
-          "Germany"
-        ]
-      }
-    }
-    this.kpiDummyData = {
-      name : "Quaterly Revenue",
-      metric : "200",
-      icon : "show_chart"
-    }
-    this.pieChartDummyData = {
-      labels : ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-      series : [44, 55, 13, 43, 22]
-    }
-    this.lineChartDummyData = {
-      series: [{
-        name: "Desktops",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-      }],
-      xaxis : {
-        categories : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
-      }
-    }
-
-    // dummy dashboard testing
-    this._dashboard = {charts :[
-      {
-      chartType : "bar",
-      chartID : 6666,
-      position : {
-      col : 2,
-      row : 3
-      },
-      chartData : this.barChartDummyData
-    },{
-      chartType : "kpi",
-      chartID : 6666,
-      position : {
-      col : 1,
-      row : 1
-      },
-      chartData : this.kpiDummyData
-    },
-    {
-      chartType : "kpi",
-      chartID : 6666,
-      position : {
-      col : 1,
-      row : 1
-      },
-      chartData : this.kpiDummyData
-    },
-    {
-      chartType : "kpi",
-      chartID : 6666,
-      position : {
-      col : 1,
-      row : 1
-      },
-      chartData : this.kpiDummyData
-    },
-    {
-      chartType : "kpi",
-      chartID : 6666,
-      position : {
-      col : 1,
-      row : 1
-      },
-      chartData : this.kpiDummyData
-    },
-    {
-      chartType : "pie",
-      chartID : 6666,
-      position : {
-      col : 2,
-      row : 2
-      },
-      chartData : this.pieChartDummyData
-    },
-    {
-      chartType : "line",
-      chartID : 6666,
-      position : {
-      col : 2,
-      row : 3
-      },
-      chartData : this.lineChartDummyData
-    }
-  ]}
-
+    this.chartContainerService.DeleteSelectedChart(this.DeleteChart.bind(this));
     this.DashboardInit(this._dashboard);
-
   }
 
   DashboardInit(dashboardObject){
@@ -210,7 +92,6 @@ export class ChartsContainerComponent implements OnInit {
       const viewContainerRef = this.newChart.viewContainerRef;
       viewContainerRef.clear();
       const componentRef = viewContainerRef.createComponent<PieChartComponent>(componentFactory);
-      //TODO: update dashboard object
     }
     if(chartType.toUpperCase() == "KPI")
     {
