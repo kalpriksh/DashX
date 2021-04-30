@@ -5,4 +5,5 @@ export * from './chartOptions'
 export * from './seriesData'
 export * from './categoryData'
 export * from './kpiData'
+export * from './dashboard'
 
