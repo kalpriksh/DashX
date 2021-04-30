@@ -29,8 +29,9 @@ export class BarChart extends BaseChart{
   seriesData : SeriesData
   categoryData : CategoryData
   chartData : Partial<BarChartOptions>
-
-  constructor(chartId? : number, chartData? : Partial<BarChartOptions>){
+  
+  constructor(chartId? : number, chartData? : Partial<BarChartOptions>)
+  {
     super()
     
     if(chartId && chartData){

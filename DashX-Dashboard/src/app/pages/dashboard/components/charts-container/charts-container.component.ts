@@ -114,13 +114,11 @@ export class ChartsContainerComponent implements OnInit {
      * update dashboard
      */
     
-  }
-
-  UpdateDashboard(){
-    /**
-     * updates the dashboard | add/deletes chart
-     * updates the list of charts in the dashboard
-     */
+    //filter out the chart not required based on id
+    var filteredData = this._dashboard.charts.filter((chartData) => {
+      return chartData.chartID != chartId
+    })
+    this._dashboard.charts = filteredData
 
   }
 
@@ -129,7 +127,6 @@ export class ChartsContainerComponent implements OnInit {
      * creates dashboard object
      * returns the object to be saved
      */
-
   }
 
 }
