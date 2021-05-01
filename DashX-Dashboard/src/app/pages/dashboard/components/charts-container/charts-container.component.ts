@@ -46,6 +46,10 @@ export class ChartsContainerComponent implements OnInit {
                       }, {
                         name : "Bar",
                         icon : "bar_chart"
+                      },
+                      {
+                        name : "Line",
+                        icon : "show_chart"
                       }];
 
   // dummy chart data
@@ -77,29 +81,21 @@ export class ChartsContainerComponent implements OnInit {
      * add chart type on selection basis 
      * dynamically load chart component
      */
-
     if(chartType.toUpperCase() == "BAR")
     {
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(BarGraphComponent);
-      const viewContainerRef = this.newChart.viewContainerRef;
-      viewContainerRef.clear();
-      const componentRef = viewContainerRef.createComponent<BarGraphComponent>(componentFactory);
-      //TODO: update dashboard object
+      this._dashboard.charts.push(this.dashboardService.GetDefaultBarDashboardObject())
     }
     if(chartType.toUpperCase() == "PIE")
     {
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(PieChartComponent);
-      const viewContainerRef = this.newChart.viewContainerRef;
-      viewContainerRef.clear();
-      const componentRef = viewContainerRef.createComponent<PieChartComponent>(componentFactory);
+      this._dashboard.charts.push(this.dashboardService.GetDefaultPieDashboardObject())
     }
     if(chartType.toUpperCase() == "KPI")
     {
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(KeyPerformanceIndicatorComponent);
-      const viewContainerRef = this.newChart.viewContainerRef;
-      viewContainerRef.clear();
-      const componentRef = viewContainerRef.createComponent<KeyPerformanceIndicatorComponent>(componentFactory);
-      //TODO: update dashboard object
+      this._dashboard.charts.push(this.dashboardService.GetDefaultKpiDashboardObject())
+    }
+    if(chartType.toUpperCase() == "LINE")
+    {
+      this._dashboard.charts.push(this.dashboardService.GetDefaultLineDashboardObject())
     }
 
     this.showChartTypesList = false;

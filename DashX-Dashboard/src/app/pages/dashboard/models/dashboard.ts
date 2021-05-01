@@ -3,7 +3,7 @@ export interface Dashboard
   charts : DashboardObject[]
 }
 
-interface DashboardObject
+export interface DashboardObject
 {
   chartType : string,
   chartID : number,
