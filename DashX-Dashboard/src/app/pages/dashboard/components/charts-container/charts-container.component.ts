@@ -37,20 +37,7 @@ export class ChartsContainerComponent implements OnInit {
   _dashboard : Dashboard 
 
   // list of chart types {placeholder}
-  listOfChartTypes = [{
-                        name : "Kpi",
-                        icon : "vpn_key"
-                      }, {
-                        name : "Pie",
-                        icon : "pie_chart"
-                      }, {
-                        name : "Bar",
-                        icon : "bar_chart"
-                      },
-                      {
-                        name : "Line",
-                        icon : "show_chart"
-                      }];
+  listOfChartTypes : any[]
 
   // dummy chart data
   barChartDummyData : BarGraphData
@@ -64,16 +51,9 @@ export class ChartsContainerComponent implements OnInit {
 
   ngOnInit(): void {
     // bind deleteChart function to service's delete chart function
-    this.chartContainerService.DeleteSelectedChart(this.DeleteChart.bind(this));
-    this.DashboardInit(this._dashboard);
-  }
-
-  DashboardInit(dashboardObject){
-    /**
-     * initializes the dashboard
-     */
-    
-    
+    this.chartContainerService.DeleteSelectedChart(this.DeleteChart.bind(this))
+    //initialize listOfChartTypes
+    this.listOfChartTypes = this.dashboardService.GetListOfChartTypes()
   }
 
   AddChart(chartType : string){

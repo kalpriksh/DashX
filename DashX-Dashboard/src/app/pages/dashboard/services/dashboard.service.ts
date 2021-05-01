@@ -205,6 +205,22 @@ export class DashboardService {
       }
     }
   }
+  public GetListOfChartTypes(): any[]
+  {return [{
+      name : "Kpi",
+      icon : "vpn_key"
+    }, {
+      name : "Pie",
+      icon : "pie_chart"
+    }, {
+      name : "Bar",
+      icon : "bar_chart"
+    },
+    {
+      name : "Line",
+      icon : "show_chart"
+    }]
+  }
   public SaveDashboardData(dashboardData : Dashboard)
   {
     console.log('////saving data////', dashboardData);
