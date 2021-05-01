@@ -123,6 +123,7 @@ export class ChartsContainerComponent implements OnInit {
      * creates dashboard object
      * returns the object to be saved
      */
+    this.dashboardService.SaveDashboardData(this._dashboard)
   }
 
 }

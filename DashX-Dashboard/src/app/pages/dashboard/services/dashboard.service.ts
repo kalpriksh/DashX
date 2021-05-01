@@ -205,5 +205,9 @@ export class DashboardService {
       }
     }
   }
+  public SaveDashboardData(dashboardData : Dashboard)
+  {
+    console.log('////saving data////', dashboardData);
+  }
 
 }
