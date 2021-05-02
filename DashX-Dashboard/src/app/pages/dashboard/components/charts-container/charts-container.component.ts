@@ -37,16 +37,7 @@ export class ChartsContainerComponent implements OnInit {
   _dashboard : Dashboard 
 
   // list of chart types {placeholder}
-  listOfChartTypes = [{
-                        name : "Kpi",
-                        icon : "vpn_key"
-                      }, {
-                        name : "Pie",
-                        icon : "pie_chart"
-                      }, {
-                        name : "Bar",
-                        icon : "bar_chart"
-                      }];
+  listOfChartTypes : any[]
 
   // dummy chart data
   barChartDummyData : BarGraphData
@@ -60,16 +51,9 @@ export class ChartsContainerComponent implements OnInit {
 
   ngOnInit(): void {
     // bind deleteChart function to service's delete chart function
-    this.chartContainerService.DeleteSelectedChart(this.DeleteChart.bind(this));
-    this.DashboardInit(this._dashboard);
-  }
-
-  DashboardInit(dashboardObject){
-    /**
-     * initializes the dashboard
-     */
-    
-    
+    this.chartContainerService.DeleteSelectedChart(this.DeleteChart.bind(this))
+    //initialize listOfChartTypes
+    this.listOfChartTypes = this.dashboardService.GetListOfChartTypes()
   }
 
   AddChart(chartType : string){
@@ -77,29 +61,21 @@ export class ChartsContainerComponent implements OnInit {
      * add chart type on selection basis 
      * dynamically load chart component
      */
-
     if(chartType.toUpperCase() == "BAR")
     {
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(BarGraphComponent);
-      const viewContainerRef = this.newChart.viewContainerRef;
-      viewContainerRef.clear();
-      const componentRef = viewContainerRef.createComponent<BarGraphComponent>(componentFactory);
-      //TODO: update dashboard object
+      this._dashboard.charts.push(this.dashboardService.GetDefaultBarDashboardObject())
     }
     if(chartType.toUpperCase() == "PIE")
     {
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(PieChartComponent);
-      const viewContainerRef = this.newChart.viewContainerRef;
-      viewContainerRef.clear();
-      const componentRef = viewContainerRef.createComponent<PieChartComponent>(componentFactory);
+      this._dashboard.charts.push(this.dashboardService.GetDefaultPieDashboardObject())
     }
     if(chartType.toUpperCase() == "KPI")
     {
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(KeyPerformanceIndicatorComponent);
-      const viewContainerRef = this.newChart.viewContainerRef;
-      viewContainerRef.clear();
-      const componentRef = viewContainerRef.createComponent<KeyPerformanceIndicatorComponent>(componentFactory);
-      //TODO: update dashboard object
+      this._dashboard.charts.push(this.dashboardService.GetDefaultKpiDashboardObject())
+    }
+    if(chartType.toUpperCase() == "LINE")
+    {
+      this._dashboard.charts.push(this.dashboardService.GetDefaultLineDashboardObject())
     }
 
     this.showChartTypesList = false;
@@ -127,6 +103,7 @@ export class ChartsContainerComponent implements OnInit {
      * creates dashboard object
      * returns the object to be saved
      */
+    this.dashboardService.SaveDashboardData(this._dashboard)
   }
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LineChartData, PieChartData, BarGraphData, Dashboard, KpiData } from '../models';
+import { LineChartData, PieChartData, BarGraphData, Dashboard, KpiData, DashboardObject } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -89,7 +89,6 @@ export class DashboardService {
       }
     };
   }
-
   public loadDashboardData(): Dashboard
   {
       return {charts :[
@@ -158,4 +157,73 @@ export class DashboardService {
   ]}
 
   }
+  public GetDefaultBarDashboardObject(): DashboardObject 
+  {
+    return {
+      chartData : this.barChartDummyData,
+      chartID : 0,
+      chartType : 'bar',
+      position :{
+        row : 3,
+        col : 2
+      }
+    }
+  }
+  public GetDefaultLineDashboardObject(): DashboardObject 
+  { 
+    return {
+      chartData : this.lineChartDummyData,
+      chartID : 0,
+      chartType : 'line',
+      position :{
+        row : 3,
+        col : 2
+      }
+    }
+  }
+  public GetDefaultPieDashboardObject(): DashboardObject
+  {
+    return {
+      chartData : this.pieChartDummyData,
+      chartID : 0,
+      chartType : 'pie',
+      position :{
+        row : 2,
+        col : 2
+      }
+    }
+  }
+  public GetDefaultKpiDashboardObject(): DashboardObject
+  {
+    return {
+      chartData : this.kpiDummyData,
+      chartID : 0,
+      chartType : 'kpi',
+      position :{
+        row : 1,
+        col : 1
+      }
+    }
+  }
+  public GetListOfChartTypes(): any[]
+  {return [{
+      name : "Kpi",
+      icon : "vpn_key"
+    }, {
+      name : "Pie",
+      icon : "pie_chart"
+    }, {
+      name : "Bar",
+      icon : "bar_chart"
+    },
+    {
+      name : "Line",
+      icon : "show_chart"
+    }]
+  }
+  public SaveDashboardData(dashboardData : Dashboard)
+  {
+    console.log('////saving data////', dashboardData);
+  }
+
 }
