@@ -1,5 +1,7 @@
-<mat-card class="container" [ngClass]="{'no-display': !isEditorOpen}">
-    <mat-tab-group>
+<mat-card class="container"
+[@chartEditorAnimate]='stateName'
+>
+    <mat-tab-group> 
         <mat-tab label = "Data">
             <app-chart-setup></app-chart-setup>
         </mat-tab>
