@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule, routingComponents } from '../../app-routing.module';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms' 
@@ -31,13 +32,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ChartEditorComponent } from './components/chart-editor/chart-editor.component';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { KeyPerformanceIndicatorComponent } from './components/key-performance-indicator/key-performance-indicator.component';
 
 //services
 import { DashboardService, ChartEditorService } from './services';
 import { ReadExcelDirective } from './directives/read-excel.directive';
 
-import { PieChartComponent } from './components/pie-chart/pie-chart.component';
-import { KeyPerformanceIndicatorComponent } from './components/key-performance-indicator/key-performance-indicator.component';
 import { NewChartTabDirective } from './directives/new-chart-tab.directive';
 
 
@@ -66,7 +67,8 @@ import { NewChartTabDirective } from './directives/new-chart-tab.directive';
     MatExpansionModule,
     MatMenuModule,
     MatRadioModule,
-    MatTooltipModule
+    MatTooltipModule,
+    BrowserAnimationsModule
   ],
   exports: [
     OptionSelectorComponent

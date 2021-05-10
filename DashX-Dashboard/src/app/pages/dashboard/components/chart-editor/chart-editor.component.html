@@ -1,10 +1,16 @@
-<mat-card class="container" [ngClass]="{'no-display': !isEditorOpen}">
-    <mat-tab-group>
-        <mat-tab label = "Data">
-            <app-chart-setup></app-chart-setup>
-        </mat-tab>
-        <mat-tab label = "Customise">
-            <app-option-selector></app-option-selector>
-        </mat-tab>
-    </mat-tab-group>
+<mat-card class="container"
+[@chartEditorAnimate]='stateName'
+>
+  <button mat-button type="button" class="btn-close" aria-label="Close" (click) = 'closeEditor()'>
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <mat-tab-group> 
+      <mat-tab label = "Data">
+          <app-chart-setup></app-chart-setup>
+      </mat-tab>
+      <mat-tab label = "Customise">
+          <app-option-selector></app-option-selector>
+      </mat-tab>
+  </mat-tab-group>
 </mat-card>

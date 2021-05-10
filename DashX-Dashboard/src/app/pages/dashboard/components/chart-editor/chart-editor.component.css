@@ -6,3 +6,8 @@
 .no-display{
     display: none;
 }
+.btn-close{
+  position: absolute;
+  right: 10px;
+  z-index: 4;
+}
