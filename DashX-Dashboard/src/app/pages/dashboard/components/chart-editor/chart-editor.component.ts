@@ -21,7 +21,7 @@ import {trigger, state, style, animate, transition} from '@angular/animations'
       transition('show<=>hide', [
         style({ display: 'block' }), 
         animate('200ms ease')
-     ])
+      ])
     ])
   ]
 })
@@ -34,14 +34,23 @@ export class ChartEditorComponent implements OnInit {
     return this.isEditorOpen ? 'show':'hide';
   }
 
-  constructor(private data : ChartEditorService) { }
+  constructor(private chartEditorService : ChartEditorService) { }
 
   ngOnInit(): void {
+
     //subscripton to chartEditor service
-    this.data.isEditorOpen_current.subscribe(_editorState => {
+      this.chartEditorService.isEditorOpen_current.subscribe(_editorState => {
       this.editorState = _editorState
       this.isEditorOpen = _editorState[0]
     })
+  }
+
+  closeEditor()
+  {
+    this.isEditorOpen = !this.isEditorOpen
+
+    //TODO handle chartID in case when editor is close via close button
+    this.chartEditorService.ToggleEditor(this.isEditorOpen, -999)
   }
 
 }
