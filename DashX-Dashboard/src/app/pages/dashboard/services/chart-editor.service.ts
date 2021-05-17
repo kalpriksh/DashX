@@ -26,10 +26,6 @@ export class ChartEditorService {
   }
 
   constructor() {
-    /*
-      for bar chart
-      currently default observable value is barChart's default
-     */
     this.editorData = new BehaviorSubject<any>(null)
     this.editorData_current = this.editorData.asObservable()
   }

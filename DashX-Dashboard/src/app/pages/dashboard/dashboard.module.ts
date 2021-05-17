@@ -40,10 +40,11 @@ import { DashboardService, ChartEditorService } from './services';
 import { ReadExcelDirective } from './directives/read-excel.directive';
 
 import { NewChartTabDirective } from './directives/new-chart-tab.directive';
+import { ChartCustomizerComponent } from './components/chart-customizer/chart-customizer.component';
 
 
 @NgModule({
-  declarations: [OptionSelectorComponent, LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective],
+  declarations: [OptionSelectorComponent, LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent],
 
   imports: [
     CommonModule,
