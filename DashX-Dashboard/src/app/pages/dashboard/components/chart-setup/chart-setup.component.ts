@@ -20,7 +20,7 @@ export class ChartSetupComponent implements OnInit {
   barChart : BarChart
   pieChart: PieChart
   //#endregion
-
+  
   //#region UI variables
   seriesNames : string[];
   categoryNames : any[];

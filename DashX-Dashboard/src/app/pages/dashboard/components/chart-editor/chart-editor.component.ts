@@ -48,7 +48,6 @@ export class ChartEditorComponent implements OnInit {
   closeEditor()
   {
     this.isEditorOpen = !this.isEditorOpen
-
     //TODO handle chartID in case when editor is close via close button
     this.chartEditorService.ToggleEditor(this.isEditorOpen, -999)
   }

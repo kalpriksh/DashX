@@ -30,7 +30,9 @@ export class BarGraphComponent implements OnInit{
 
   ngOnInit(): void {
 
+    //TODO need to give unique ID to new charts
     this.barChart = new BarChart(100);
+    
     //emit chart id on chart creation
     this.chartId.emit(this.barChart.chartId)
 
@@ -66,7 +68,6 @@ export class BarGraphComponent implements OnInit{
   }
 
   //#region component functions
-  
   public initChart(): Partial<any> {
     return  this.barChart.GetDefaults()
   }
