@@ -23,7 +23,6 @@ import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } fro
 import { NgApexchartsModule } from "ng-apexcharts";
 import { from } from 'rxjs';
 
-import { OptionSelectorComponent } from './components/option-selector/option-selector.component';
 import { LineChartComponent} from './components/line-chart/line-chart.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
@@ -44,7 +43,7 @@ import { ChartCustomizerComponent } from './components/chart-customizer/chart-cu
 
 
 @NgModule({
-  declarations: [OptionSelectorComponent, LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent],
+  declarations: [LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent],
 
   imports: [
     CommonModule,
@@ -72,7 +71,7 @@ import { ChartCustomizerComponent } from './components/chart-customizer/chart-cu
     BrowserAnimationsModule
   ],
   exports: [
-    OptionSelectorComponent
+    
   ],
   providers: [
     DashboardService,
