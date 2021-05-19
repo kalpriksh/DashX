@@ -30,7 +30,10 @@ export class ChartCustomizerComponent implements OnInit {
     this.ChartOptionsForm = fb.group({
       showXAxisLines : false,
       showYAxisLines : false,
-      chartHeight : 0
+      chartHeight : 0,
+      showDataLabels : false,
+      showStroke : false,
+      strokeWidth: 0
     })
 
   }
@@ -47,16 +50,27 @@ export class ChartCustomizerComponent implements OnInit {
           this._chartData = chartObject.chartData;
 
           //update form values
-          this.ChartOptionsForm.patchValue({
-            showXAxisLines : this._chartData.grid.xaxis.lines.show,
-            showYAxisLines : this._chartData.grid.yaxis.lines.show,
-            chartHeight : this._chartData.chart.height
-          }, {emitEvent : false});
-        
+          this.ChartOptionsForm.patchValue(
+            this.CreateChartOptionsFormObject(this._chartObject.chartType), {emitEvent : false});
         }
     })
     //subscribe to form value change event
     this.OnFormUpdate()
+  }
+
+  CreateChartOptionsFormObject(chartType)
+  {
+    if(chartType.toLowerCase() == 'bar')
+    {
+        return {
+        showXAxisLines : this._chartData.grid.xaxis.lines.show,
+        showYAxisLines : this._chartData.grid.yaxis.lines.show,
+        chartHeight : this._chartData.chart.height,
+        showDataLabels : this._chartData.dataLabels.enabled,
+        showStroke : this._chartData.stroke.show ?? false,
+        strokeWidth : this._chartData.stroke.width ?? 0
+      }
+    }
   }
 
   OnFormUpdate() : void
@@ -73,9 +87,17 @@ export class ChartCustomizerComponent implements OnInit {
 
   UpdateChartOptions(formValues)
   {
+    //grid
     this._chartData.grid.xaxis.lines.show = formValues.showXAxisLines;
     this._chartData.grid.yaxis.lines.show = formValues.showYAxisLines;
+
+    //stroke
+    this._chartData.stroke.show = formValues.showStroke;
+    this._chartData.stroke.width = formValues.strokeWidth;
+    
     this._chartData.chart.height = formValues.chartHeight;
+    this._chartData.dataLabels.enabled = formValues.showDataLabels;
+
   }
 
   ChartInit()
