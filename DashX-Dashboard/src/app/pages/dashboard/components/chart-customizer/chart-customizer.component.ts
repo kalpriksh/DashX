@@ -29,7 +29,8 @@ export class ChartCustomizerComponent implements OnInit {
     this.ChartInit();
     this.ChartOptionsForm = fb.group({
       showXAxisLines : false,
-      showYAxisLines : false
+      showYAxisLines : false,
+      chartHeight : 0
     })
 
   }
@@ -48,7 +49,8 @@ export class ChartCustomizerComponent implements OnInit {
           //update form values
           this.ChartOptionsForm.patchValue({
             showXAxisLines : this._chartData.grid.xaxis.lines.show,
-            showYAxisLines : this._chartData.grid.yaxis.lines.show
+            showYAxisLines : this._chartData.grid.yaxis.lines.show,
+            chartHeight : this._chartData.chart.height
           }, {emitEvent : false});
         
         }
@@ -73,6 +75,7 @@ export class ChartCustomizerComponent implements OnInit {
   {
     this._chartData.grid.xaxis.lines.show = formValues.showXAxisLines;
     this._chartData.grid.yaxis.lines.show = formValues.showYAxisLines;
+    this._chartData.chart.height = formValues.chartHeight;
   }
 
   ChartInit()
