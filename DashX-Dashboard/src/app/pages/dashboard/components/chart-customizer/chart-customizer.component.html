@@ -1,0 +1,50 @@
+<mat-accordion *ngIf="_chartData" >
+
+  <form [formGroup] = "ChartOptionsForm">
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+          Chart Style
+          </mat-panel-title>
+      </mat-expansion-panel-header>                    
+      <label for="chartHeight">Chart Height:</label>
+      <mat-slider min="100" max="500" step="10" name = "chartHeight"
+      [(value)] = "_chartData.chart.height"
+      formControlName = "chartHeight"
+      #sliderHeight
+      ></mat-slider>
+      <span>{{sliderHeight.value}}</span>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+          Grid
+          </mat-panel-title>
+      </mat-expansion-panel-header>                    
+      <mat-checkbox name = "gridXLines" formControlName = "showXAxisLines" >x-Axis</mat-checkbox>&#160;
+      <mat-checkbox name = "gridYLines" formControlName= "showYAxisLines" >y-Axis</mat-checkbox>&#160;
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+          Data Labels
+          </mat-panel-title>
+      </mat-expansion-panel-header>                    
+      <mat-checkbox name = "dataLabels" formControlName="showDataLabels">Display</mat-checkbox>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+          Stroke
+          </mat-panel-title>
+      </mat-expansion-panel-header>                    
+      <mat-checkbox name = "strokeShow" formControlName="showStroke">Display stroke</mat-checkbox>
+      <br>
+      <label for="strokeWidth">Stroke Width</label>
+      <mat-slider min="0" max="5" step="0.2" name = "strokeWidth" formControlName="strokeWidth"></mat-slider>
+  </mat-expansion-panel>
+  </form>
+</mat-accordion>

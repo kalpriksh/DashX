@@ -58,7 +58,7 @@ export class BarChart extends BaseChart{
       
         chart: {
           type: "bar",
-          height: 350
+          height: 430
         },
         plotOptions: {
           bar: {

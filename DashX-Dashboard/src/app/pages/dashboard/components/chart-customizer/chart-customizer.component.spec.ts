@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OptionSelectorComponent } from './option-selector.component';
+import { ChartCustomizerComponent } from './chart-customizer.component';
 
-describe('OptionSelectorComponent', () => {
-  let component: OptionSelectorComponent;
-  let fixture: ComponentFixture<OptionSelectorComponent>;
+describe('ChartCustomizerComponent', () => {
+  let component: ChartCustomizerComponent;
+  let fixture: ComponentFixture<ChartCustomizerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OptionSelectorComponent ]
+      declarations: [ ChartCustomizerComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OptionSelectorComponent);
+    fixture = TestBed.createComponent(ChartCustomizerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
