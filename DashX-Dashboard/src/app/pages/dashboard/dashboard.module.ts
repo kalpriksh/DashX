@@ -40,6 +40,7 @@ import { ReadExcelDirective } from './directives/read-excel.directive';
 
 import { NewChartTabDirective } from './directives/new-chart-tab.directive';
 import { ChartCustomizerComponent } from './components/chart-customizer/chart-customizer.component';
+import { DataHandlerService } from './services/data-handler.service';
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import { ChartCustomizerComponent } from './components/chart-customizer/chart-cu
   providers: [
     DashboardService,
     ChartEditorService,
+    DataHandlerService,
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
   ]
   
