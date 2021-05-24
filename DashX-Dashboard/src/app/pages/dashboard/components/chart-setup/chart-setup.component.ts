@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ChartEditorService } from '../../services'
 import { ChartSetup, PieChart, BarChart, BarChartOptions, PieChartOptions, LineChart, LineChartOptions } from '../../component-classes';
-import { PieChartData, SeriesData } from '../../models';
+import { CategoryData, PieChartData, SeriesData } from '../../models';
+
+import { ChartEditorService, } from '../../services'
+import { DataHandlerService } from '../../services/data-handler.service';
+
 @Component({
   selector: 'app-chart-setup',
   templateUrl: './chart-setup.component.html',
@@ -24,7 +27,7 @@ export class ChartSetupComponent implements OnInit {
   //#region UI variables
   seriesNames : string[];
   categoryNames : any[];
-  availableCategoryNames: string[];
+  availableCategoryNames: CategoryData[];
   availableLabelNames: any[];
   labelNames : any[];
   labelList: any[];
@@ -36,20 +39,22 @@ export class ChartSetupComponent implements OnInit {
   //#endregion
   
 
-  constructor(private chartData : ChartEditorService){}
+  constructor(private chartData : ChartEditorService, private dataHandler : DataHandlerService){
+    this.chartSetup = new ChartSetup(this.dataHandler);
+  }
 
   ngOnInit(){
     this.barChart = new BarChart();
     this.pieChart = new PieChart();
     
+        
     this.chartData.editorData_current.subscribe(_chartObject =>{
       this.Reset()
       this.LoadData(_chartObject)
-      }
+    }
     )
-    
+
     this.Reset()
-    this.chartSetup = new ChartSetup();
     this.chartTypesList = ["Bar","Line","Pie"]
     this.seriesNames = ["null"]
     this.categoryNames = ["null"]
@@ -89,18 +94,9 @@ export class ChartSetupComponent implements OnInit {
     this.labelList = [];
   }
 
-  DataSelected(event){
-    this.UpdateChartSetup(event.value);
-  }
-
   // updates the component UI
-  UpdateChartSetup(chartType){
-      
-    this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series")
-    this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
-    this.availableCategoryNames = [];
-    this.availableLabelNames = this.chartSetup.GetSeriesName(chartType, "label")
-    this.labelNames = this.chartSetup.GetSeriesName(chartType, "label")
+  UpdateChartSetup(){
+    this.seriesNames = this.categoryNames = this.availableLabelNames = this.labelNames = this.chartSetup.GetSeriesName();
   }
 
   EnterSubmit(event, form){
@@ -120,7 +116,9 @@ export class ChartSetupComponent implements OnInit {
       this.UpdateSeriesList(chartData)
     }
     if(chartData.xaxis && chartData.xaxis.categories){
-      this.categoryList.push(...chartData.xaxis.categories);
+      this.availableCategoryNames = [];
+      var category = this.chartSetup.CreateCategoryData("Cat1", chartData.xaxis.categories)
+      this.availableCategoryNames.push(category);
     }
     if(chartData.labels){
       this.labelList.push(...chartData.labels)
@@ -151,6 +149,10 @@ export class ChartSetupComponent implements OnInit {
   }
   
   LoadData(chartObject){
+    
+    //load data from connected DB 
+    this.UpdateChartSetup();
+
     if(chartObject){
 
       if(chartObject.chartType == "Bar") {
@@ -204,7 +206,7 @@ export class ChartSetupComponent implements OnInit {
       else if(dataType == 'category'){
         this._chartSetupData.xaxis.categories = dataToPush.data;
         this.categoryList.push(dataToPush)
-        this.availableCategoryNames.push(dataToPush.name)
+        // this.availableCategoryNames.push(dataToPush.name)
       }
       else
       if (dataType == 'label'){
