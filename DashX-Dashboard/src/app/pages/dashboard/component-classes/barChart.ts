@@ -10,7 +10,8 @@ import {
   ApexXAxis,
   ApexPlotOptions,
   ApexGrid,
-  ApexStroke
+  ApexStroke,
+  ApexLegend
 } from "ng-apexcharts";
 
 export type BarChartOptions = {
@@ -22,6 +23,7 @@ export type BarChartOptions = {
   xaxis: ApexXAxis;
   grid : ApexGrid;
   stroke : ApexStroke;
+  legend : ApexLegend
 };
 
 export class BarChart extends BaseChart{
@@ -92,7 +94,7 @@ export class BarChart extends BaseChart{
     this.chartId = chartId
     this.chartType = "Bar"
     // init series data
-    this.seriesData = {
+    this.seriesData ={
       name : "",
       data : []
     }
@@ -106,7 +108,7 @@ export class BarChart extends BaseChart{
   DataComplete(){
   }
 
-  CreateNewSeries(name : string , data){
+  CreateNewSeries(name : string , data) : SeriesData {
     this.seriesData.name = name;
     this.seriesData.data = data;
     return this.seriesData;
