@@ -19,6 +19,7 @@ export class ChartSetupComponent implements OnInit {
   chartSetup : ChartSetup
   barChart : BarChart
   pieChart: PieChart
+  lineChart: LineChart
   //#endregion
   
   //#region UI variables
@@ -41,6 +42,7 @@ export class ChartSetupComponent implements OnInit {
   ngOnInit(){
     this.barChart = new BarChart();
     this.pieChart = new PieChart();
+    this.lineChart = new LineChart();
     
     this.chartData.editorData_current.subscribe(_chartObject =>{
       this.Reset()
@@ -66,14 +68,15 @@ export class ChartSetupComponent implements OnInit {
 
   DeleteCategory(deletedCategory)
   {  
+
     this.availableCategoryNames = this.availableCategoryNames.filter(category => category !== deletedCategory);
-    this._chartSetupData.categories.pop(deletedCategory)
+    this._chartSetupData.xaxis.categories.pop(deletedCategory)
     this._chartObject.chartData = this._chartSetupData
     this.chartData.EditorDataUpdated(this._chartObject)
   }
 
   DeleteLabel(deletedLabel)
-  {    console.log(deletedLabel);
+  { 
     this.availableLabelNames = this.availableLabelNames.filter(label => label !== deletedLabel);
     this._chartSetupData.label.pop(deletedLabel)
     this._chartObject.chartData = this._chartSetupData
@@ -117,7 +120,10 @@ export class ChartSetupComponent implements OnInit {
   ChartInit(chartData){
 
     if(chartData.series){
+      if(chartData != null)
+      {
       this.UpdateSeriesList(chartData)
+      }
     }
     if(chartData.xaxis && chartData.xaxis.categories){
       this.categoryList.push(...chartData.xaxis.categories);
@@ -133,7 +139,8 @@ export class ChartSetupComponent implements OnInit {
    * @param chartData chart data
    */
   UpdateSeriesList(chartData){
-    if(chartData.chart.type.toUpperCase() == this.barChart.chartType.toUpperCase()){
+    if(chartData.chart.type.toUpperCase() == this.barChart.chartType.toUpperCase()
+    || chartData.chart.type.toUpperCase() == this.lineChart.chartType.toUpperCase()){
       this.seriesList.push(...chartData.series);
     }
     else if(chartData.chartType.toUpperCase() == this.pieChart.chartType.toUpperCase()){

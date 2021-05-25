@@ -3,6 +3,7 @@ import { SeriesData } from '../models';
 import { CategoryData } from '../models';
 import { BarChart } from "../component-classes/barChart"
 import { PieChart } from "../component-classes/pieChart"
+import { LineChart } from "../component-classes/lineChart"
 import { LabelData } from "../models/labelData";
 
 // class for chart setup component
@@ -10,6 +11,7 @@ export class ChartSetup {
 
     private barChart : BarChart
     private pieChart : PieChart
+    private lineChart : LineChart
     private DataHandler : DataHandler
 
     //#region properties
@@ -55,6 +57,7 @@ export class ChartSetup {
         // init charts to handle different charts
         this.barChart = new BarChart();
         this.pieChart = new PieChart();
+        this.lineChart = new LineChart();
     }
 
     //#region functions related to series
