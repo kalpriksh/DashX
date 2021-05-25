@@ -39,14 +39,23 @@
 
                     <div *ngFor="let category of availableCategoryNames">
                         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" >
+                            <!-- header -->
                             <mat-expansion-panel-header>
-                                <mat-panel-title class = "delete-category"> 
-                                        <button mat-button (click) = 'DeleteCategory(category)'>
-                                          <mat-icon>delete</mat-icon>
-                                        </button>
-                                    Category: {{category.name}}
-                                </mat-panel-title>
+                              <mat-panel-title class = "delete-category">
+                                <button mat-button (click) = 'DeleteCategory(category)'>
+                                  <mat-icon>delete</mat-icon>
+                                </button>
+                                Category: {{category.name}}
+                              </mat-panel-title>
                             </mat-expansion-panel-header>
+                            
+                            <!-- content -->
+                            <mat-selection-list #categorySelectionList [multiple]="false">
+                              <mat-list-option *ngFor="let category of categoryNames" [value]="category">
+                                {{category}}
+                              </mat-list-option>
+                            </mat-selection-list>
+
                         </mat-expansion-panel>
                     </div>
 
@@ -72,6 +81,7 @@
                     </button>
                     <div *ngFor="let series of seriesList">
                         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" >
+                            <!-- header -->
                             <mat-expansion-panel-header>
                                 <mat-panel-title class = "delete-series"> 
                                         <button mat-button (click) = 'DeleteSeries(series)'>
@@ -80,7 +90,16 @@
                                     Series : {{series.name}}
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
+
+                            <!-- content -->
+                            <mat-selection-list #seriesSelectionList [(ngModel)]="updatedSeriesOption" (ngModelChange)="UpdateField($event, series,'series')" [multiple]="false" [ngModelOptions]="{standalone : true}">
+                              <mat-list-option *ngFor="let option of seriesNames" [value]="option">
+                                {{option}}
+                              </mat-list-option>
+                            </mat-selection-list>
+
                         </mat-expansion-panel>
+
                     </div>
                     <mat-menu #seriesMenu="matMenu">
                         <div *ngFor="let item of seriesNames">

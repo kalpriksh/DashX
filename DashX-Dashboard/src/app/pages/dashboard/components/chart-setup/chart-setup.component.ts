@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ApexOptions } from 'apexcharts';
 import { ChartSetup, PieChart, BarChart, BarChartOptions, PieChartOptions, LineChart, LineChartOptions } from '../../component-classes';
 import { CategoryData, PieChartData, SeriesData } from '../../models';
 
@@ -36,8 +37,9 @@ export class ChartSetupComponent implements OnInit {
   categoryList : any[];
   chartTypeData : string; //test variable
   chartTypesList : string[];
+  updatedCategory : string;
+  updatedSeriesOption : string[] = ['Country'];
   //#endregion
-  
 
   constructor(private chartData : ChartEditorService, private dataHandler : DataHandlerService){
     this.chartSetup = new ChartSetup(this.dataHandler);
@@ -78,7 +80,7 @@ export class ChartSetupComponent implements OnInit {
   }
 
   DeleteLabel(deletedLabel)
-  {    console.log(deletedLabel);
+  {    
     this.availableLabelNames = this.availableLabelNames.filter(label => label !== deletedLabel);
     this._chartSetupData.label.pop(deletedLabel)
     this._chartObject.chartData = this._chartSetupData
@@ -96,7 +98,8 @@ export class ChartSetupComponent implements OnInit {
 
   // updates the component UI
   UpdateChartSetup(){
-    this.seriesNames = this.categoryNames = this.availableLabelNames = this.labelNames = this.chartSetup.GetSeriesName();
+    this.seriesNames = this.categoryNames = this.availableLabelNames = this.labelNames = this.
+    chartSetup.GetSeriesName();
   }
 
   EnterSubmit(event, form){
@@ -116,9 +119,15 @@ export class ChartSetupComponent implements OnInit {
       this.UpdateSeriesList(chartData)
     }
     if(chartData.xaxis && chartData.xaxis.categories){
+
       this.availableCategoryNames = [];
-      var category = this.chartSetup.CreateCategoryData("Category", chartData.xaxis.categories)
-      this.availableCategoryNames.push(category);
+
+      if(chartData.xaxis.categories.length != 0)
+      {
+        var category = this.chartSetup.CreateCategoryData("cat-1", chartData.xaxis.categories)
+        this.availableCategoryNames.push(category);
+      }
+
     }
     if(chartData.labels){
       this.labelList.push(...chartData.labels)
@@ -148,6 +157,24 @@ export class ChartSetupComponent implements OnInit {
     }
   }
   
+  UpdateField(updated, original, fieldType)
+  {
+    if(fieldType == "series")
+    {
+      this.DeleteSeries(original);
+      this.AddData(updated, fieldType);
+    }
+    else if(fieldType == "category")
+    {
+
+    }
+    else if(fieldType == "label")
+    {
+
+    }
+
+  }
+
   LoadData(chartObject){
     
     //load data from connected DB 
