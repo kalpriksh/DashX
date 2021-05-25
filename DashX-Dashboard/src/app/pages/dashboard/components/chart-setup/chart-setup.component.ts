@@ -72,7 +72,7 @@ export class ChartSetupComponent implements OnInit {
   DeleteCategory(deletedCategory)
   {  
     this.availableCategoryNames = this.availableCategoryNames.filter(category => category !== deletedCategory);
-    this._chartSetupData.categories.pop(deletedCategory)
+    this._chartSetupData.xaxis.categories = []
     this._chartObject.chartData = this._chartSetupData
     this.chartData.EditorDataUpdated(this._chartObject)
   }
@@ -117,7 +117,7 @@ export class ChartSetupComponent implements OnInit {
     }
     if(chartData.xaxis && chartData.xaxis.categories){
       this.availableCategoryNames = [];
-      var category = this.chartSetup.CreateCategoryData("Cat1", chartData.xaxis.categories)
+      var category = this.chartSetup.CreateCategoryData("Category", chartData.xaxis.categories)
       this.availableCategoryNames.push(category);
     }
     if(chartData.labels){
