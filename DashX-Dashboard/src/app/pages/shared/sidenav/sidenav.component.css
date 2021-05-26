@@ -6,3 +6,11 @@
 .sidenav-sidenav {
   padding: 20px;
 }
+
+.mat-drawer-content{
+  overflow: visible;
+}
+
+.mat-drawer-container{
+  overflow: visible;
+}

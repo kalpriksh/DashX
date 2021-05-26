@@ -3,7 +3,6 @@ import { BarGraphData } from '../../models';
 import { BarChart, BarChartOptions } from '../../component-classes/barChart'
 import { ChartComponent } from "ng-apexcharts";
 import { ChartEditorService } from '../../services'
-import { DataHandler } from '../../helpers'
 import { ChartContainerService } from '../../services/chart-container.service';
 
 

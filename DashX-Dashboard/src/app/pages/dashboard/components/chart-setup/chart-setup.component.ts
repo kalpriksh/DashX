@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ChartEditorService } from '../../services'
+import { ApexOptions } from 'apexcharts';
 import { ChartSetup, PieChart, BarChart, BarChartOptions, PieChartOptions, LineChart, LineChartOptions } from '../../component-classes';
-import { PieChartData, SeriesData } from '../../models';
+import { CategoryData, PieChartData, SeriesData } from '../../models';
+
+import { ChartEditorService, } from '../../services'
+import { DataHandlerService } from '../../services/data-handler.service';
+
 @Component({
   selector: 'app-chart-setup',
   templateUrl: './chart-setup.component.html',
@@ -25,7 +29,7 @@ export class ChartSetupComponent implements OnInit {
   //#region UI variables
   seriesNames : string[];
   categoryNames : any[];
-  availableCategoryNames: string[];
+  availableCategoryNames: CategoryData[];
   availableLabelNames: any[];
   labelNames : any[];
   labelList: any[];
@@ -34,24 +38,28 @@ export class ChartSetupComponent implements OnInit {
   categoryList : any[];
   chartTypeData : string; //test variable
   chartTypesList : string[];
+  updatedCategory : string;
+  updatedSeriesOption : string[] = [''];
+  updatedCategoryOption : string[] = [''];
   //#endregion
-  
 
-  constructor(private chartData : ChartEditorService){}
+  constructor(private chartData : ChartEditorService, private dataHandler : DataHandlerService){
+    this.chartSetup = new ChartSetup(this.dataHandler);
+  }
 
   ngOnInit(){
     this.barChart = new BarChart();
     this.pieChart = new PieChart();
     this.lineChart = new LineChart();
     
+        
     this.chartData.editorData_current.subscribe(_chartObject =>{
       this.Reset()
       this.LoadData(_chartObject)
-      }
+    }
     )
-    
+
     this.Reset()
-    this.chartSetup = new ChartSetup();
     this.chartTypesList = ["Bar","Line","Pie"]
     this.seriesNames = ["null"]
     this.categoryNames = ["null"]
@@ -92,18 +100,10 @@ export class ChartSetupComponent implements OnInit {
     this.labelList = [];
   }
 
-  DataSelected(event){
-    this.UpdateChartSetup(event.value);
-  }
-
   // updates the component UI
-  UpdateChartSetup(chartType){
-      
-    this.seriesNames = this.chartSetup.GetSeriesName(chartType, "series")
-    this.categoryNames = this.chartSetup.GetSeriesName(chartType, "category")
-    this.availableCategoryNames = [];
-    this.availableLabelNames = this.chartSetup.GetSeriesName(chartType, "label")
-    this.labelNames = this.chartSetup.GetSeriesName(chartType, "label")
+  UpdateChartSetup(){
+    this.seriesNames = this.categoryNames = this.availableLabelNames = this.labelNames = this.
+    chartSetup.GetSeriesName();
   }
 
   EnterSubmit(event, form){
@@ -126,7 +126,15 @@ export class ChartSetupComponent implements OnInit {
       }
     }
     if(chartData.xaxis && chartData.xaxis.categories){
-      this.categoryList.push(...chartData.xaxis.categories);
+
+      this.availableCategoryNames = [];
+
+      if(chartData.xaxis.categories.length != 0)
+      {
+        var category = this.chartSetup.CreateCategoryData("cat-1", chartData.xaxis.categories)
+        this.availableCategoryNames.push(category);
+      }
+
     }
     if(chartData.labels){
       this.labelList.push(...chartData.labels)
@@ -157,7 +165,31 @@ export class ChartSetupComponent implements OnInit {
     }
   }
   
+  /**
+   * function to update an orginal field(category/series) with selected one 
+   * @param updated updated field value
+   * @param original original field value
+   * @param fieldType type of field value (....can be series, category..)
+   */
+  UpdateField(updated, original, fieldType)
+  {
+    if(fieldType == "series" || fieldType == "category")
+    {
+      this.DeleteSeries(original);
+      this.AddData(updated, fieldType);
+    }
+    else if(fieldType == "label")
+    {
+
+    }
+
+  }
+
   LoadData(chartObject){
+    
+    //load data from connected DB 
+    this.UpdateChartSetup();
+
     if(chartObject){
 
       if(chartObject.chartType == "Bar") {
@@ -211,7 +243,7 @@ export class ChartSetupComponent implements OnInit {
       else if(dataType == 'category'){
         this._chartSetupData.xaxis.categories = dataToPush.data;
         this.categoryList.push(dataToPush)
-        this.availableCategoryNames.push(dataToPush.name)
+        // this.availableCategoryNames.push(dataToPush.name)
       }
       else
       if (dataType == 'label'){

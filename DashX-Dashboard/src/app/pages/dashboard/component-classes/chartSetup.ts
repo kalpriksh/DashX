@@ -1,59 +1,21 @@
-import { DataHandler } from "../helpers";
 import { SeriesData } from '../models';
 import { CategoryData } from '../models';
 import { BarChart } from "../component-classes/barChart"
 import { PieChart } from "../component-classes/pieChart"
 import { LineChart } from "../component-classes/lineChart"
 import { LabelData } from "../models/labelData";
+import { DataHandlerService } from '../services/data-handler.service';
 
 // class for chart setup component
 export class ChartSetup {
 
     private barChart : BarChart
     private pieChart : PieChart
-    private lineChart : LineChart
-    private DataHandler : DataHandler
-
+    
     //#region properties
-
-    private _seriesNames : string[];
-    public get seriesNames() : string[] {
-        return this._seriesNames;
-    }
-    public set seriesNames(v : string[]) {
-        this._seriesNames = v;
-    }
-    
-    
-    private _seriesList : SeriesData[];
-    public get seriesList() : SeriesData[] {
-        return this._seriesList;
-    }
-    public set seriesList(v : SeriesData[]) {
-        this._seriesList = v;
-    }
-    
-    private _categoryList : CategoryData[];
-    public get categoryList() : CategoryData[] {
-        return this._categoryList;
-    }
-    public set categoryList(v : CategoryData[]) {
-        this._categoryList = v;
-    }
-
-    private _labelList : LabelData[];
-    public get labelList() : LabelData[] {
-        return this._labelList;
-    }
-    public set labelList(v : LabelData[]) {
-        this._labelList = v;
-    }
-    
     //#endregion
 
-    constructor() {
-        this.DataHandler = new DataHandler()
-
+    constructor(private dataHandler : DataHandlerService) {
         // init charts to handle different charts
         this.barChart = new BarChart();
         this.pieChart = new PieChart();
@@ -64,13 +26,22 @@ export class ChartSetup {
     // functionality changes wrt to type of graph should be handled here 
 
     // to get series available as input for the chart
-    GetSeriesName(chartType : string, dataType : string){
-        return this.DataHandler.GetKeys(chartType, dataType)
+    GetSeriesName(){
+        return this.dataHandler.GetHeaders()
     }
 
     // to get data for a series based on series name 
     GetSeriesData(chartType : string, dataType : string, name : string){
-        return this.DataHandler.GetValuesAll(chartType, dataType, name)
+        return this.dataHandler.GetHeaderValue(chartType, dataType, name)
+    }
+
+    // to create category data used by chart-setup component
+    CreateCategoryData(categoryName, categoryData) : CategoryData{
+      var category : CategoryData = {
+        name : categoryName,
+        data : categoryData
+      };
+      return category;
     }
 
     //#endregion
