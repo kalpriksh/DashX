@@ -166,14 +166,9 @@ export class ChartSetupComponent implements OnInit {
    */
   UpdateField(updated, original, fieldType)
   {
-    if(fieldType == "series")
+    if(fieldType == "series" || fieldType == "category")
     {
       this.DeleteSeries(original);
-      this.AddData(updated, fieldType);
-    }
-    else if(fieldType == "category")
-    {
-      this.DeleteCategory(original)
       this.AddData(updated, fieldType);
     }
     else if(fieldType == "label")
