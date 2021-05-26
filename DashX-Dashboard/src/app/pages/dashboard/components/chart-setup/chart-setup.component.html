@@ -50,9 +50,9 @@
                             </mat-expansion-panel-header>
                             
                             <!-- content -->
-                            <mat-selection-list #categorySelectionList [multiple]="false">
-                              <mat-list-option *ngFor="let category of categoryNames" [value]="category">
-                                {{category}}
+                            <mat-selection-list #categorySelectionList [(ngModel)]="updatedCategoryOption" (ngModelChange)="UpdateField($event, category,'category')" [multiple]="false" [ngModelOptions]="{standalone : true}">
+                              <mat-list-option *ngFor="let option of categoryNames" [value]="option">
+                                {{option}}
                               </mat-list-option>
                             </mat-selection-list>
 

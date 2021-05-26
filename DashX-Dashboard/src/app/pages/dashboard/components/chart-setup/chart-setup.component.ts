@@ -38,7 +38,8 @@ export class ChartSetupComponent implements OnInit {
   chartTypeData : string; //test variable
   chartTypesList : string[];
   updatedCategory : string;
-  updatedSeriesOption : string[] = ['Country'];
+  updatedSeriesOption : string[] = [''];
+  updatedCategoryOption : string[] = [''];
   //#endregion
 
   constructor(private chartData : ChartEditorService, private dataHandler : DataHandlerService){
@@ -157,6 +158,12 @@ export class ChartSetupComponent implements OnInit {
     }
   }
   
+  /**
+   * function to update an orginal field(category/series) with selected one 
+   * @param updated updated field value
+   * @param original original field value
+   * @param fieldType type of field value (....can be series, category..)
+   */
   UpdateField(updated, original, fieldType)
   {
     if(fieldType == "series")
@@ -166,7 +173,8 @@ export class ChartSetupComponent implements OnInit {
     }
     else if(fieldType == "category")
     {
-
+      this.DeleteCategory(original)
+      this.AddData(updated, fieldType);
     }
     else if(fieldType == "label")
     {
