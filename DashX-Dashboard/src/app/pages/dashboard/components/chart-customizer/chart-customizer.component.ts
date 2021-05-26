@@ -48,7 +48,6 @@ export class ChartCustomizerComponent implements OnInit {
         {
           this._chartObject = chartObject;
           this._chartData = chartObject.chartData;
-
           //update form values
           this.ChartOptionsForm.patchValue(
             this.CreateChartOptionsFormObject(this._chartObject.chartType), {emitEvent : false});
@@ -69,16 +68,25 @@ export class ChartCustomizerComponent implements OnInit {
         showDataLabels : this._chartData.dataLabels.enabled,
         showStroke : this._chartData.stroke.show ?? false,
         strokeWidth : this._chartData.stroke.width ?? 0
-      }
+      }}
+      else
+      if(chartType.toLowerCase() == 'line')
+      {
+          return {
+          chartHeight : this._chartData.chart.height,
+          showDataLabels : this._chartData.dataLabels.enabled,
+          showStroke : this._chartData.stroke.show ?? false,
+          strokeWidth : this._chartData.stroke.width ?? 0
+        }
     }
   }
 
   OnFormUpdate() : void
-  {
+  {    
+    
     this.ChartOptionsForm.valueChanges.subscribe(formValues => {
       //update chart options
       this.UpdateChartOptions(formValues)
-
       //emit chart options
       this._chartObject.chartData = this._chartData;
       this.chartEditorService.EditorDataUpdated(this._chartObject);
@@ -88,6 +96,7 @@ export class ChartCustomizerComponent implements OnInit {
   UpdateChartOptions(formValues)
   {
     //grid
+   
     this._chartData.grid.xaxis.lines.show = formValues.showXAxisLines;
     this._chartData.grid.yaxis.lines.show = formValues.showYAxisLines;
 
