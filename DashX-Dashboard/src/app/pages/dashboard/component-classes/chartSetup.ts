@@ -11,6 +11,7 @@ export class ChartSetup {
 
     private barChart : BarChart
     private pieChart : PieChart
+    private lineChart : LineChart
     
     //#region properties
     //#endregion
