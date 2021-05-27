@@ -7,7 +7,6 @@ import { of } from "rxjs";
 //services
 import { ChartContainerService } from "../../services/chart-container.service";
 import { DashboardService } from "../../services";
-
 @Component({
   selector: 'app-charts-container',
   templateUrl: './charts-container.component.html',
