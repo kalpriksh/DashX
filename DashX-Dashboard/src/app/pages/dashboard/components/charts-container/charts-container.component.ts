@@ -2,11 +2,7 @@ import { Component, OnInit, ViewEncapsulation, ViewChild, ComponentFactoryResolv
 import { LineChartData, PieChartData, BarGraphData, KpiData, Dashboard } from '../../models';
 import { NewChartTabDirective } from '../../directives/new-chart-tab.directive'
 import { of } from "rxjs";
-
 //components
-import { BarGraphComponent } from '../bar-graph/bar-graph.component'
-import { PieChartComponent } from "../pie-chart/pie-chart.component";
-import { KeyPerformanceIndicatorComponent } from "../key-performance-indicator/key-performance-indicator.component";
 
 //services
 import { ChartContainerService } from "../../services/chart-container.service";
