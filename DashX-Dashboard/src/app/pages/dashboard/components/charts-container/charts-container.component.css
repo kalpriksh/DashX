@@ -1,7 +1,24 @@
 .chart-container{
-    min-height: 91vh;
-    position: relative;
-    overflow: hidden;
+    /* min-height: 91vh; */
+    /* position: relative; */
+    /* overflow: hidden; */
+    /* height: 100%;
+    background-color:red; */
+    display: grid;
+    grid-template-columns: auto;
+    /* fixed height required */
+    height: 90vh;
+    /* overflow-y: scroll; */
+}
+
+.test{
+  display: flex;
+  flex-direction: column;
+}
+
+.gridster-grid{
+  /* height: 100%; */
+  /* width: 100%; */
 }
 
 #chart-editor{
@@ -51,5 +68,5 @@
 
 .edit-toolbar-options
 {
-justify-content: flex-end;
+  justify-content: flex-end;
 }

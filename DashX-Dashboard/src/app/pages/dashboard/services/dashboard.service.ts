@@ -96,62 +96,76 @@ export class DashboardService {
       chartType : "bar",
       chartID : 0,
       position : {
-      col : 2,
-      row : 3
+      cols : 2,
+      rows : 3,
+      x : 0,
+      y : 0
       },
       chartData : this.barChartDummyData
     },{
       chartType : "kpi",
       chartID : 0,
-      position : {
-      col : 1,
-      row : 1
-      },
+      position :{
+        cols : 1,
+        rows : 1,
+        x : 2,
+        y : 0
+        },
       chartData : this.kpiDummyData
     },
     {
       chartType : "kpi",
       chartID : 0,
       position : {
-      col : 1,
-      row : 1
-      },
+        cols : 1,
+        rows : 1,
+        x : 3,
+        y : 0
+        },
+      chartData : this.kpiDummyData
+    },
+    {
+      chartType : "kpi",
+      chartID : 0,
+      position :{
+        cols : 1,
+        rows : 1,
+        x : 2,
+        y : 1
+        },
       chartData : this.kpiDummyData
     },
     {
       chartType : "kpi",
       chartID : 0,
       position : {
-      col : 1,
-      row : 1
-      },
-      chartData : this.kpiDummyData
-    },
-    {
-      chartType : "kpi",
-      chartID : 0,
-      position : {
-      col : 1,
-      row : 1
-      },
+        cols : 1,
+        rows : 1,
+        x : 3,
+        y : 1
+        },
       chartData : this.kpiDummyData
     },
     {
       chartType : "pie",
       chartID : 0,
-      position : {
-      col : 2,
-      row : 2
-      },
+      position :{
+        cols : 2,
+        rows : 2,
+        x : 0,
+        y : 3
+        },
       chartData : this.pieChartDummyData
     },
     {
       chartType : "line",
       chartID : 0,
-      position : {
-      col : 2,
-      row : 3
-      },
+      position :{
+        cols : 2,
+        rows : 3,
+        x : 2,
+        y : 3
+        },
       chartData : this.lineChartDummyData
     }
   ]}
@@ -164,8 +178,10 @@ export class DashboardService {
       chartID : 0,
       chartType : 'bar',
       position :{
-        row : 3,
-        col : 2
+        rows : 3,
+        cols : 2,
+        x : 0,
+        y : 0
       }
     }
   }
@@ -176,8 +192,10 @@ export class DashboardService {
       chartID : 0,
       chartType : 'line',
       position :{
-        row : 3,
-        col : 2
+        rows : 3,
+        cols : 2,
+        x : 0,
+        y : 0
       }
     }
   }
@@ -188,8 +206,10 @@ export class DashboardService {
       chartID : 0,
       chartType : 'pie',
       position :{
-        row : 2,
-        col : 2
+        rows : 2,
+        cols : 2,
+        x : 0,
+        y : 0
       }
     }
   }
@@ -200,8 +220,10 @@ export class DashboardService {
       chartID : 0,
       chartType : 'kpi',
       position :{
-        row : 1,
-        col : 1
+        rows : 1,
+        cols : 1,
+        x : 0,
+        y : 0
       }
     }
   }

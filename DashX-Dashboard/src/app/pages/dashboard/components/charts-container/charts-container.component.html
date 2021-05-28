@@ -1,6 +1,5 @@
 <!--drop down menu items-------------------------------- -->
 
-<!-- todo : create this using *ngFor -->
 <mat-menu #chartTypeMenu="matMenu">
   <div *ngFor="let chartTypeItem of listOfChartTypes">
     <button mat-menu-item (click) = "AddChart(chartTypeItem.name)">
@@ -11,7 +10,9 @@
 </mat-menu>
 
 <!-- -------------------------------------------------- -->
+<div></div>
 
+<div class="test">
 <div class = "top-toolbar">
   <mat-toolbar class = "edit-toolbar-options" color = 'basic'>
     <div>
@@ -25,16 +26,29 @@
   </mat-toolbar>
 </div>
 
-
 <div class='chart-container'>
   <!-- chart editor declared -->
   <app-chart-editor id = 'chart-editor'></app-chart-editor>
   
-  <gridster [options]="options">
-    <gridster-item [item]="item" *ngFor="let item of dashboard">
-      <!-- your content here -->
-    </gridster-item>
-  </gridster>
+  <div class="gridster-grid">
+    <gridster [options]="options">
+      <gridster-item [item]="item.position" *ngFor="let item of _dashboard.charts">
+        <ng-template [ngIf]="item.chartType=='bar'">
+          <app-bar-graph [barGraphData] = 'item.chartData' (chartId) = "item.chartID = $event"></app-bar-graph>
+        </ng-template>
+        <ng-template [ngIf]="item.chartType=='pie'">
+          <app-pie-chart [pieChartData] = 'item.chartData'></app-pie-chart>
+        </ng-template>
+        <ng-template [ngIf]="item.chartType=='kpi'">
+          <app-kpi [kpiData] = 'item.chartData'></app-kpi>
+        </ng-template>
+        <ng-template [ngIf]="item.chartType=='line'">
+          <app-line-chart [lineChartData] = 'item.chartData'></app-line-chart>
+        </ng-template>
+      </gridster-item>
+    </gridster>
+  </div>
+
   
   <!-- <mat-grid-list cols="4" rowHeight="150px" gutterSize = "7px">
     <ng-container *ngFor="let item of _dashboard.charts; let i = index">
@@ -58,6 +72,5 @@
     </ng-container>
   </mat-grid-list> -->
 
-
-
+</div>
 </div>
