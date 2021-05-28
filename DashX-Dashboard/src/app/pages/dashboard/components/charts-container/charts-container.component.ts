@@ -54,7 +54,11 @@ export class ChartsContainerComponent implements OnInit {
   options: Safe;
   dashboard: Array<GridsterItem>;
 
-  constructor(private dashboardService: DashboardService, private componentFactoryResolver : ComponentFactoryResolver, private chartContainerService : ChartContainerService) {
+  /**
+   * @param dashboardService to fetch data for dashboard
+   * @param chartContainerService service to transfer chart data between components
+   */
+  constructor(private dashboardService: DashboardService, private chartContainerService : ChartContainerService) {
     this._dashboard = dashboardService.loadDashboardData()
   }
 
@@ -86,15 +90,15 @@ export class ChartsContainerComponent implements OnInit {
       outerMarginLeft: null,
       useTransformPositioning: true,
       mobileBreakpoint: 640,
-      minCols: 1,
+      minCols: 100,
       maxCols: 100,
-      minRows: 1,
+      minRows: 100,
       maxRows: 100,
-      maxItemCols: 100,
+      maxItemCols: 200,
       minItemCols: 1,
-      maxItemRows: 100,
+      maxItemRows: 200,
       minItemRows: 1,
-      maxItemArea: 2500,
+      maxItemArea: 40000,
       minItemArea: 1,
       defaultItemCols: 1,
       defaultItemRows: 1,
@@ -122,9 +126,9 @@ export class ChartsContainerComponent implements OnInit {
       pushItems: true,
       disablePushOnDrag: false,
       disablePushOnResize: false,
-      pushDirections: {north: true, east: true, south: true, west: true},
+      pushDirections: {north: true, east: false, south: true, west: false},
       pushResizeItems: false,
-      displayGrid: DisplayGrid.Always,
+      displayGrid: DisplayGrid.None,
       disableWindowResize: false,
       disableWarnings: false,
       scrollToNewItems: false

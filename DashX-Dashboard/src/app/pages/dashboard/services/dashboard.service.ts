@@ -96,78 +96,79 @@ export class DashboardService {
       chartType : "bar",
       chartID : 0,
       position : {
-      cols : 2,
-      rows : 3,
+      cols : 7,
+      rows : 7,
       x : 0,
       y : 0
       },
       chartData : this.barChartDummyData
-    },{
-      chartType : "kpi",
-      chartID : 0,
-      position :{
-        cols : 1,
-        rows : 1,
-        x : 2,
-        y : 0
-        },
-      chartData : this.kpiDummyData
-    },
-    {
-      chartType : "kpi",
-      chartID : 0,
-      position : {
-        cols : 1,
-        rows : 1,
-        x : 3,
-        y : 0
-        },
-      chartData : this.kpiDummyData
-    },
-    {
-      chartType : "kpi",
-      chartID : 0,
-      position :{
-        cols : 1,
-        rows : 1,
-        x : 2,
-        y : 1
-        },
-      chartData : this.kpiDummyData
-    },
-    {
-      chartType : "kpi",
-      chartID : 0,
-      position : {
-        cols : 1,
-        rows : 1,
-        x : 3,
-        y : 1
-        },
-      chartData : this.kpiDummyData
-    },
-    {
-      chartType : "pie",
-      chartID : 0,
-      position :{
-        cols : 2,
-        rows : 2,
-        x : 0,
-        y : 3
-        },
-      chartData : this.pieChartDummyData
-    },
-    {
-      chartType : "line",
-      chartID : 0,
-      position :{
-        cols : 2,
-        rows : 3,
-        x : 2,
-        y : 3
-        },
-      chartData : this.lineChartDummyData
     }
+    // {
+    //   chartType : "kpi",
+    //   chartID : 0,
+    //   position :{
+    //     cols : 1,
+    //     rows : 1,
+    //     x : 2,
+    //     y : 0
+    //     },
+    //   chartData : this.kpiDummyData
+    // },
+    // {
+    //   chartType : "kpi",
+    //   chartID : 0,
+    //   position : {
+    //     cols : 1,
+    //     rows : 1,
+    //     x : 3,
+    //     y : 0
+    //     },
+    //   chartData : this.kpiDummyData
+    // },
+    // {
+    //   chartType : "kpi",
+    //   chartID : 0,
+    //   position :{
+    //     cols : 1,
+    //     rows : 1,
+    //     x : 2,
+    //     y : 1
+    //     },
+    //   chartData : this.kpiDummyData
+    // },
+    // {
+    //   chartType : "kpi",
+    //   chartID : 0,
+    //   position : {
+    //     cols : 1,
+    //     rows : 1,
+    //     x : 3,
+    //     y : 1
+    //     },
+    //   chartData : this.kpiDummyData
+    // },
+    // {
+    //   chartType : "pie",
+    //   chartID : 0,
+    //   position :{
+    //     cols : 2,
+    //     rows : 2,
+    //     x : 0,
+    //     y : 3
+    //     },
+    //   chartData : this.pieChartDummyData
+    // },
+    // {
+    //   chartType : "line",
+    //   chartID : 0,
+    //   position :{
+    //     cols : 7,
+    //     rows : 7,
+    //     x : 2,
+    //     y : 3
+    //     },
+    //   chartData : this.lineChartDummyData
+    // }
   ]}
 
   }
