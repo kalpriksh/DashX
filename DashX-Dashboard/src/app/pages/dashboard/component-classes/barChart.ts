@@ -13,6 +13,7 @@ import {
   ApexStroke,
   ApexLegend
 } from "ng-apexcharts";
+import { autoType } from 'd3';
 
 export type BarChartOptions = {
   title : ApexTitleSubtitle;
@@ -60,7 +61,7 @@ export class BarChart extends BaseChart{
       
         chart: {
           type: "bar",
-          height: 430
+          height: '300'
         },
         plotOptions: {
           bar: {

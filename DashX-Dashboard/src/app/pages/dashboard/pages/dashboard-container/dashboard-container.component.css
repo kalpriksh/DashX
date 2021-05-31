@@ -2,7 +2,7 @@
   margin: 50px;
 }
 .test-class{
- background-color: yellow;
+  background-color: yellow;
 }
 :hover .test-class{
   background-color: aqua;

@@ -34,6 +34,10 @@ import { ChartEditorComponent } from './components/chart-editor/chart-editor.com
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { KeyPerformanceIndicatorComponent } from './components/key-performance-indicator/key-performance-indicator.component';
 
+//gridster
+import { GridsterModule } from 'angular-gridster2';
+
+
 //services
 import { DashboardService, ChartEditorService } from './services';
 import { ReadExcelDirective } from './directives/read-excel.directive';
@@ -69,7 +73,8 @@ import { DataHandlerService } from './services/data-handler.service';
     MatMenuModule,
     MatRadioModule,
     MatTooltipModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    GridsterModule
   ],
   exports: [
     

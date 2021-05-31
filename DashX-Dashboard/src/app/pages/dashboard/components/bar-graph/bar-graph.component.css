@@ -1,5 +1,6 @@
 .container{
     position: relative;
+    padding: auto;
 }
 .chart-heading{
     display: inline-flex;

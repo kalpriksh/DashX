@@ -1,27 +1,28 @@
-<mat-drawer-container class="sidenav-container">
+<div class="sidenav-component-container">
+  <app-header (toggleSideBar$)="drawer.toggle()"></app-header>
   
+  <mat-drawer-container class="sidenav-container">
+    
     <mat-drawer #drawer class="sidenav-sidenav" mode="over">
       
       <mat-list>
         <mat-list-item  routerLinkActive="active">
-        <mat-icon>home</mat-icon> Dashboard
+          <mat-icon>home</mat-icon> Dashboard
         </mat-list-item>
         <mat-list-item  routerLinkActive="active">
-        <mat-icon>text_fields</mat-icon> Typography
+          <mat-icon>text_fields</mat-icon> Typography
         </mat-list-item>
         <mat-list-item routerLinkActive="active">
-        <mat-icon>border_all</mat-icon> Tables
+          <mat-icon>border_all</mat-icon> Tables
         </mat-list-item>
       </mat-list>
-  
+      
     </mat-drawer>
-  
+    
     <mat-drawer-content>
-
-      <app-header (toggleSideBar$)="drawer.toggle()"></app-header>
-
-      <router-outlet></router-outlet>
-  
+        <router-outlet></router-outlet>
     </mat-drawer-content>
-  
+    
   </mat-drawer-container>
+
+</div>
