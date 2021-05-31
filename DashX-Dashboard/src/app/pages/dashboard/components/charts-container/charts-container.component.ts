@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ComponentFactoryResolver, ChangeDetectionStrategy, ViewContainerRef, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { LineChartData, PieChartData, BarGraphData, KpiData, Dashboard } from '../../models';
 import { NewChartTabDirective } from '../../directives/new-chart-tab.directive'
 import { of } from "rxjs";
@@ -16,7 +16,8 @@ interface Safe extends GridsterConfig {
 
 //services
 import { ChartContainerService } from "../../services/chart-container.service";
-import { DashboardService } from "../../services";
+import { ChartEditorService, DashboardService } from "../../services";
+
 @Component({
   selector: 'app-charts-container',
   templateUrl: './charts-container.component.html',
@@ -40,6 +41,7 @@ export class ChartsContainerComponent implements OnInit {
 
   showChartTypesList = false
   _dashboard : Dashboard 
+  _currentChartData
 
   // list of chart types {placeholder}
   listOfChartTypes : any[]
@@ -58,8 +60,14 @@ export class ChartsContainerComponent implements OnInit {
    * @param dashboardService to fetch data for dashboard
    * @param chartContainerService service to transfer chart data between components
    */
-  constructor(private dashboardService: DashboardService, private chartContainerService : ChartContainerService) {
+  constructor(private dashboardService: DashboardService, private chartContainerService : ChartContainerService, private chartEditorService : ChartEditorService) {
     this._dashboard = dashboardService.loadDashboardData()
+
+    this.chartEditorService.editorData_current.subscribe(_chartObject =>{
+      this._currentChartData = _chartObject
+    }
+    )
+
   }
 
   //#region gridster static methods 
@@ -70,6 +78,23 @@ export class ChartsContainerComponent implements OnInit {
   static itemResize(item, itemComponent) {
     console.info('itemResized', item, itemComponent);
   }
+
+  UpdateChart(item, itemComponent){
+    console.log(item);
+    
+    if(this._dashboard)
+    {
+      let modifiedItem = this._dashboard.charts.find(e => e.position.x == item.x && e.position.y == item.y)
+      this._currentChartData = modifiedItem.chartData;
+    }
+
+    
+    if(this._currentChartData)
+    {
+      this.chartEditorService.EditorDataUpdated(this._currentChartData);
+    }
+  }
+
   //#endregion
 
   ngOnInit(): void {
@@ -90,8 +115,8 @@ export class ChartsContainerComponent implements OnInit {
       outerMarginLeft: null,
       useTransformPositioning: true,
       mobileBreakpoint: 640,
-      minCols: 100,
-      maxCols: 100,
+      minCols: 160,
+      maxCols: 160,
       minRows: 100,
       maxRows: 100,
       maxItemCols: 200,
@@ -131,7 +156,8 @@ export class ChartsContainerComponent implements OnInit {
       displayGrid: DisplayGrid.None,
       disableWindowResize: false,
       disableWarnings: false,
-      scrollToNewItems: false
+      scrollToNewItems: false,
+      itemResizeCallback : this.UpdateChart,
     };
 
     this.dashboard =[
@@ -151,7 +177,7 @@ export class ChartsContainerComponent implements OnInit {
 
   }
 
-  //#region gridster method
+  //#region gridster methods
   changedOptions(): void {
     if (this.options.api && this.options.api.optionsChanged) {
       this.options.api.optionsChanged();
@@ -167,6 +193,7 @@ export class ChartsContainerComponent implements OnInit {
   addItem(): void {
     this.dashboard.push({x: 0, y: 0, cols: 1, rows: 1});
   }
+  
   //#endregion
 
   
