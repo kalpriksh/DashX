@@ -33,6 +33,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ChartEditorComponent } from './components/chart-editor/chart-editor.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { KeyPerformanceIndicatorComponent } from './components/key-performance-indicator/key-performance-indicator.component';
+import { MatDialog} from '@angular/material/dialog';
 
 //gridster
 import { GridsterModule } from 'angular-gridster2';
@@ -45,10 +46,12 @@ import { ReadExcelDirective } from './directives/read-excel.directive';
 import { NewChartTabDirective } from './directives/new-chart-tab.directive';
 import { ChartCustomizerComponent } from './components/chart-customizer/chart-customizer.component';
 import { DataHandlerService } from './services/data-handler.service';
+import { CreateDashboardComponent } from './components/create-dashboard/create-dashboard.component';
+
 
 
 @NgModule({
-  declarations: [LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent],
+  declarations: [LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent, CreateDashboardComponent],
 
   imports: [
     CommonModule,
