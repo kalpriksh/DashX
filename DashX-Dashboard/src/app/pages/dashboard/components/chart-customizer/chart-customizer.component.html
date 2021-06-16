@@ -32,8 +32,8 @@
           Grid
           </mat-panel-title>
       </mat-expansion-panel-header>                    
-      <mat-checkbox name = "gridXLines" formControlName = "showXAxisLines" *ngIf="_chartData.grid.x-Axis">x-Axis</mat-checkbox>&#160;
-      <mat-checkbox name = "gridYLines" formControlName= "showYAxisLines" *ngIf="_chartData.grid.y-Axis">y-Axis</mat-checkbox>&#160;
+      <mat-checkbox name = "gridXLines" formControlName = "showXAxisLines" *ngIf="_chartData.grid.xaxis">x-Axis</mat-checkbox>&#160;
+      <mat-checkbox name = "gridYLines" formControlName= "showYAxisLines" *ngIf="_chartData.grid.yaxis">y-Axis</mat-checkbox>&#160;
   </mat-expansion-panel>
 
   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartData.dataLabels">
