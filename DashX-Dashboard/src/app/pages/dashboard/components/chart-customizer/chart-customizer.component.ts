@@ -19,7 +19,7 @@ export class ChartCustomizerComponent implements OnInit {
 
   _chartObject
   _chartData : Partial<ApexOptions>
-
+  
   panelOpenState
   optionsVisible
   
@@ -33,7 +33,8 @@ export class ChartCustomizerComponent implements OnInit {
       chartHeight : 0,
       showDataLabels : false,
       showStroke : false,
-      strokeWidth: 0
+      strokeWidth: 0,
+      chartWidth: 0
     })
 
   }
@@ -61,24 +62,27 @@ export class ChartCustomizerComponent implements OnInit {
   {
     if(chartType.toLowerCase() == 'bar')
     {
+      return {
+      showXAxisLines : this._chartData.grid.xaxis.lines.show,
+      showYAxisLines : this._chartData.grid.yaxis.lines.show,
+      chartHeight : this._chartData.chart.height,
+      showDataLabels : this._chartData.dataLabels.enabled,
+      showStroke : this._chartData.stroke.show ?? false,
+      strokeWidth : this._chartData.stroke.width ?? 0
+      }}
+    else if(chartType.toLowerCase() == 'line')
+      {
         return {
-        showXAxisLines : this._chartData.grid.xaxis.lines.show,
-        showYAxisLines : this._chartData.grid.yaxis.lines.show,
         chartHeight : this._chartData.chart.height,
         showDataLabels : this._chartData.dataLabels.enabled,
         showStroke : this._chartData.stroke.show ?? false,
         strokeWidth : this._chartData.stroke.width ?? 0
-      }}
-      else
-      if(chartType.toLowerCase() == 'line')
+        }}
+    else if (chartType.toLowerCase() == 'pie')
       {
-          return {
-          chartHeight : this._chartData.chart.height,
-          showDataLabels : this._chartData.dataLabels.enabled,
-          showStroke : this._chartData.stroke.show ?? false,
-          strokeWidth : this._chartData.stroke.width ?? 0
-        }
-    }
+        return {
+          chartWidth : this._chartData.chart.width
+        }}
   }
 
   OnFormUpdate() : void
@@ -95,17 +99,27 @@ export class ChartCustomizerComponent implements OnInit {
 
   UpdateChartOptions(formValues)
   {
-    //grid
-   
-    this._chartData.grid.xaxis.lines.show = formValues.showXAxisLines;
-    this._chartData.grid.yaxis.lines.show = formValues.showYAxisLines;
-
-    //stroke
-    this._chartData.stroke.show = formValues.showStroke;
-    this._chartData.stroke.width = formValues.strokeWidth;
-    
-    this._chartData.chart.height = formValues.chartHeight;
-    this._chartData.dataLabels.enabled = formValues.showDataLabels;
+    if(this._chartObject.chartType.toLowerCase() == 'bar')
+    {
+      //grid
+      this._chartData.grid.xaxis.lines.show = formValues.showXAxisLines;
+      this._chartData.grid.yaxis.lines.show = formValues.showYAxisLines;
+      //stroke
+      this._chartData.stroke.show = formValues.showStroke;
+      this._chartData.stroke.width = formValues.strokeWidth;
+      this._chartData.dataLabels.enabled = formValues.showDataLabels;
+      this._chartData.chart.height = formValues.chartHeight;
+    }
+    else if(this._chartObject.chartType.toLowerCase() == 'line')
+    {
+      this._chartData.stroke.show = formValues.showStroke;
+      this._chartData.stroke.width = formValues.strokeWidth;
+      this._chartData.dataLabels.enabled = formValues.showDataLabels;
+      this._chartData.chart.height = formValues.chartHeight;
+    }
+    else if(this._chartObject.chartType.toLowerCase() == 'pie'){
+      this._chartData.chart.width = formValues.chartWidth;
+    }
 
   }
 

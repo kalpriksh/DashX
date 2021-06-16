@@ -6,27 +6,37 @@
           <mat-panel-title>
           Chart Style
           </mat-panel-title>
-      </mat-expansion-panel-header>                    
-      <label for="chartHeight">Chart Height:</label>
-      <mat-slider min="100" max="1000" step="10" name = "chartHeight"
-      [(value)] = "_chartData.chart.height"
-      formControlName = "chartHeight"
-      #sliderHeight
+      </mat-expansion-panel-header> 
+      <div *ngIf="_chartData.chart.height">
+        <label for="chartHeight">Chart Height:</label>
+        <mat-slider min="100" max="1000" step="10" name = "chartHeight"
+        [(value)] = "_chartData.chart.height"
+        formControlName = "chartHeight"
+        #sliderHeight>
+        </mat-slider>
+        <span>{{sliderHeight.value}}</span>
+    </div>
+    <div *ngIf="!_chartData.chart.height">
+      <label for="chartWidth">Chart Width:</label>
+      <mat-slider min="100" max="1000" step="10" name = "chartWidth"
+      [(value)] = "_chartData.chart.width"
+      formControlName = "chartWidth"
+      #sliderWidth
       ></mat-slider>
-      <span>{{sliderHeight.value}}</span>
+    </div>
   </mat-expansion-panel>
 
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartData.grid">
       <mat-expansion-panel-header>
           <mat-panel-title>
           Grid
           </mat-panel-title>
       </mat-expansion-panel-header>                    
-      <mat-checkbox name = "gridXLines" formControlName = "showXAxisLines" >x-Axis</mat-checkbox>&#160;
-      <mat-checkbox name = "gridYLines" formControlName= "showYAxisLines" >y-Axis</mat-checkbox>&#160;
+      <mat-checkbox name = "gridXLines" formControlName = "showXAxisLines" *ngIf="_chartData.grid.x-Axis">x-Axis</mat-checkbox>&#160;
+      <mat-checkbox name = "gridYLines" formControlName= "showYAxisLines" *ngIf="_chartData.grid.y-Axis">y-Axis</mat-checkbox>&#160;
   </mat-expansion-panel>
 
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartData.dataLabels">
       <mat-expansion-panel-header>
           <mat-panel-title>
           Data Labels
@@ -35,7 +45,7 @@
       <mat-checkbox name = "dataLabels" formControlName="showDataLabels">Display</mat-checkbox>
   </mat-expansion-panel>
 
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartData.stroke">
       <mat-expansion-panel-header>
           <mat-panel-title>
           Stroke
