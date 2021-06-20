@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule, routingComponents } from '../../app-routing.module';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms' 
 import { MatMenuModule } from '@angular/material/menu';
@@ -45,7 +44,13 @@ import { ReadExcelDirective } from './directives/read-excel.directive';
 import { NewChartTabDirective } from './directives/new-chart-tab.directive';
 import { ChartCustomizerComponent } from './components/chart-customizer/chart-customizer.component';
 import { DataHandlerService } from './services/data-handler.service';
+import { AppConfig } from './services/app-config.service';
+import { HttpClientModule } from '@angular/common/http';
 
+
+export function initializeApp(appConfig: AppConfig) {
+  return () => appConfig.load();
+}
 
 @NgModule({
   declarations: [LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent],
@@ -74,12 +79,19 @@ import { DataHandlerService } from './services/data-handler.service';
     MatRadioModule,
     MatTooltipModule,
     BrowserAnimationsModule,
-    GridsterModule
+    GridsterModule,
+    HttpClientModule
   ],
   exports: [
     
   ],
   providers: [
+    AppConfig,
+    { 
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [AppConfig], multi: true
+    },
     DashboardService,
     ChartEditorService,
     DataHandlerService,
