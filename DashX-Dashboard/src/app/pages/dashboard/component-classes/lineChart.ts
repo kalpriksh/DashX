@@ -55,9 +55,11 @@ chartData : Partial<LineChartOptions>
               chart: {
                 height: 350,
                 type: "line",
-              zoom: {
-                enabled: false
-              }
+                redrawOnParentResize : true,
+                redrawOnWindowResize : true,
+                zoom: {
+                  enabled: false
+                }
               },
               dataLabels: {
                 enabled: false

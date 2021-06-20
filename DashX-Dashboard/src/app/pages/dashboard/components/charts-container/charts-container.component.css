@@ -1,7 +1,7 @@
 .chart-container{
     display: grid;
     grid-template-columns: auto;
-    height: 90vh;
+    height: 200vh;
 }
 
 #chart-editor{
