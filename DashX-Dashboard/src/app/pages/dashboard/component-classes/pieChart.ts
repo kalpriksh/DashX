@@ -42,23 +42,25 @@ export class PieChart extends BaseChart{
       },
       series: [],
       chart: {
-        width: 380,
-        type: "pie"
+        // width: 380,
+        type: "pie",
+        redrawOnParentResize : true,
+        redrawOnWindowResize : true
       },
       labels: [],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
+      // responsive: [
+      //   {
+      //     breakpoint: 480,
+      //     options: {
+      //       chart: {
+      //         width: 200
+      //       },
+      //       legend: {
+      //         position: "bottom"
+      //       }
+      //     }
+      //   }
+      // ]
     };
   }
 

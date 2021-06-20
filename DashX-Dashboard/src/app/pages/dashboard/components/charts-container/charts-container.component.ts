@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { LineChartData, PieChartData, BarGraphData, KpiData, Dashboard } from '../../models';
 import { NewChartTabDirective } from '../../directives/new-chart-tab.directive'
-import { of } from "rxjs";
 //components
 
 //gridster
@@ -17,6 +16,7 @@ interface Safe extends GridsterConfig {
 //services
 import { ChartContainerService } from "../../services/chart-container.service";
 import { ChartEditorService, DashboardService } from "../../services";
+import { AppConfig } from '../../services/app-config.service';
 
 @Component({
   selector: 'app-charts-container',
@@ -61,13 +61,20 @@ export class ChartsContainerComponent implements OnInit {
    * @param chartContainerService service to transfer chart data between components
    */
   constructor(private dashboardService: DashboardService, private chartContainerService : ChartContainerService, private chartEditorService : ChartEditorService) {
-    this._dashboard = dashboardService.loadDashboardData()
+    
+    
+    this._dashboard = dashboardService.loadDashboardData();
+    //toggle demo charts
+    if(AppConfig.settings.variables.demoChartVisible)
+    {
+      this._dashboard.charts = [];
+    }
+    
 
     this.chartEditorService.editorData_current.subscribe(_chartObject =>{
       this._currentChartData = _chartObject
     }
     )
-
   }
 
   //#region gridster static methods 
@@ -80,29 +87,19 @@ export class ChartsContainerComponent implements OnInit {
   }
 
   UpdateChart(item, itemComponent){
-    console.log(item);
     
-    if(this._dashboard)
-    {
-      let modifiedItem = this._dashboard.charts.find(e => e.position.x == item.x && e.position.y == item.y)
-      this._currentChartData = modifiedItem.chartData;
-    }
-
-    
-    if(this._currentChartData)
-    {
-      this.chartEditorService.EditorDataUpdated(this._currentChartData);
-    }
+    //window resize event triggered to resize charts using redrawOnWindowResize
+    window.dispatchEvent(new Event('resize'))
   }
 
   //#endregion
 
   ngOnInit(): void {
+
     // bind deleteChart function to service's delete chart function
     this.chartContainerService.DeleteSelectedChart(this.DeleteChart.bind(this))
     //initialize listOfChartTypes
     this.listOfChartTypes = this.dashboardService.GetListOfChartTypes()
-    
     //#region gridster init
     this.options = {
       gridType: GridType.Fit,
@@ -159,21 +156,6 @@ export class ChartsContainerComponent implements OnInit {
       scrollToNewItems: false,
       itemResizeCallback : this.UpdateChart,
     };
-
-    this.dashboard =[
-      {cols: 2, rows: 1, y: 0, x: 0},
-      {cols: 2, rows: 2, y: 0, x: 2, hasContent: true},
-      {cols: 1, rows: 1, y: 0, x: 4},
-      {cols: 1, rows: 1, y: 2, x: 5},
-      {cols: 1, rows: 1, y: 1, x: 0},
-      {cols: 1, rows: 1, y: 1, x: 0},
-      {cols: 2, rows: 2, y: 3, x: 5, minItemRows: 2, minItemCols: 2, label: 'Min rows & cols = 2'},
-      {cols: 2, rows: 2, y: 2, x: 0, maxItemRows: 2, maxItemCols: 2, label: 'Max rows & cols = 2'},
-      {cols: 2, rows: 1, y: 2, x: 2, dragEnabled: true, resizeEnabled: true, label: 'Drag&Resize Enabled'},
-      {cols: 1, rows: 1, y: 2, x: 4, dragEnabled: false, resizeEnabled: false, label: 'Drag&Resize Disabled'},
-      {cols: 1, rows: 1, y: 2, x: 6}
-    ];
-    //#endregion
 
   }
 

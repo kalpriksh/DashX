@@ -60,6 +60,8 @@ export class BarChart extends BaseChart{
         },
       
         chart: {
+          redrawOnParentResize : true,
+          redrawOnWindowResize : true,
           type: "bar",
           height: '300'
         },
