@@ -33,7 +33,7 @@ export class BarChart extends BaseChart{
   categoryData : CategoryData
   chartData : Partial<BarChartOptions>
   
-  constructor(chartId? : number, chartData? : Partial<BarChartOptions>)
+  constructor(chartId? : string, chartData? : Partial<BarChartOptions>)
   {
     super()
     

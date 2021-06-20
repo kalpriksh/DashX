@@ -26,7 +26,7 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.lineChart = new LineChart(103);
+    this.lineChart = new LineChart(this.editorData.UID());
     this.chart = this.initChart()
 
     if(this.lineChartData)

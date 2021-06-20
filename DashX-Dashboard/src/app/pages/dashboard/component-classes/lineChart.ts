@@ -28,7 +28,7 @@ export type LineChartOptions = {
 export class LineChart extends BaseChart {
 chartData : Partial<LineChartOptions>
 
-  constructor(chartId? : number, chartData? : Partial<LineChartOptions>) {
+  constructor(chartId? : string, chartData? : Partial<LineChartOptions>) {
       super()
 
       if(chartId && chartData){

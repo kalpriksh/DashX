@@ -27,7 +27,7 @@ import {trigger, state, style, animate, transition} from '@angular/animations'
 })
 export class ChartEditorComponent implements OnInit {
   
-  editorState : [boolean, number];
+  editorState : [boolean, string];
   isEditorOpen
   
   get stateName() : string {
@@ -49,7 +49,7 @@ export class ChartEditorComponent implements OnInit {
   {
     this.isEditorOpen = !this.isEditorOpen
     //TODO handle chartID in case when editor is close via close button
-    this.chartEditorService.ToggleEditor(this.isEditorOpen, -999)
+    this.chartEditorService.ToggleEditor(this.isEditorOpen, "-999")
   }
 
 }
