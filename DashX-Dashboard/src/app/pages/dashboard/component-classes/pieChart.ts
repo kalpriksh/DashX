@@ -19,7 +19,7 @@ export class PieChart extends BaseChart{
   seriesData : SeriesData
   categoryData : CategoryData
     chartData : Partial<PieChartOptions>    
-    constructor(chartId? : number, chartData? : Partial<PieChartOptions>){
+    constructor(chartId? : string, chartData? : Partial<PieChartOptions>){
       super()
       if(chartId && chartData){
         this.chartData = chartData
