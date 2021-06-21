@@ -8,17 +8,13 @@
   justify-content: space-between;
   /* padding: 5px; */
 }
-.metric{
-    margin-left: 30%;
-    font-size: 50px;
-    margin-top: 6%;
-}
 
-  .center{
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 54px;
-  }
+.center{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 54px;
+  font-weight: 10px;
+}

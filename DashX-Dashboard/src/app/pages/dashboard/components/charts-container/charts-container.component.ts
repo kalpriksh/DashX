@@ -87,9 +87,6 @@ export class ChartsContainerComponent implements OnInit {
   }
 
   UpdateChart(item, itemComponent){
-    
-    //window resize event triggered to resize charts using redrawOnWindowResize
-    window.dispatchEvent(new Event('resize'))
   }
 
   //#endregion
