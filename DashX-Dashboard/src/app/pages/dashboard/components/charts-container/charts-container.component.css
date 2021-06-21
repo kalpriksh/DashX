@@ -1,11 +1,10 @@
 .chart-container{
     display: grid;
     grid-template-columns: auto;
-    height: 90vh;
+    height: 200vh;
 }
 
 #chart-editor{
-    height: 100%;
     position: absolute;
     z-index: 20;
     right: -0px;
@@ -19,7 +18,7 @@
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 21;
 }
 
 .mat-grid-tile .mat-figure {

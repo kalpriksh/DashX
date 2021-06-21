@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GridsterItem } from 'angular-gridster2';
 import { LineChartData, PieChartData, BarGraphData, Dashboard, KpiData, DashboardObject } from '../models';
 
 @Injectable({
@@ -11,10 +12,14 @@ export class DashboardService {
   pieChartDummyData : PieChartData
   lineChartDummyData : LineChartData
 
+  demoPieChartPosition : GridsterItem
+  demoLineChartPosition : GridsterItem
+  demoBarChartPosition : GridsterItem
+  demoKPIPosition : GridsterItem
+
   constructor()
   {
-    // dummy data testing
-    
+    //#region dummy chart data
     this.barChartDummyData = {
       series: [
         {
@@ -55,8 +60,36 @@ export class DashboardService {
         categories : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
       }
     }
+    //#endregion
 
+    //#region dummy chart position data
+    this.demoPieChartPosition = {
+      rows : 21,
+      cols : 52,
+      x : 0,
+      y : 0
+    }
+    this.demoLineChartPosition = {
+      rows : 21,
+      cols : 52,
+      x : 0,
+      y : 0
+    }
+    this.demoBarChartPosition = {
+      rows : 21,
+      cols : 52,
+      x : 0,
+      y : 0
+    }
+    this.demoKPIPosition = {
+      rows : 11,
+      cols : 36,
+      x : 0,
+      y : 0
+    }
+    //#endregion
   }
+
   public loadPieChartData(): PieChartData{
     return{
       series: [44, 55, 13, 43, 22],
@@ -178,12 +211,7 @@ export class DashboardService {
       chartData : this.barChartDummyData,
       chartID : 0,
       chartType : 'bar',
-      position :{
-        rows : 3,
-        cols : 2,
-        x : 0,
-        y : 0
-      }
+      position : this.demoBarChartPosition
     }
   }
   public GetDefaultLineDashboardObject(): DashboardObject 
@@ -192,12 +220,7 @@ export class DashboardService {
       chartData : this.lineChartDummyData,
       chartID : 0,
       chartType : 'line',
-      position :{
-        rows : 3,
-        cols : 2,
-        x : 0,
-        y : 0
-      }
+      position : this.demoLineChartPosition
     }
   }
   public GetDefaultPieDashboardObject(): DashboardObject
@@ -206,12 +229,7 @@ export class DashboardService {
       chartData : this.pieChartDummyData,
       chartID : 0,
       chartType : 'pie',
-      position :{
-        rows : 2,
-        cols : 2,
-        x : 0,
-        y : 0
-      }
+      position : this.demoPieChartPosition
     }
   }
   public GetDefaultKpiDashboardObject(): DashboardObject
@@ -220,12 +238,7 @@ export class DashboardService {
       chartData : this.kpiDummyData,
       chartID : 0,
       chartType : 'kpi',
-      position :{
-        rows : 1,
-        cols : 1,
-        x : 0,
-        y : 0
-      }
+      position : this.demoKPIPosition
     }
   }
   public GetListOfChartTypes(): any[]

@@ -12,11 +12,11 @@ export class BaseChart{
     }
     
     
-    private _chartId : number;
-    public get chartId() : number {
+    private _chartId : string;
+    public get chartId() : string {
         return this._chartId;
     }
-    public set chartId(v : number) {
+    public set chartId(v : string) {
         this._chartId = v;
     }
     //#endregion

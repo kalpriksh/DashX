@@ -28,7 +28,7 @@ export type LineChartOptions = {
 export class LineChart extends BaseChart {
 chartData : Partial<LineChartOptions>
 
-  constructor(chartId? : number, chartData? : Partial<LineChartOptions>) {
+  constructor(chartId? : string, chartData? : Partial<LineChartOptions>) {
       super()
 
       if(chartId && chartData){
@@ -47,17 +47,22 @@ chartData : Partial<LineChartOptions>
                 floating: false,
                 style: {
                   fontSize:  '23px',
-                  fontWeight:  'bold',
-                  fontFamily:  undefined,
+                  fontWeight:  10,
+                  fontFamily:  'Roboto',
                   color:  '#263238'
                 },
               },
               chart: {
+                toolbar : {
+                  show : false
+                },
                 height: 350,
                 type: "line",
-              zoom: {
-                enabled: false
-              }
+                redrawOnParentResize : true,
+                redrawOnWindowResize : true,
+                zoom: {
+                  enabled: false
+                }
               },
               dataLabels: {
                 enabled: false

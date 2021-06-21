@@ -1,9 +1,11 @@
-<mat-card class="container"
+<div class="container"
 [@chartEditorAnimate]='stateName'
 >
-  <button mat-button type="button" class="btn-close" aria-label="Close" (click) = 'closeEditor()'>
+<div class="chart-editor-header">
+  <button mat-icon-button type="button" class="btn-close" aria-label="Close" (click) = 'closeEditor()'>
     <mat-icon>close</mat-icon>
   </button>
+</div>
 
   <mat-tab-group> 
       <mat-tab label = "Data">
@@ -13,4 +15,4 @@
         <app-chart-customizer></app-chart-customizer>
       </mat-tab>
   </mat-tab-group>
-</mat-card>
+</div>

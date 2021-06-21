@@ -22,7 +22,7 @@ export class BarGraphComponent implements OnInit{
   @Input() barGraphData : BarGraphData;
   @ViewChild ('chartObj') chartObj : ChartComponent;
 
-  @Output() chartId = new EventEmitter<number>(); 
+  @Output() chartId = new EventEmitter<string>(); 
 
   constructor(private editorData : ChartEditorService, private chartContainerService : ChartContainerService){
   }
@@ -30,7 +30,7 @@ export class BarGraphComponent implements OnInit{
   ngOnInit(): void {
 
     //TODO need to give unique ID to new charts
-    this.barChart = new BarChart(100);
+    this.barChart = new BarChart(this.editorData.UID());
     
     //emit chart id on chart creation
     this.chartId.emit(this.barChart.chartId)

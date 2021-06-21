@@ -33,7 +33,7 @@ export class BarChart extends BaseChart{
   categoryData : CategoryData
   chartData : Partial<BarChartOptions>
   
-  constructor(chartId? : number, chartData? : Partial<BarChartOptions>)
+  constructor(chartId? : string, chartData? : Partial<BarChartOptions>)
   {
     super()
     
@@ -53,13 +53,18 @@ export class BarChart extends BaseChart{
           floating: false,
           style: {
             fontSize:  '23px',
-            fontWeight:  'bold',
-            fontFamily:  undefined,
+            fontWeight:  10,
+            fontFamily:  'Roboto',
             color:  '#263238'
           },
         },
       
         chart: {
+          toolbar : {
+            show : false
+          },
+          redrawOnParentResize : true,
+          redrawOnWindowResize : true,
           type: "bar",
           height: '300'
         },

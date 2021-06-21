@@ -26,7 +26,7 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.lineChart = new LineChart(103);
+    this.lineChart = new LineChart(this.editorData.UID());
     this.chart = this.initChart()
 
     if(this.lineChartData)
@@ -82,6 +82,13 @@ export class LineChartComponent implements OnInit {
       this.editorData.ToggleEditor(!this.editorState[0], this.lineChart.chartId)
       this.editorData.EditorDataUpdated(this.lineChart)
     }
+  }
+
+  /**
+   * to the delete the selected chart
+   */
+  DeleteChart(){
+
   }
 
   public initChart(): Partial<LineChartOptions> {

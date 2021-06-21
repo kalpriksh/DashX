@@ -16,7 +16,7 @@ export class PieChartComponent implements OnInit {
   @Input() pieChartData: PieChartData;  
   pieChartDefaults : PieChart;
   isEditorOpen : boolean
-  editorState : [boolean, number]
+  editorState : [boolean, string]
 
   EditorData
 
@@ -27,7 +27,7 @@ export class PieChartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.pieChartDefaults = new PieChart(102);
+    this.pieChartDefaults = new PieChart(this.data.UID());
     this.chart = this.initChart()
 
     if(this.pieChartData)
@@ -80,6 +80,14 @@ export class PieChartComponent implements OnInit {
         this.data.ToggleEditor(!this.editorState[0], this.pieChartDefaults.chartId)
         this.data.EditorDataUpdated(this.pieChartDefaults)
     }
+  }
+
+  /**
+   * to delete the selected chart
+   */
+  DeleteChart()
+  {
+
   }
 
   public initChart(): Partial<any> {

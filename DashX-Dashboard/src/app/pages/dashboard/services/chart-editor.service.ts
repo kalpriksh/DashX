@@ -7,13 +7,13 @@ import { BaseChart } from "../base";
 })
 export class ChartEditorService {
 
-  private isEditorOpen = new BehaviorSubject<[boolean,number]>([false, 0]);
+  private isEditorOpen = new BehaviorSubject<[boolean,string]>([false, '']);
   isEditorOpen_current = this.isEditorOpen.asObservable();
 
   private editorData
   editorData_current
 
-  ToggleEditor(isEditorOpen:boolean, chartID : number){
+  ToggleEditor(isEditorOpen:boolean, chartID : string){
     this.isEditorOpen.next([isEditorOpen, chartID]);
   }
 
@@ -23,6 +23,17 @@ export class ChartEditorService {
    */
   EditorDataUpdated(editorData){
     this.editorData.next(editorData);
+  }
+
+  /**
+   * to generate unique ids for graphs
+   * @returns unique id
+   */
+  UID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
   }
 
   constructor() {

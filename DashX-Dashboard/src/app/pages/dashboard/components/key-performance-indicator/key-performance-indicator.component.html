@@ -1,9 +1,23 @@
-<mat-card>
-    <div class="container">
-        <mat-card-subtitle><mat-icon>{{this.kpiData.icon}}</mat-icon>{{this.kpiData.name}}</mat-card-subtitle>
-        <h1 class="center">
-            {{this.kpiData.metric | currency}}
-        </h1>
+<div class="container">
+
+    <div class="kpi-header">
+
+        <button mat-icon-button disabled>
+            <mat-icon>{{this.kpiData.icon}}</mat-icon>
+        </button>
+        
+        <div style="margin-top: 10px; color: gray;">
+            {{this.kpiData.name}}
+        </div>
+
+        <button mat-icon-button>
+            <mat-icon style="color: gray;">more_vert</mat-icon>
+        </button>
     </div>
-</mat-card>
+
+    <div class="center">
+            {{this.kpiData.metric | currency}}
+    </div>
+        
+</div>
 

@@ -19,7 +19,7 @@ export class PieChart extends BaseChart{
   seriesData : SeriesData
   categoryData : CategoryData
     chartData : Partial<PieChartOptions>    
-    constructor(chartId? : number, chartData? : Partial<PieChartOptions>){
+    constructor(chartId? : string, chartData? : Partial<PieChartOptions>){
       super()
       if(chartId && chartData){
         this.chartData = chartData
@@ -35,30 +35,32 @@ export class PieChart extends BaseChart{
         floating: false,
         style: {
           fontSize:  '23px',
-          fontWeight:  'bold',
-          fontFamily:  undefined,
+          fontWeight:  10,
+          fontFamily:  'Roboto',
           color:  '#263238'
         },
       },
       series: [],
       chart: {
-        width: 380,
-        type: "pie"
+        // width: 380,
+        type: "pie",
+        redrawOnParentResize : true,
+        redrawOnWindowResize : true
       },
       labels: [],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
+      // responsive: [
+      //   {
+      //     breakpoint: 480,
+      //     options: {
+      //       chart: {
+      //         width: 200
+      //       },
+      //       legend: {
+      //         position: "bottom"
+      //       }
+      //     }
+      //   }
+      // ]
     };
   }
 
