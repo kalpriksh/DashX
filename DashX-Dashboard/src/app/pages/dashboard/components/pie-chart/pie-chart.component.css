@@ -1,17 +1,10 @@
 .container{
     display: flex;
     flex-direction: column;
-    /* right: 10px;
-    z-index: 10; */
 }
+
 .chart-heading{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    /* right: 10px;
-    z-index: 10; */
-}
-
-#edit-icon{
-    margin-left: 10px;
 }

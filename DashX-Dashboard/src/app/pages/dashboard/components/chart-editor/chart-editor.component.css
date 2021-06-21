@@ -1,13 +1,17 @@
 .container{
-    height: 100%;
-    position: relative;
-    width: 23vw;
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  background-color: whitesmoke;
+  margin-top: 10px;
+  box-shadow: -11px -3px 19px -10px;
+  min-height: 40vh;
 }
 .no-display{
-    display: none;
+  display: none;
 }
-.btn-close{
-  position: absolute;
-  right: 10px;
-  z-index: 4;
+.chart-editor-header{
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
 }
