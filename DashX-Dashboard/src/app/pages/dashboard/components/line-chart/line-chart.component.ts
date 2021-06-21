@@ -84,6 +84,13 @@ export class LineChartComponent implements OnInit {
     }
   }
 
+  /**
+   * to the delete the selected chart
+   */
+  DeleteChart(){
+
+  }
+
   public initChart(): Partial<LineChartOptions> {
     return this.lineChart.GetDefaults();
   }

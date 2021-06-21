@@ -47,12 +47,15 @@ chartData : Partial<LineChartOptions>
                 floating: false,
                 style: {
                   fontSize:  '23px',
-                  fontWeight:  'bold',
-                  fontFamily:  undefined,
+                  fontWeight:  10,
+                  fontFamily:  'Roboto',
                   color:  '#263238'
                 },
               },
               chart: {
+                toolbar : {
+                  show : false
+                },
                 height: 350,
                 type: "line",
                 redrawOnParentResize : true,

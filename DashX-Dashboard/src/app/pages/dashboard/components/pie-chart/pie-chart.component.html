@@ -1,10 +1,15 @@
 <div class="container">
+
   <div class="chart-heading"> 
-    <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" id="edit-icon" (click) = 'EditChart()'>
-      <mat-icon>edit</mat-icon>
+    <button mat-icon-button color="primary" style="color:gray" id="edit-icon" (click) = 'DeleteChart()'>
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-icon-button color="primary" style="color:gray" id="edit-icon" (click) = 'EditChart()'>
+      <mat-icon>more_vert</mat-icon>
     </button>
   </div>
-<div>
+
+  
     <apx-chart #chartObj
       [title] = "chart.title"
       [series]="chart.series"
@@ -12,5 +17,5 @@
       [labels]="chart.labels"
       [responsive]="chart.responsive"
     ></apx-chart>
-  </div>
+  
 </div>

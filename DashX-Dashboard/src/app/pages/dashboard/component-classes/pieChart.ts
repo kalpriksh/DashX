@@ -35,8 +35,8 @@ export class PieChart extends BaseChart{
         floating: false,
         style: {
           fontSize:  '23px',
-          fontWeight:  'bold',
-          fontFamily:  undefined,
+          fontWeight:  10,
+          fontFamily:  'Roboto',
           color:  '#263238'
         },
       },

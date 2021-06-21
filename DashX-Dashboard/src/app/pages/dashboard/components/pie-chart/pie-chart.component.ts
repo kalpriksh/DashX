@@ -82,6 +82,14 @@ export class PieChartComponent implements OnInit {
     }
   }
 
+  /**
+   * to delete the selected chart
+   */
+  DeleteChart()
+  {
+
+  }
+
   public initChart(): Partial<any> {
     return  this.pieChartDefaults.GetDefaults()
   }

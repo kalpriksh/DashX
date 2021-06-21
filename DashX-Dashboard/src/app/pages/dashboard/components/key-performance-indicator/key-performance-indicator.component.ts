@@ -11,6 +11,8 @@ export class KeyPerformanceIndicatorComponent implements OnInit {
 
   kpi : KPI
   @Input() kpiData: KpiData
+  kpiColor = 'green'
+
   constructor() { }
 
   ngOnInit(): void {
