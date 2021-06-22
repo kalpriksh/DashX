@@ -147,7 +147,7 @@ export class ChartsContainerComponent implements OnInit {
       disablePushOnResize: false,
       pushDirections: {north: false, east: false, south: false, west: false},
       pushResizeItems: false,
-      displayGrid: DisplayGrid.OnDragAndResize,
+      displayGrid: DisplayGrid.None,
       disableWindowResize: false,
       disableWarnings: false,
       scrollToNewItems: false,

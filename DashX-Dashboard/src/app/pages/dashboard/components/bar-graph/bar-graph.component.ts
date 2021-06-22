@@ -29,7 +29,6 @@ export class BarGraphComponent implements OnInit{
 
   ngOnInit(): void {
 
-    //TODO need to give unique ID to new charts
     this.barChart = new BarChart(this.editorData.UID());
     
     //emit chart id on chart creation

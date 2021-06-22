@@ -1,8 +1,9 @@
 import { PieChartData } from '../../models';
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from "@angular/core";
 import { ChartComponent } from "ng-apexcharts";
 import { ChartEditorService } from '../../services'
 import { PieChart, PieChartOptions } from '../../component-classes/pieChart';
+import { ChartContainerService } from '../../services/chart-container.service';
 
 @Component({
   selector: 'app-pie-chart',
@@ -14,21 +15,26 @@ export class PieChartComponent implements OnInit {
   public chart: Partial<PieChartOptions>;
 
   @Input() pieChartData: PieChartData;  
-  pieChartDefaults : PieChart;
+  pieChart : PieChart;
   isEditorOpen : boolean
   editorState : [boolean, string]
 
   EditorData
 
   @ViewChild ('chartObj') chartObj : ChartComponent;
-  constructor(private data : ChartEditorService){
+
+  constructor(private data : ChartEditorService, private chartContainerService : ChartContainerService){
   }
   
+  @Output() chartId = new EventEmitter<string>(); 
 
   ngOnInit(): void {
 
-    this.pieChartDefaults = new PieChart(this.data.UID());
+    this.pieChart = new PieChart(this.data.UID());
     this.chart = this.initChart()
+
+    //emit chart id on chart creation
+    this.chartId.emit(this.pieChart.chartId)
 
     if(this.pieChartData)
     {
@@ -66,19 +72,19 @@ export class PieChartComponent implements OnInit {
   EditChart(){
     if(this.isEditorOpen){
       //if editor is already open
-      if(this.editorState[1] == this.pieChartDefaults.chartId){
+      if(this.editorState[1] == this.pieChart.chartId){
         // chart data is already loaded on the editor
-        this.data.ToggleEditor(!this.editorState[0], this.pieChartDefaults.chartId);
+        this.data.ToggleEditor(!this.editorState[0], this.pieChart.chartId);
       } 
       else{
         // need to load chart data on editor
-        this.data.ToggleEditor(this.editorState[0], this.pieChartDefaults.chartId)
-        this.data.EditorDataUpdated(this.pieChartDefaults)
+        this.data.ToggleEditor(this.editorState[0], this.pieChart.chartId)
+        this.data.EditorDataUpdated(this.pieChart)
       }
     }
     else{
-        this.data.ToggleEditor(!this.editorState[0], this.pieChartDefaults.chartId)
-        this.data.EditorDataUpdated(this.pieChartDefaults)
+        this.data.ToggleEditor(!this.editorState[0], this.pieChart.chartId)
+        this.data.EditorDataUpdated(this.pieChart)
     }
   }
 
@@ -87,11 +93,10 @@ export class PieChartComponent implements OnInit {
    */
   DeleteChart()
   {
-
+    this.chartContainerService.DeleteChart(this.pieChart.chartId);
   }
-
   public initChart(): Partial<any> {
-    return  this.pieChartDefaults.GetDefaults()
+    return  this.pieChart.GetDefaults()
   }
 }
 

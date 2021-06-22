@@ -85,7 +85,8 @@ export class DataHandlerService {
   }
 
   GetHeaders(){
-    return Object.keys(this.data[0]);
+    var dummyData = JSON.parse(this.data);
+    return Object.keys(dummyData[0]);
   }
 
   GetHeaderValue(chartType : string, dataType? : string, keyName? : string){

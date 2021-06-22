@@ -35,13 +35,13 @@
             <app-bar-graph [barGraphData] = 'item.chartData' (chartId) = "item.chartID = $event"></app-bar-graph>
           </ng-template>
           <ng-template [ngIf]="item.chartType=='pie'">
-            <app-pie-chart [pieChartData] = 'item.chartData'></app-pie-chart>
+            <app-pie-chart [pieChartData] = 'item.chartData' (chartId) = "item.chartID = $event"></app-pie-chart>
           </ng-template>
           <ng-template [ngIf]="item.chartType=='kpi'">
             <app-kpi [kpiData] = 'item.chartData'></app-kpi>
           </ng-template>
           <ng-template [ngIf]="item.chartType=='line'">
-            <app-line-chart [lineChartData] = 'item.chartData'></app-line-chart>
+            <app-line-chart [lineChartData] = 'item.chartData' (chartId) = "item.chartID = $event"></app-line-chart>
           </ng-template>
         </gridster-item>
       </gridster>

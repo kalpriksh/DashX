@@ -1,7 +1,8 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ChartEditorService } from '../../services'
 import { LineChart, LineChartOptions } from '../../component-classes'
 import { ChartComponent } from "ng-apexcharts";
+import { ChartContainerService } from '../../services/chart-container.service';
 
 
 @Component({
@@ -22,12 +23,17 @@ export class LineChartComponent implements OnInit {
   @Input() lineChartData: Partial<LineChartOptions>;
   @ViewChild ('chartObj') chartObj : ChartComponent
 
-  constructor(private editorData : ChartEditorService){}
+  @Output() chartId = new EventEmitter<string>(); 
+  
+  constructor(private editorData : ChartEditorService, private chartContainerService : ChartContainerService){}
 
   ngOnInit(): void {
 
     this.lineChart = new LineChart(this.editorData.UID());
     this.chart = this.initChart()
+
+    //emit chart id on chart creation
+    this.chartId.emit(this.lineChart.chartId)
 
     if(this.lineChartData)
     {
@@ -87,8 +93,9 @@ export class LineChartComponent implements OnInit {
   /**
    * to the delete the selected chart
    */
-  DeleteChart(){
-
+  DeleteChart()
+  {
+    this.chartContainerService.DeleteChart(this.lineChart.chartId);
   }
 
   public initChart(): Partial<LineChartOptions> {
