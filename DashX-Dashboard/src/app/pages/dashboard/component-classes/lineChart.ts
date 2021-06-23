@@ -56,7 +56,7 @@ chartData : Partial<LineChartOptions>
                 toolbar : {
                   show : false
                 },
-                height: 350,
+                height: "100%",
                 type: "line",
                 redrawOnParentResize : true,
                 redrawOnWindowResize : true,

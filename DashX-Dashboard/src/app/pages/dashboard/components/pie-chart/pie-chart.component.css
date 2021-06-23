@@ -1,7 +1,9 @@
 .container{
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
+.container>apx-chart { flex:1; }
 
 .chart-heading{
     display: flex;

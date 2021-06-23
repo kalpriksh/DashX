@@ -11,7 +11,9 @@ import {
   ApexPlotOptions,
   ApexGrid,
   ApexStroke,
-  ApexLegend
+  ApexLegend,
+  ApexTheme
+
 } from "ng-apexcharts";
 import { autoType } from 'd3';
 
@@ -24,7 +26,8 @@ export type BarChartOptions = {
   xaxis: ApexXAxis;
   grid : ApexGrid;
   stroke : ApexStroke;
-  legend : ApexLegend
+  legend : ApexLegend;
+  theme : ApexTheme
 };
 
 export class BarChart extends BaseChart{
@@ -44,6 +47,16 @@ export class BarChart extends BaseChart{
       this.chartData = this.chartData = {
         series: [
         ],
+        theme: {
+          mode: 'light', 
+          palette: 'palette4', 
+          monochrome: {
+              enabled: false,
+              color: '#C7F464',
+              shadeTo: 'dark',
+              shadeIntensity: 0.65
+          }
+        },
         title: {
           text: "Bar Chart",
           align: 'left',
@@ -55,7 +68,7 @@ export class BarChart extends BaseChart{
             fontSize:  '23px',
             fontWeight:  10,
             fontFamily:  'Roboto',
-            color:  '#263238'
+            // color:  '#263238'
           },
         },
       
@@ -66,7 +79,7 @@ export class BarChart extends BaseChart{
           redrawOnParentResize : true,
           redrawOnWindowResize : true,
           type: "bar",
-          height: '300'
+          height: '100%'
         },
         plotOptions: {
           bar: {
