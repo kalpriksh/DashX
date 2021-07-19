@@ -16,6 +16,7 @@ export class DashboardService {
   demoLineChartPosition : GridsterItem
   demoBarChartPosition : GridsterItem
   demoKPIPosition : GridsterItem
+  demoDashboardPosition : GridsterItem
 
   constructor()
   {
@@ -88,6 +89,13 @@ export class DashboardService {
       y : 0
     }
     //#endregion
+    this.demoDashboardPosition = 
+    {
+      rows : 21,
+      cols : 52,
+      x : 0,
+      y : 0
+    }
   }
 
   public loadPieChartData(): PieChartData{
@@ -241,6 +249,16 @@ export class DashboardService {
       position : this.demoKPIPosition
     }
   }
+  public GetDefaultDashboardObject(): DashboardObject 
+  { 
+    return {
+      chartData : null,
+      chartID : 0,
+      chartType : '',
+      position : this.demoDashboardPosition
+    }
+  }
+
   public GetListOfChartTypes(): any[]
   {return [{
       name : "Kpi",
