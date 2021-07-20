@@ -1,7 +1,16 @@
+<mat-menu #chartTypeMenu="matMenu">
+  <p mat-dialog-title>Hi</p>
+<div mat-dialog-actions>
+  <button mat-button >Cancel</button>
+  <button mat-button cdkFocusInitial>Save</button>
+</div> 
+</mat-menu>
+
+
 <div class = "top-toolbar">
   <mat-toolbar class = "edit-toolbar-options" color = 'basic'>
     <div>
-      <button mat-button color = "primary">
+      <button mat-button color = "primary" [matMenuTriggerFor]="chartTypeMenu">
         Add Dashboard
       </button>
     </div>

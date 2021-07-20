@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router'
 import { GridsterModule } from 'angular-gridster2';
 
@@ -37,7 +38,7 @@ export class DashboardContainerComponent implements OnInit {
     }
     
   }
-
+  
   ngOnInit() {
    
    //#region gridster init
@@ -122,7 +123,9 @@ removeItem($event: MouseEvent | TouchEvent, item): void {
 addItem(): void {
   this.dashboard.push({x: 0, y: 0, cols: 1, rows: 1});
 }
+openCreateDashboardDialog(): void {
 
+}
   SaveDashboardContaine(){
     /**
      * creates dashboard object
