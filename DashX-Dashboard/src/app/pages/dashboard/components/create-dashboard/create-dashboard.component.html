@@ -1,1 +1,15 @@
-<p>create-dashboard works!</p>
+<div class='dashboard-container'>
+    <p>Create dashboard component</p>
+ <mat-grid-list cols="3" rowHeight="2:1" gutterSize = "5px" >
+      <div *ngFor="let item of dashboardList">
+       
+        <button mat-raised-button color = 'primary' class = 'dashboard-title' (click) = 'OpenDashboard()'>
+              {{item.content}}
+           <p class = 'dashboard-description'>
+             {{item.description}}
+          </p>
+          </button>
+  
+      </div>
+    </mat-grid-list>
+ </div>
