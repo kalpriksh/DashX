@@ -20,6 +20,8 @@ exports.myfunction =  async function (){
     oAuth2Client.credentials.access_token
   );
   console.log(tokenInfo);
+
+  //TODO need to store tokens in db
   return oAuth2Client;
 }
 

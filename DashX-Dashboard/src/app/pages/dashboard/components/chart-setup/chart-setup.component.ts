@@ -102,8 +102,11 @@ export class ChartSetupComponent implements OnInit {
 
   // updates the component UI
   UpdateChartSetup(){
-    this.seriesNames = this.categoryNames = this.availableLabelNames = this.labelNames = this.
-    chartSetup.GetSeriesName();
+    let headersObject
+    this.chartSetup.GetSeriesName().subscribe(res => {
+      headersObject = res
+      this.seriesNames = this.categoryNames = this.availableLabelNames = this.labelNames = headersObject.headers
+    })
   }
 
   EnterSubmit(event, form){

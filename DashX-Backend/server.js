@@ -1,19 +1,14 @@
 //#region require
-const customTokenModule = require('./google-auth'); 
-
-const express = require('express');
-// const http = require('http');
-// const url = require('url');
-// const open = require('open');
-// const destroyer = require('server-destroy');
-
+  const customTokenModule = require('./google-auth');
+  const express = require('express');
+  const cors = require('cors');
+  // spreadsheets
+  const { GoogleSpreadsheet } = require('google-spreadsheet');
+  // google auth
+  const { OAuth2Client } = require('google-auth-library');
 //#endregion
 
-// spreadsheets
-const { GoogleSpreadsheet } = require('google-spreadsheet');
-
-// google auth
-const { OAuth2Client } = require('google-auth-library');
+//#region setup
 
 // google oAuth keys
 const keys = require('./oauth2.keys.json');
@@ -37,48 +32,50 @@ oauthClient.on('tokens', credentials => {
 const doc = new GoogleSpreadsheet('1TKVPqyPYtpOpv6ikj-19bs0GyUWIbVED90O4HsEjFFk');
 doc.useOAuth2Client(oauthClient);
 
+//#endregion
+
+//#region spreadsheet functions
+
 test = async function ()
 {
   await doc.loadInfo(); // loads document properties and worksheets
-  console.log(doc.title);
   const sheet = doc.sheetsByIndex[1]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
-  console.log(sheet.title);
-  console.log(sheet.rowCount);
   options = {
     offset : 0,
     limit : 30
   }
+
   const rows = await sheet.getRows();
   const header = await sheet.loadHeaderRow();
   console.log(sheet.headerValues);
+  return sheet.headerValues
   // rows.forEach(row => {
   //   console.log(row.Country);
   // })
 }
 
-test()
+//#endregion
 
-// const oauthClient = new OAuth2Client(
-//   keys.web.client_id,
-//   keys.web.client_secret,
-//   keys.web.redirect_uris[0]
-//   );
+//#region APIs
 
+const app = express();
+const port = 3000;
+const www = './';
 
+app.use(cors());
+app.use(express.static(www));
+console.log(`serving ${www}`);
 
-//#region express server
+app.get('/headers',async (req, res) => {
+  console.log("hello");
+  var result = await test()
+  var data = {
+    headers : result
+  }
+  res.send(data)
 
-// const app = express();
-// const port = 3000;
-// const www = './';
+});
 
-// app.use(express.static(www));
-// console.log(`serving ${www}`);
-
-// app.get('/test', (req, res) => {
-//   res.sendFile(`index.html`, { root: www });
-// });
-
-// app.listen(port, () => console.log(`listening on http://localhost:${port}`));
+app.listen(port, () => console.log(`listening on http://localhost:${port}`));
 
 //#endregion

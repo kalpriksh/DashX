@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import * as dummyData from "../services/chartTestData.json"
 
 
@@ -9,7 +10,7 @@ import * as dummyData from "../services/chartTestData.json"
 export class DataHandlerService {
   data : any
   
-  constructor() { 
+  constructor(private http : HttpClient) { 
     this.data = `[
       {
         "Country": "Colombia",
@@ -82,11 +83,32 @@ export class DataHandlerService {
         "Metric" : 60000
       }
     ]`
+    let test = this.http.get('http://localhost:3000/headers').subscribe(res => {
+      console.log(res);
+    })
   }
 
-  GetHeaders(){
+  GetHeaders_(){
     var dummyData = JSON.parse(this.data);
+    console.log(Object.keys(dummyData[0]));
+    
     return Object.keys(dummyData[0]);
+  }
+  
+  GetHeaders(){
+
+    let headersObject : any
+    let headers
+    return this.http.get('http://localhost:3000/headers')
+    // .subscribe(res => {
+    //   headersObject = res
+    //   if(headersObject != null){
+    //     return headers = headersObject.headers
+    //   }
+    // },error => {
+    //   console.log(error);
+    // })
+
   }
 
   GetHeaderValue(chartType : string, dataType? : string, keyName? : string){
