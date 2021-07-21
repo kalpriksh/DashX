@@ -13,14 +13,19 @@
 // google oAuth keys
 const keys = require('./oauth2.keys.json');
 
+// auth tokens
+// TODO init db to fetch tokens from DB
+const token = require('./auth-tokens.json');
+const { response } = require('express');
+
 const oauthClient = new OAuth2Client({
   clientId: keys.web.client_id,
   clientSecret: keys.web.client_secret
 });
 
-oauthClient.credentials.access_token = "ya29.a0ARrdaM_Wn25WeDoEaV_PKdFn781-liymbwBUZm4t8c6CIszLSpKcJQo7Pqu8YVRlkpDVR3RekepxGfdWc799AirKdNtoDwlBoHBIlWYame-FaQXwUDXx_PFkiKiygTZ7vL_mVMjth9MmPwA4npoP2XmV8zM_";
-oauthClient.credentials.refresh_token = "1//0gF77WntnIFThCgYIARAAGBASNwF-L9Ir9J3GzcnugiUwvsfLZDbL57kabYrVYIuzu84uQ3fGrYc3tde5oI6cOl9muFI9GFUMRuM";
-oauthClient.credentials.expiry_date = 1626380757246; // Unix epoch milliseconds
+oauthClient.credentials.access_token = token.access_token;
+oauthClient.credentials.refresh_token = token.refresh_token;
+oauthClient.credentials.expiry_date = token.expiry_date; // Unix epoch milliseconds
 
 oauthClient.on('tokens', credentials => {
   console.log(credentials.access_token);
@@ -32,11 +37,30 @@ oauthClient.on('tokens', credentials => {
 const doc = new GoogleSpreadsheet('1TKVPqyPYtpOpv6ikj-19bs0GyUWIbVED90O4HsEjFFk');
 doc.useOAuth2Client(oauthClient);
 
+  
 //#endregion
 
 //#region spreadsheet functions
 
-test = async function ()
+GetHeaderValues = async function(columnName)
+{
+  await doc.loadInfo(); // loads document properties and worksheets
+  const sheet = doc.sheetsByIndex[1]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
+  options = {
+    offset : 0,
+    limit : 30
+  }
+  const rows = await sheet.getRows();
+  var headerValues = []
+
+  rows.forEach(row => {
+    headerValues.push(row[columnName])
+  })
+
+  return headerValues
+}
+
+GetHeaders = async function ()
 {
   await doc.loadInfo(); // loads document properties and worksheets
   const sheet = doc.sheetsByIndex[1]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
@@ -46,18 +70,50 @@ test = async function ()
   }
 
   const rows = await sheet.getRows();
-  const header = await sheet.loadHeaderRow();
+  var allData = []
+
+  rows.forEach(row =>{
+    allData.push(row._rawData)
+  })
+  // const header = await sheet.loadHeaderRow();
+  
   console.log(sheet.headerValues);
   return sheet.headerValues
-  // rows.forEach(row => {
-  //   console.log(row.Country);
-  // })
-}
 
+}
+GetHeaders()
+
+GetSheetData = async function()
+{
+  await doc.loadInfo(); // loads document properties and worksheets
+  const sheet = doc.sheetsByIndex[1]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
+  options = {
+    offset : 0,
+    limit : 30
+  }
+
+  const rows = await sheet.getRows();
+  var allData = []
+  
+  console.log(rows[0]);
+  
+  
+  
+  rows.forEach(row =>{
+    var object = {}
+    for (let index = 0; index < row._rawData.length; index++) {
+      object[row._sheet.headerValues[index]] = row._rawData[index]
+    }
+    allData.push(object)
+  })
+
+  return allData
+}
 //#endregion
 
 //#region APIs
 
+//#region express init
 const app = express();
 const port = 3000;
 const www = './';
@@ -66,14 +122,36 @@ app.use(cors());
 app.use(express.static(www));
 console.log(`serving ${www}`);
 
-app.get('/headers',async (req, res) => {
-  console.log("hello");
-  var result = await test()
+//#endregion end express init
+
+app.get('/header/all',async (req, res) => {
+  var result = await GetHeaders()
   var data = {
     headers : result
   }
   res.send(data)
+});
 
+app.get('/header/',async (req, res) => {
+  // query parameter name contains column name
+
+  var headerValues = await GetHeaderValues(req.query.name);
+  var response = {
+    data : headerValues
+  }
+
+  res.send(response)
+});
+
+app.get('/sheetdata/',async (req, res) => {
+  // query parameter name contains column name
+
+  var headerValues = await GetSheetData();
+  var response = {
+    rows : headerValues
+  }
+
+  res.send(response)
 });
 
 app.listen(port, () => console.log(`listening on http://localhost:${port}`));

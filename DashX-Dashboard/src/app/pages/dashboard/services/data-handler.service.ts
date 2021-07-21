@@ -9,6 +9,7 @@ import * as dummyData from "../services/chartTestData.json"
 
 export class DataHandlerService {
   data : any
+  data_new : any
   
   constructor(private http : HttpClient) { 
     this.data = `[
@@ -83,8 +84,10 @@ export class DataHandlerService {
         "Metric" : 60000
       }
     ]`
-    let test = this.http.get('http://localhost:3000/headers').subscribe(res => {
-      console.log(res);
+    var rowObject 
+    this.http.get('http://localhost:3000/sheetdata/').subscribe(rowData => {
+      rowObject = rowData
+      this.data_new = rowObject.rows
     })
   }
 
@@ -96,10 +99,7 @@ export class DataHandlerService {
   }
   
   GetHeaders(){
-
-    let headersObject : any
-    let headers
-    return this.http.get('http://localhost:3000/headers')
+    return this.http.get('http://localhost:3000/header/all')
     // .subscribe(res => {
     //   headersObject = res
     //   if(headersObject != null){
@@ -108,17 +108,17 @@ export class DataHandlerService {
     // },error => {
     //   console.log(error);
     // })
-
   }
 
   GetHeaderValue(chartType : string, dataType? : string, keyName? : string){
+    // var url = 'http://localhost:3000/header/?name=' + keyName;
+    debugger
+    // return this.http.get(url)
     var values : any[] = []
-    var dummyData = JSON.parse(this.data) 
-    dummyData.forEach(row =>{
+    this.data_new.forEach(row =>{
       values.push(row[keyName])
     },this)
     return values
   }
-
 
 }

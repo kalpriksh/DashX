@@ -226,34 +226,36 @@ export class ChartSetupComponent implements OnInit {
       alert("need to add data file")
     }
     else 
-    {
-      this.addedSeries = this.barChart.CreateNewSeries(dataTypeName, this.chartSetup.GetSeriesData(this._chartObject.chartType, dataType, dataTypeName));
-      // to prevent call by reference
-      let dataToPush : SeriesData = {
-        name : this.addedSeries.name,
-        data : this.addedSeries.data
-      } 
+    { 
+      var seriesData = this.chartSetup.GetSeriesData(this._chartObject.chartType, dataType, dataTypeName)
+        
+        this.addedSeries = this.barChart.CreateNewSeries(dataTypeName, seriesData);
+        // to prevent call by reference
+        let dataToPush : SeriesData = {
+          name : this.addedSeries.name,
+          data : this.addedSeries.data
+        } 
 
-      if(dataType == 'series'){
-        this.seriesList.push(dataToPush)
-        this._chartSetupData.series.push(dataToPush)
-
-        if (this._chartObject.chartType == "Pie"){
-          this._chartSetupData.series = dataToPush.data
+        if(dataType == 'series'){
           this.seriesList.push(dataToPush)
+          this._chartSetupData.series.push(dataToPush)
+
+          if (this._chartObject.chartType == "Pie"){
+            this._chartSetupData.series = dataToPush.data
+            this.seriesList.push(dataToPush)
+          }
         }
-      }
-      else if(dataType == 'category'){
-        this._chartSetupData.xaxis.categories = dataToPush.data;
-        this.categoryList.push(dataToPush)
-        // this.availableCategoryNames.push(dataToPush.name)
-      }
-      else
-      if (dataType == 'label'){
-        this._chartSetupData.labels = dataToPush.data;
-        this.labelList.push(dataToPush)
-        this.availableLabelNames.push(dataToPush.name)
-      }   
+        else if(dataType == 'category'){
+          this._chartSetupData.xaxis.categories = dataToPush.data;
+          this.categoryList.push(dataToPush)
+          // this.availableCategoryNames.push(dataToPush.name)
+        }
+        else
+        if (dataType == 'label'){
+          this._chartSetupData.labels = dataToPush.data;
+          this.labelList.push(dataToPush)
+          this.availableLabelNames.push(dataToPush.name)
+        }
     }
 
       // update seriesList UI
