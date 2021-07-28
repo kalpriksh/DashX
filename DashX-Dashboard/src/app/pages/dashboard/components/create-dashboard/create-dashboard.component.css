@@ -69,4 +69,10 @@
   font-size: 18px;
   bottom : 0;
   }
-  
+
+
+.chart-heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
