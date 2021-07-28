@@ -1,14 +1,19 @@
 
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router'
 import { GridsterModule } from 'angular-gridster2';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
+export interface DialogData {
+  title: string;
+  description: string;
+}
 //gridster
 import {CompactType, DisplayGrid, Draggable, GridsterConfig, GridsterItem, GridType, PushDirections, Resizable} from 'angular-gridster2';
 import { Dashboard } from '../../models';
 import { DashboardService } from '../../services';
 import { AppConfig } from '../../services/app-config.service';
+import { AddDashboardComponent } from '../../components/add-dashboard/add-dashboard.component';
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -27,8 +32,10 @@ export class DashboardContainerComponent implements OnInit {
  options: GridsterConfig;
  dashboard: Array<GridsterItem>;
  _dashboard : Dashboard ;
+ title: string;
+ description: string;
   dashboardList = [{content : "Sales", description : "Description", color : "blue"},{content : "Inventory", description : "Description", color : "blue"}]
-  constructor(private _router : Router, private dashboardService: DashboardService) { 
+  constructor(private _router : Router, private dashboardService: DashboardService, public dialog: MatDialog) { 
        
     this._dashboard = dashboardService.loadDashboardData();
     //toggle demo charts
@@ -133,4 +140,21 @@ openCreateDashboardDialog(): void {
      */
   }
 
+
+  openDialog(): void {
+    
+    console.log('Hi');
+    const dialogRef = this.dialog.open(AddDashboardComponent, {
+      width: '250px',
+      data: {title: this.title, description: this.description}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      this.title = result.title;
+      this.description = result.description;
+    });
+  }
+
 }
+
