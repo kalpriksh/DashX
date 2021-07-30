@@ -55,12 +55,15 @@ function getAuthenticatedClient() {
             console.log(`Code is ${code}`);
             res.end('Authentication successful! Please return to the console.');
             // server.destroy();
-
-            // Now that we have the code, use that to acquire tokens.
-            const r = await oAuth2Client.getToken(code);
-            // Make sure to set the credentials on the OAuth2 client.
-            oAuth2Client.setCredentials(r.tokens);
-            resolve(oAuth2Client);
+            if(code)
+            {
+              // Now that we have the code, use that to acquire tokens.
+              const r = await oAuth2Client.getToken(code);
+              // Make sure to set the credentials on the OAuth2 client.
+              oAuth2Client.setCredentials(r.tokens);
+              resolve(oAuth2Client);
+            }
+            
         } catch (e) {
           reject(e);
         }
