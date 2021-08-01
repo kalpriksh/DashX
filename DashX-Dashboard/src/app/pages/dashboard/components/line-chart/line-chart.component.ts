@@ -32,7 +32,9 @@ export class LineChartComponent implements OnInit {
     this.lineChart = new LineChart(this.editorData.UID());
     this.chart = this.initChart()
 
-    //emit chart id on chart creation
+    // emit chart id on chart creation
+    // used to uniquely identify charts
+
     this.chartId.emit(this.lineChart.chartId)
 
     if(this.lineChartData)
@@ -54,8 +56,14 @@ export class LineChartComponent implements OnInit {
         //update if chartType and chartID is the same
         if(_modifiedChartObject.chartType == this.lineChart.chartType && _modifiedChartObject.chartId == this.lineChart.chartId){
           this.chartData = _modifiedChartObject
-          this.updateChart(_modifiedChartObject.chartData)
           this.lineChart = _modifiedChartObject
+
+          // deep copy created for chart data object
+          // value was getting referenced and changing the original correct value 
+          // this is working fine for bar chart
+          let chartData = JSON.parse(JSON.stringify(_modifiedChartObject.chartData));
+
+          this.UpdateChart(chartData)
         }
       }
     })
@@ -63,7 +71,7 @@ export class LineChartComponent implements OnInit {
   }
 
   //to update the chart options
-  updateChart( chartOption : Partial<LineChartOptions> ){
+  UpdateChart( chartOption : Partial<LineChartOptions> ){
     this.chartObj.updateOptions(
       chartOption
     );

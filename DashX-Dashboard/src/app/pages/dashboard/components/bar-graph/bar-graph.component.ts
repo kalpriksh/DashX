@@ -55,6 +55,7 @@ export class BarGraphComponent implements OnInit{
       if(this.chartObj != null){
         //update if chartType and chartID is the same
         if(_modifiedChartObject.chartType == this.barChart.chartType && _modifiedChartObject.chartId == this.barChart.chartId){
+          debugger
           this.chartData = _modifiedChartObject
           this.UpdateChart(_modifiedChartObject.chartData)
           this.barChart = _modifiedChartObject

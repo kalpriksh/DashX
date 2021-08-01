@@ -73,8 +73,8 @@ export class ChartsContainerComponent implements OnInit {
 
     this.chartEditorService.editorData_current.subscribe(_chartObject =>{
       this._currentChartData = _chartObject
-    }
-    )
+    })
+    
   }
 
   //#region gridster static methods 
