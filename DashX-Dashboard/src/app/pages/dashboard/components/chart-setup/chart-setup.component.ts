@@ -76,9 +76,9 @@ export class ChartSetupComponent implements OnInit {
 
   DeleteCategory(deletedCategory)
   {  
-
+    debugger
     this.availableCategoryNames = this.availableCategoryNames.filter(category => category !== deletedCategory);
-    this._chartSetupData.xaxis.categories.pop(deletedCategory)
+    this._chartSetupData.xaxis.categories = [];
     this._chartObject.chartData = this._chartSetupData
     this.chartData.EditorDataUpdated(this._chartObject)
   }
