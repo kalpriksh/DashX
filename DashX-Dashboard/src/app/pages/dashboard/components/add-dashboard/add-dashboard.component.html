@@ -1,0 +1,19 @@
+<div class = "container">
+<div>
+<div mat-dialog-content class = "dashboard-info">
+  <p>Title</p>
+  <mat-form-field appearance="fill"> 
+    <input matInput [(ngModel)]="data.title">
+  </mat-form-field>
+
+  <p>Description</p>
+  <mat-form-field appearance="fill">
+    <input matInput [(ngModel)]="data.description">
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()" >Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+</div>
+</div>
