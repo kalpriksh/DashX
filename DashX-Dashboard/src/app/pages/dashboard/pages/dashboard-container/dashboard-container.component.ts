@@ -28,15 +28,42 @@ interface Safe extends GridsterConfig {
   styleUrls: ['./dashboard-container.component.css']
 })
 export class DashboardContainerComponent implements OnInit {
- //gridster properties
- options: GridsterConfig;
- dashboard: Array<GridsterItem>;
- _dashboard : Dashboard ;
- title: string;
- description: string;
-  dashboardList = [{content : "Sales", description : "Description", color : "blue"},{content : "Inventory", description : "Description", color : "blue"}]
+  
+  //gridster properties
+  options: GridsterConfig;
+  dashboard: Array<GridsterItem>;
+  _dashboard : Dashboard ;
+  title: string;
+  description: string;
+
+  dashboardList = [
+    {
+      content : "Sales",
+      description : "Description",
+      color : "blue",
+      position : {
+        rows : 3,
+        cols : 3,
+        x : 0,
+        y : 0
+      }
+    },
+    {
+      content : "Sales",
+      description : "Description",
+      color : "blue",
+      position : {
+        rows : 3,
+        cols : 3,
+        x : 0,
+        y : 0
+      }
+    }
+  ]
+
+
   constructor(private _router : Router, private dashboardService: DashboardService, public dialog: MatDialog) { 
-       
+
     this._dashboard = dashboardService.loadDashboardData();
     //toggle demo charts
     if(AppConfig.settings.variables.demoChartVisible)
@@ -47,7 +74,7 @@ export class DashboardContainerComponent implements OnInit {
   }
   
   ngOnInit() {
-   
+
    //#region gridster init
     this.options = {
       gridType: GridType.Fit,
@@ -60,10 +87,10 @@ export class DashboardContainerComponent implements OnInit {
       outerMarginLeft: null,
       useTransformPositioning: true,
       mobileBreakpoint: 640,
-      minCols: 200,
-      maxCols: 500,
-      minRows: 200,
-      maxRows: 500,
+      minCols: 10,
+      maxCols: 25,
+      minRows: 8,
+      maxRows: 25,
       maxItemCols: 500,
       minItemCols: 1,
       maxItemRows: 500,
@@ -98,7 +125,7 @@ export class DashboardContainerComponent implements OnInit {
       disablePushOnResize: false,
       pushDirections: {north: false, east: false, south: false, west: false},
       pushResizeItems: false,
-      displayGrid: DisplayGrid.Always,
+      displayGrid: DisplayGrid.None,
       disableWindowResize: false,
       disableWarnings: false,
       scrollToNewItems: false,
@@ -115,7 +142,7 @@ static itemResize(item, itemComponent) {
   console.info('itemResized', item, itemComponent);
 }
  //#region gridster methods
- changedOptions(): void {
+changedOptions(): void {
   if (this.options.api && this.options.api.optionsChanged) {
     this.options.api.optionsChanged();
   }
