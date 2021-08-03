@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import * as dummyData from "../services/chartTestData.json"
 
 
@@ -8,8 +9,9 @@ import * as dummyData from "../services/chartTestData.json"
 
 export class DataHandlerService {
   data : any
+  data_new : any
   
-  constructor() { 
+  constructor(private http : HttpClient) { 
     this.data = `[
       {
         "Country": "Colombia",
@@ -82,21 +84,41 @@ export class DataHandlerService {
         "Metric" : 60000
       }
     ]`
+    var rowObject 
+    this.http.get('http://localhost:3000/sheetdata/').subscribe(rowData => {
+      rowObject = rowData
+      this.data_new = rowObject.rows
+    })
   }
 
-  GetHeaders(){
+  GetHeaders_(){
     var dummyData = JSON.parse(this.data);
+    console.log(Object.keys(dummyData[0]));
+    
     return Object.keys(dummyData[0]);
+  }
+  
+  GetHeaders(){
+    return this.http.get('http://localhost:3000/header/all')
+    // .subscribe(res => {
+    //   headersObject = res
+    //   if(headersObject != null){
+    //     return headers = headersObject.headers
+    //   }
+    // },error => {
+    //   console.log(error);
+    // })
   }
 
   GetHeaderValue(chartType : string, dataType? : string, keyName? : string){
+    // var url = 'http://localhost:3000/header/?name=' + keyName;
+    debugger
+    // return this.http.get(url)
     var values : any[] = []
-    var dummyData = JSON.parse(this.data) 
-    dummyData.forEach(row =>{
+    this.data_new.forEach(row =>{
       values.push(row[keyName])
     },this)
     return values
   }
-
 
 }

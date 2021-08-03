@@ -1,3 +1,9 @@
 .mat-radio-button ~ .mat-radio-button {
     margin-left: 16px;
   }
+
+.label-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

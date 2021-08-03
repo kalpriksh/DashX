@@ -1,0 +1,20 @@
+{
+  "name": "dashx_",
+  "version": "1.0.0",
+  "description": "Application to build dashboards with multiple generic chart components.",
+  "main": "index.js",
+  "scripts": {
+    "start":"(cd DashX-Dashboard && ng serve)&(cd DashX-Backend && npm start)",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalpriksh/DashX.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kalpriksh/DashX/issues"
+  },
+  "homepage": "https://github.com/kalpriksh/DashX#readme"
+}
