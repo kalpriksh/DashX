@@ -2,9 +2,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { GridsterModule } from 'angular-gridster2';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
+export interface DialogData {
+  title: string;
+  description: string;
+}
 //gridster
 import {CompactType, DisplayGrid, Draggable, GridsterConfig, GridsterItem, GridType, PushDirections, Resizable} from 'angular-gridster2';
+import { Dashboard } from '../../models';
+import { DashboardService } from '../../services';
+import { AppConfig } from '../../services/app-config.service';
+import { AddDashboardComponent } from '../../components/add-dashboard/add-dashboard.component';
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -22,14 +31,80 @@ export class DashboardContainerComponent implements OnInit {
  //gridster properties
  options: GridsterConfig;
  dashboard: Array<GridsterItem>;
+ _dashboard : Dashboard ;
+ title: string;
+ description: string;
   dashboardList = [{content : "Sales", description : "Description", color : "blue"},{content : "Inventory", description : "Description", color : "blue"}]
-  constructor(private _router : Router) { }
-
+  constructor(private _router : Router, private dashboardService: DashboardService, public dialog: MatDialog) { 
+       
+    this._dashboard = dashboardService.loadDashboardData();
+    //toggle demo charts
+    if(AppConfig.settings.variables.demoChartVisible)
+    {
+      this._dashboard.charts = [];
+    }
+    
+  }
+  
   ngOnInit() {
+   
+   //#region gridster init
     this.options = {
+      gridType: GridType.Fit,
+      compactType: CompactType.None,
+      margin: 10,
+      outerMargin: true,
+      outerMarginTop: null,
+      outerMarginRight: null,
+      outerMarginBottom: null,
+      outerMarginLeft: null,
+      useTransformPositioning: true,
+      mobileBreakpoint: 640,
+      minCols: 200,
+      maxCols: 500,
+      minRows: 200,
+      maxRows: 500,
+      maxItemCols: 500,
+      minItemCols: 1,
+      maxItemRows: 500,
+      minItemRows: 1,
+      maxItemArea: 200,
+      minItemArea: 1,
+      defaultItemCols: 1,
+      defaultItemRows: 1,
+      fixedColWidth: 50,
+      fixedRowHeight: 50,
+      keepFixedHeightInMobile: false,
+      keepFixedWidthInMobile: false,
+      scrollSensitivity: 10,
+      scrollSpeed: 20,
+      enableEmptyCellClick: false,
+      enableEmptyCellContextMenu: false,
+      enableEmptyCellDrop: false,
+      enableEmptyCellDrag: false,
+      enableOccupiedCellDrop: false,
+      emptyCellDragMaxCols: 50,
+      emptyCellDragMaxRows: 50,
+      ignoreMarginInRow: false,
+      draggable: {
+        enabled: true,
+      },
+      resizable: {
+        enabled: true,
+      },
+      swap: false,
+      pushItems: true,
+      disablePushOnDrag: false,
+      disablePushOnResize: false,
+      pushDirections: {north: false, east: false, south: false, west: false},
+      pushResizeItems: false,
+      displayGrid: DisplayGrid.Always,
+      disableWindowResize: false,
+      disableWarnings: false,
+      scrollToNewItems: false,
       itemChangeCallback: DashboardContainerComponent.itemChange,
       itemResizeCallback: DashboardContainerComponent.itemResize
-    };
+        };
   }
 //#region gridster static methods 
 static itemChange(item, itemComponent) {
@@ -55,12 +130,9 @@ removeItem($event: MouseEvent | TouchEvent, item): void {
 addItem(): void {
   this.dashboard.push({x: 0, y: 0, cols: 1, rows: 1});
 }
+openCreateDashboardDialog(): void {
 
-
-  OpenDashboard(){
-    this._router.navigateByUrl('/dashboard/current')
-  }
-
+}
   SaveDashboardContaine(){
     /**
      * creates dashboard object
@@ -68,4 +140,21 @@ addItem(): void {
      */
   }
 
+
+  openDialog(): void {
+    
+    console.log('Hi');
+    const dialogRef = this.dialog.open(AddDashboardComponent, {
+      width: '250px',
+      data: {title: this.title, description: this.description}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      this.title = result.title;
+      this.description = result.description;
+    });
+  }
+
 }
+

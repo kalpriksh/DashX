@@ -1,31 +1,19 @@
+<div class = "top-toolbar">
+  <mat-toolbar class = "edit-toolbar-options" color = 'basic'>
+    <div>
+      <button mat-button color = "primary" (click)="openDialog()">
+        Add Dashboard
+      </button>
+    </div>
+  </mat-toolbar>
+</div>
+
 <div class='dashboard-container'>
 
   <div class="gridster-grid" style="height: 90vh;">
 <gridster [options]="options" style="background-color: rgb(227, 228, 228);">
   <gridster-item [item]="item" *ngFor="let item of dashboardList">
-<p>Gridster Dashboard Container</p>
-
-    <mat-grid-list cols="3" rowHeight="2:1" gutterSize = "5px" >
-      <div *ngFor="let item of dashboardList">
-        <mat-grid-tile
-        [rowspan] = '1'
-        [colspan] = '1'
-        >  
-          <button mat-raised-button color = 'primary' class = 'dashboard-title' (click) = 'OpenDashboard()'>{{item.content}}
-           <p class = 'dashboard-description'>
-             {{item.description}}
-          </p>
-          </button>
-  
-        </mat-grid-tile>
-      </div>
-      <mat-grid-tile
-      [rowspan] = '1'
-      [colspan] = '1'
-      >  
-        <button mat-button color = 'primary' class = 'test-class-1' (click) = 'OpenDashboard()'><mat-icon class = "icon_large">add_circle</mat-icon></button>
-      </mat-grid-tile>
-    </mat-grid-list>
+    <app-create-dashboard></app-create-dashboard>
 
   </gridster-item>
 </gridster>
