@@ -1,17 +1,16 @@
-.dashboard-container{
-  margin: 50px;
+
+
+.no-display{
+  display: none;
 }
-.test-class{
-  background-color: yellow;
+
+.top-toolbar{
+position: -webkit-sticky;
+position: sticky;
+top: 0;
+z-index: 21;
 }
-:hover .test-class{
-  background-color: aqua;
-}
-.dashboard-title{
-  height: 100%;
-  width: 100%;
-  font-size: 30px;
-}
+
 .mat-grid-tile .mat-figure {
   top: 0;
   left: 0;
@@ -25,14 +24,20 @@
   width: 100%;
   padding: 0;
   margin: 0;
-  font-weight: bold;
 }
 
-.icon_large {
-  transform:scale(3);
+#addChartIcon{
+transform: scale(2);
 }
-.dashboard-description{
-  font-weight: lighter;
-font-size: 18px;
-bottom : 0;
+
+
+.edit-toolbar-options
+{
+justify-content: flex-end;
 }
+
+
+:hover .test-class{
+  background-color: aqua;
+}
+
