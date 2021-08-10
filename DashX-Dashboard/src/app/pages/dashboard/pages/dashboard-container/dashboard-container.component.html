@@ -10,10 +10,10 @@
 
 <div class='dashboard-container'>
 
-  <div class="gridster-grid" style="height: 90vh;">
+  <div class="gridster-grid" >
 <gridster [options]="options" style="background-color: rgb(227, 228, 228);">
-  <gridster-item [item]="item.position" *ngFor="let item of dashboardList">
-    <app-create-dashboard></app-create-dashboard>
+  <gridster-item [item]="item.position" *ngFor="let item of dashboardList" class = "gridster-item">
+    <app-create-dashboard class = "dashboard-item"></app-create-dashboard>
   </gridster-item>
 </gridster>
 

@@ -1,5 +1,11 @@
-
-
+.dashboard-container{
+  display: grid;
+  grid-template-columns: auto;
+  height: 100%;
+}
+.gridster-grid{
+  height: 90vh;
+ }
 .no-display{
   display: none;
 }
