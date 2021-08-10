@@ -11,7 +11,9 @@
 <mat-grid-list cols="3" rowHeight="2:1"  class = "dashboard" >
      <div *ngFor="let item of dashboardList" style="height: 100%;">
        <button mat-raised-button color = 'primary'  (click) = 'OpenDashboard()' class = "dashboard-button">
-             {{item.content}}
+        <p class = 'dashboard-title'>
+          {{item.content}}
+        </p>   
           <p class = 'dashboard-description'>
             {{item.description}}
          </p>
