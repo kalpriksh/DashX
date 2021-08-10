@@ -47,17 +47,6 @@ export class DashboardContainerComponent implements OnInit {
         x : 0,
         y : 0
       }
-    },
-    {
-      content : "Sales",
-      description : "Description",
-      color : "blue",
-      position : {
-        rows : 3,
-        cols : 3,
-        x : 0,
-        y : 0
-      }
     }
   ]
 
