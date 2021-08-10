@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
-import { LineChartData, PieChartData, BarGraphData, Dashboard, KpiData, DashboardObject } from '../models';
+import { LineChartData, PieChartData, BarGraphData, Dashboard, KpiData, DashboardData, DashboardObject } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class DashboardService {
   kpiDummyData : KpiData
   pieChartDummyData : PieChartData
   lineChartDummyData : LineChartData
-
+  dashboardDummyData: DashboardData
   demoPieChartPosition : GridsterItem
   demoLineChartPosition : GridsterItem
   demoBarChartPosition : GridsterItem
@@ -60,6 +60,11 @@ export class DashboardService {
       xaxis : {
         categories : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
       }
+    }
+    this.dashboardDummyData =
+    {
+      title: 'Inventory',
+      description: 'Inventory sold'
     }
     //#endregion
 
@@ -251,10 +256,11 @@ export class DashboardService {
   }
   public GetDefaultDashboardObject(): DashboardObject 
   { 
+    console.log(this.dashboardDummyData);
     return {
-      chartData : null,
+      chartData : this.dashboardDummyData,
       chartID : 0,
-      chartType : '',
+      chartType : 'Dashboard',
       position : this.demoDashboardPosition
     }
   }

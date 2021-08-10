@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: auto;
   height: 100%;
+  background-color: white;
 }
 .gridster-grid{
   height: 90vh;
