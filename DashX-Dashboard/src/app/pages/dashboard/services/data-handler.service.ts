@@ -112,7 +112,6 @@ export class DataHandlerService {
 
   GetHeaderValue(chartType : string, dataType? : string, keyName? : string){
     // var url = 'http://localhost:3000/header/?name=' + keyName;
-    debugger
     // return this.http.get(url)
     var values : any[] = []
     this.data_new.forEach(row =>{

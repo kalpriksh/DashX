@@ -44,7 +44,7 @@ export class PieChart extends BaseChart{
       chart: {
         height : "100%",
         type: "pie",
-        redrawOnParentResize : true,
+        redrawOnParentResize : true
       },
       labels: [],
     };
