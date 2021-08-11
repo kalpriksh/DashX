@@ -1,6 +1,6 @@
  <div class='dashboard-container'>
    <div class="container">
-     <div class="chart-heading">
+     <div class="dashboard-heading">
        <button mat-icon-button style="color: gray;" id="edit-icon" >
          <mat-icon>delete</mat-icon>
        </button>
@@ -8,11 +8,12 @@
          <mat-icon>more_vert</mat-icon>
        </button>
      </div>
-<mat-grid-list cols="3" rowHeight="2:1" gutterSize = "5px" >
-     <div *ngFor="let item of dashboardList">
-      
-       <button mat-raised-button color = 'primary' class = 'dashboard-title' (click) = 'OpenDashboard()'>
-             {{item.content}}
+<mat-grid-list cols="3" rowHeight="2:1"  class = "dashboard" >
+     <div *ngFor="let item of dashboardList" style="height: 100%;">
+       <button mat-raised-button color = 'primary'  (click) = 'OpenDashboard()' class = "dashboard-button">
+        <p class = 'dashboard-title'>
+          {{item.content}}
+        </p>   
           <p class = 'dashboard-description'>
             {{item.description}}
          </p>

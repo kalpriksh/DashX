@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class CreateDashboardComponent implements OnInit {
 
-  dashboardList = [{content : "Sales", description : "Description", color : "blue"},{content : "Inventory", description : "Description", color : "blue"}]
+  dashboardList = [{content : "Sales", description : "Description", color : "blue"}]
   constructor(private _router : Router) { }
 
   ngOnInit(): void {
