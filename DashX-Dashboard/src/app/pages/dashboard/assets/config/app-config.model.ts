@@ -1,4 +1,4 @@
-import { DashboardObject } from "../../models";
+import { ChartObject } from "../../models";
 
 export interface IAppConfig
 {

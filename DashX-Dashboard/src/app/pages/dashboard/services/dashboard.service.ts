@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
-import { LineChartData, PieChartData, BarGraphData, Dashboard, KpiData, DashboardData, DashboardObject } from '../models';
+import { LineChartData, PieChartData, BarGraphData, Dashboard, KpiData, DashboardData, ChartObject } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -137,88 +137,35 @@ export class DashboardService {
   }
   public loadDashboardData(): Dashboard
   {
-      return {charts :[
-      {
-      chartType : "bar",
-      chartID : 0,
-      position : {
-      cols : 80,
-      rows : 45,
-      x : 0,
-      y : 0
-      },
-      chartData : this.barChartDummyData
-    },
-    {
-      chartType : "kpi",
-      chartID : 0,
-      position :{
-        cols : 39,
-        rows : 23,
-        x : 2,
-        y : 0
+      return {
+        id : "100",
+        data : {
+          title : "jojo",
+          description : "awsm charts"
         },
-      chartData : this.kpiDummyData
-    },
-    {
-      chartType : "kpi",
-      chartID : 0,
-      position : {
-        cols : 39,
-        rows : 23,
-        x : 3,
-        y : 0
+        color : "red",
+        position : {
+          rows : 0,
+          cols : 0,
+          x : 0,
+          y : 0
         },
-      chartData : this.kpiDummyData
-    },
-    {
-      chartType : "kpi",
-      chartID : 0,
-      position :{
-        cols : 39,
-        rows : 23,
-        x : 2,
-        y : 1
-        },
-      chartData : this.kpiDummyData
-    },
-    {
-      chartType : "kpi",
-      chartID : 0,
-      position : {
-        cols : 39,
-        rows : 23,
-        x : 80,
-        y : 32
-        },
-      chartData : this.kpiDummyData
-    },
-    {
-      chartType : "pie",
-      chartID : 0,
-      position :{
-        cols : 62,
-        rows : 47,
-        x : 0,
-        y : 3
-        },
-      chartData : this.pieChartDummyData
-    },
-    {
-      chartType : "line",
-      chartID : 0,
-      position :{
-        cols : 80,
-        rows : 45,
-        x : 2,
-        y : 3
-        },
-      chartData : this.lineChartDummyData
-    }
-  ]}
+        charts :[
+        {
+          chartType : "line",
+          chartID : 0,
+          position :{
+            cols : 80,
+            rows : 45,
+            x : 2,
+            y : 3
+            },
+          chartData : this.lineChartDummyData
+        }]
+      }
 
   }
-  public GetDefaultBarDashboardObject(): DashboardObject 
+  public GetDefaultBarChartObject(): ChartObject 
   {
     return {
       chartData : this.barChartDummyData,
@@ -227,7 +174,7 @@ export class DashboardService {
       position : this.demoBarChartPosition
     }
   }
-  public GetDefaultLineDashboardObject(): DashboardObject 
+  public GetDefaultLineChartObject(): ChartObject 
   { 
     return {
       chartData : this.lineChartDummyData,
@@ -236,7 +183,7 @@ export class DashboardService {
       position : this.demoLineChartPosition
     }
   }
-  public GetDefaultPieDashboardObject(): DashboardObject
+  public GetDefaultPieChartObject(): ChartObject
   {
     return {
       chartData : this.pieChartDummyData,
@@ -245,7 +192,7 @@ export class DashboardService {
       position : this.demoPieChartPosition
     }
   }
-  public GetDefaultKpiDashboardObject(): DashboardObject
+  public GetDefaultKpiChartObject(): ChartObject
   {
     return {
       chartData : this.kpiDummyData,
@@ -254,7 +201,7 @@ export class DashboardService {
       position : this.demoKPIPosition
     }
   }
-  public GetDefaultDashboardObject(): DashboardObject 
+  public GetDefaultChartObject(): ChartObject 
   { 
     console.log(this.dashboardDummyData);
     return {

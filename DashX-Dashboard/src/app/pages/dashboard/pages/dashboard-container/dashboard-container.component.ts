@@ -39,7 +39,7 @@ export class DashboardContainerComponent implements OnInit {
 
   dashboardList = [
     {
-      content : "Sales sdsd",
+      content : "Sales",
       description : "Description",
       color : "blue",
       position : {
@@ -154,7 +154,7 @@ openCreateDashboardDialog(): void {
 
 AddDashboard()
 {
-  this._dashboard.charts.push(this.dashboardService.GetDefaultDashboardObject())
+  this._dashboard.charts.push(this.dashboardService.GetDefaultChartObject())
   console.log('service called');
 }
   SaveDashboardContainer(){

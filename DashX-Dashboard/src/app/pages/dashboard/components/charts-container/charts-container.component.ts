@@ -183,19 +183,19 @@ export class ChartsContainerComponent implements OnInit {
      */
     if(chartType.toUpperCase() == "BAR")
     {
-      this._dashboard.charts.push(this.dashboardService.GetDefaultBarDashboardObject())
+      this._dashboard.charts.push(this.dashboardService.GetDefaultBarChartObject())
     }
     if(chartType.toUpperCase() == "PIE")
     {
-      this._dashboard.charts.push(this.dashboardService.GetDefaultPieDashboardObject())
+      this._dashboard.charts.push(this.dashboardService.GetDefaultPieChartObject())
     }
     if(chartType.toUpperCase() == "KPI")
     {
-      this._dashboard.charts.push(this.dashboardService.GetDefaultKpiDashboardObject())
+      this._dashboard.charts.push(this.dashboardService.GetDefaultKpiChartObject())
     }
     if(chartType.toUpperCase() == "LINE")
     {
-      this._dashboard.charts.push(this.dashboardService.GetDefaultLineDashboardObject())
+      this._dashboard.charts.push(this.dashboardService.GetDefaultLineChartObject())
     }
 
     this.showChartTypesList = false;
