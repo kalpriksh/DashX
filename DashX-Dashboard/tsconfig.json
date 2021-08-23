@@ -3,12 +3,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "paths": {
-      "dashx": [
-        "dist/dashx/dashx",
-        "dist/dashx"
-      ]
-    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,

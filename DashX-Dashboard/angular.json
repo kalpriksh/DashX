@@ -129,37 +129,6 @@
           }
         }
       }
-    },
-    "dashx": {
-      "projectType": "library",
-      "root": "projects/dashx",
-      "sourceRoot": "projects/dashx/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/dashx/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/dashx/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/dashx/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/dashx/src/test.ts",
-            "tsConfig": "projects/dashx/tsconfig.spec.json",
-            "karmaConfig": "projects/dashx/karma.conf.js"
-          }
-        }
-      }
     }
   },
   "defaultProject": "DashX-Dashboard"

@@ -1,7 +1,6 @@
-import { DashxComponent } from './dashx.component';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashAppRoutingModule, routingComponents } from './app-routing/app-routing.module';
+import { AppRoutingModule, routingComponents } from '../../app-routing.module';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms' 
@@ -41,6 +40,7 @@ import { GridsterModule } from 'angular-gridster2';
 //services
 import { DashboardService, ChartEditorService } from './services';
 import { ReadExcelDirective } from './directives/read-excel.directive';
+
 import { NewChartTabDirective } from './directives/new-chart-tab.directive';
 import { ChartCustomizerComponent } from './components/chart-customizer/chart-customizer.component';
 import { DataHandlerService } from './services/data-handler.service';
@@ -49,20 +49,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreateDashboardComponent } from './components/create-dashboard/create-dashboard.component';
 import { AddDashboardComponent } from './components/add-dashboard/add-dashboard.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DashboardContainerComponent } from './pages/dashboard-container/dashboard-container.component';
-import { ChartsContainerComponent } from './components/charts-container/charts-container.component';
+
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
 }
 
 @NgModule({
-  declarations: [
-    DashxComponent,LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent, CreateDashboardComponent, AddDashboardComponent,DashboardContainerComponent,ChartsContainerComponent
-  ],
-  imports:[
+  declarations: [LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent, CreateDashboardComponent, AddDashboardComponent],
+
+  imports: [
     CommonModule,
-    DashAppRoutingModule,
+    AppRoutingModule,
     NgApexchartsModule,
     MatToolbarModule,
     MatCardModule,
@@ -82,16 +80,14 @@ export function initializeApp(appConfig: AppConfig) {
     MatExpansionModule,
     MatMenuModule,
     MatRadioModule,
+    MatTooltipModule,
     BrowserAnimationsModule,
     GridsterModule,
     HttpClientModule,
     MatDialogModule
-    ],
+  ],
   exports: [
-    DashxComponent,
-    DashboardContainerComponent,
-    ChartsContainerComponent,
-    DashAppRoutingModule
+    
   ],
   providers: [
     AppConfig,
@@ -105,5 +101,6 @@ export function initializeApp(appConfig: AppConfig) {
     DataHandlerService,
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
   ]
+  
 })
-export class DashxModule { }
+export class DashboardModule { }
