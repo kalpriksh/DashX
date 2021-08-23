@@ -12,7 +12,7 @@
      <div *ngFor="let item of dashboardList" style="height: 100%;">
        <button mat-raised-button color = 'primary'  (click) = 'OpenDashboard()' class = "dashboard-button">
         <p class = 'dashboard-title'>
-          {{item.content}}
+          {{item.title}}
         </p>   
           <p class = 'dashboard-description'>
             {{item.description}}
