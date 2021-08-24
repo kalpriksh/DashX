@@ -40,7 +40,7 @@ export class DashboardContainerComponent implements OnInit {
 
   dashboardList = [
     {
-      content : "Salehtghgs",
+      title : "Sale",
       description : "Description",
       color : "blue",
       position : {

@@ -13,7 +13,27 @@
   <div class="gridster-grid" >
 <gridster [options]="options" style="background-color: rgb(227, 228, 228);">
   <gridster-item [item]="item.position" *ngFor="let item of dashboardList" class = "gridster-item">
-    <app-create-dashboard class = "dashboard-item"></app-create-dashboard>
+
+        <div class="dashboard-heading">
+          <button mat-icon-button style="color: gray;" id="edit-icon" >
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button style="color: gray;" id="edit-icon" >
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
+   <mat-grid-list cols="3" rowHeight="2:1"  class = "dashboard"  style="height: 100%;">
+          <button mat-raised-button color = 'primary'  (click) = 'OpenDashboard()' class = "dashboard-button">
+           <p class = 'dashboard-title'>
+             {{item.title}}
+           </p>   
+             <p class = 'dashboard-description'>
+               {{item.description}}
+            </p>
+            </button>
+
+      </mat-grid-list>
+
   </gridster-item>
 </gridster>
 
