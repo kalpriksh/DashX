@@ -145,7 +145,9 @@ addItem(): void {
 openCreateDashboardDialog(): void {
 
 }
-
+OpenDashboard(){
+  this._router.navigateByUrl('/dashboard/current')
+}
 AddDashboard()
 {
   this._dashboard = this.dashboardService.GetDefaultDashboardObject()
