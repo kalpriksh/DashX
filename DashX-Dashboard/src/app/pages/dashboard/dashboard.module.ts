@@ -46,7 +46,6 @@ import { ChartCustomizerComponent } from './components/chart-customizer/chart-cu
 import { DataHandlerService } from './services/data-handler.service';
 import { AppConfig } from './services/app-config.service';
 import { HttpClientModule } from '@angular/common/http';
-import { CreateDashboardComponent } from './components/create-dashboard/create-dashboard.component';
 import { AddDashboardComponent } from './components/add-dashboard/add-dashboard.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -56,7 +55,7 @@ export function initializeApp(appConfig: AppConfig) {
 }
 
 @NgModule({
-  declarations: [LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent, CreateDashboardComponent, AddDashboardComponent],
+  declarations: [LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent, AddDashboardComponent],
 
   imports: [
     CommonModule,
