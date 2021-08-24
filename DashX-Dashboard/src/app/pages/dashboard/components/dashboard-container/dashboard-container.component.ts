@@ -148,34 +148,11 @@ openCreateDashboardDialog(): void {
 OpenDashboard(){
   this._router.navigateByUrl('/dashboard/current')
 }
-AddDashboard()
+AddDashboard(result)
 {
-  this._dashboard = this.dashboardService.GetDefaultDashboardObject()
-  //this.dashboardList = this._dashboard;
+  this._dashboard = this.dashboardService.GetDefaultDashboardObject();
+  this.dashboardList.push(result);
 }
-
-  SaveDashboardContainer(){
- 
-  }
-
-  
-
-  DeleteChart(chartId)
-{
-    // var filteredData = this._dashboard.filter((chartData) => {
-    //   return chartData.chartID != chartId
-    // })
-    // this._dashboard = filteredData
-
-  }
-
- 
-
-
-
-
-
-
 
 
   openDialog(): void {
@@ -192,7 +169,7 @@ AddDashboard()
       this.title = result.title;
       this.description = result.description;
  
-      this.AddDashboard();
+      this.AddDashboard(result);
     });
   }
 
