@@ -1,5 +1,5 @@
 {
-  "name": "dashx",
+  "name": "@kalpriksh/dashx",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^12.0.2",
