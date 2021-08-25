@@ -11,10 +11,10 @@ export interface DialogData {
 }
 //gridster
 import {CompactType, DisplayGrid, Draggable, GridsterConfig, GridsterItem, GridType, PushDirections, Resizable} from 'angular-gridster2';
-import { Dashboard } from '../../models';
+import { Dashboard, DashboardObject } from '../../models';
 import { DashboardService } from '../../services';
 import { AppConfig } from '../../services/app-config.service';
-import { AddDashboardComponent } from '../../components/add-dashboard/add-dashboard.component';
+import { AddDashboardComponent } from '../add-dashboard/add-dashboard.component';
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -33,13 +33,14 @@ export class DashboardContainerComponent implements OnInit {
   //gridster properties
   options: GridsterConfig;
   dashboard: Array<GridsterItem>;
-  _dashboard : Dashboard ;
+  _dashboard : DashboardObject ;
   title: string;
   description: string;
+ // dashboardList: Dashboard;
 
   dashboardList = [
     {
-      content : "Sales",
+      title : "Sale",
       description : "Description",
       color : "blue",
       position : {
@@ -53,14 +54,7 @@ export class DashboardContainerComponent implements OnInit {
 
 
   constructor(private _router : Router, private dashboardService: DashboardService, public dialog: MatDialog) { 
-
-    this._dashboard = dashboardService.loadDashboardData();
-  
-    //toggle demo charts
-    if(AppConfig.settings.variables.demoChartVisible)
-    {
-      this._dashboard.charts = [];
-    }
+    //this.dashboardList =  dashboardService.loadDashboardData();
     
   }
   
@@ -151,18 +145,14 @@ addItem(): void {
 openCreateDashboardDialog(): void {
 
 }
-
-AddDashboard()
-{
-  this._dashboard.charts.push(this.dashboardService.GetDefaultChartObject())
-  console.log('service called');
+OpenDashboard(){
+  this._router.navigateByUrl('/dashboard/current')
 }
-  SaveDashboardContainer(){
-    /**
-     * creates dashboard object
-     * returns the object to be saved
-     */
-  }
+AddDashboard(result)
+{
+  this._dashboard = this.dashboardService.GetDefaultDashboardObject();
+  this.dashboardList.push(result);
+}
 
 
   openDialog(): void {
@@ -179,7 +169,7 @@ AddDashboard()
       this.title = result.title;
       this.description = result.description;
  
-      this.AddDashboard();
+      this.AddDashboard(result);
     });
   }
 

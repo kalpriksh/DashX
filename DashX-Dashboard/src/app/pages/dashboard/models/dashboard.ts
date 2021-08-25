@@ -3,7 +3,7 @@ import { GridsterItem } from "angular-gridster2";
 export interface Dashboard
 {
   id : string,
-  data : DashboardData,
+  data : DashboardObject,
   color : string,
   position : {
     rows : number,
@@ -22,7 +22,7 @@ export interface ChartObject
   chartData : any
 }
 
-export interface DashboardData {
+export interface DashboardObject {
   title: string,
   description: string
 }

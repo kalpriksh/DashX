@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardContainerComponent } from './pages/dashboard/pages/dashboard-container/dashboard-container.component';
+import { DashboardContainerComponent } from './pages/dashboard/components/dashboard-container/dashboard-container.component';
 import { ChartsContainerComponent } from './pages/dashboard/components/charts-container/charts-container.component';
 
 

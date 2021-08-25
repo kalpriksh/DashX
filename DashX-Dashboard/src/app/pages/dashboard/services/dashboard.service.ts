@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
-import { LineChartData, PieChartData, BarGraphData, Dashboard, KpiData, DashboardData, ChartObject } from '../models';
+import { LineChartData, PieChartData, BarGraphData, Dashboard, KpiData, ChartObject, DashboardObject } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class DashboardService {
   kpiDummyData : KpiData
   pieChartDummyData : PieChartData
   lineChartDummyData : LineChartData
-  dashboardDummyData: DashboardData
+  dashboardDummyData: DashboardObject
   demoPieChartPosition : GridsterItem
   demoLineChartPosition : GridsterItem
   demoBarChartPosition : GridsterItem
@@ -150,18 +150,7 @@ export class DashboardService {
           x : 0,
           y : 0
         },
-        charts :[
-        {
-          chartType : "line",
-          chartID : 0,
-          position :{
-            cols : 80,
-            rows : 45,
-            x : 2,
-            y : 3
-            },
-          chartData : this.lineChartDummyData
-        }]
+        charts :[]
       }
 
   }
@@ -201,14 +190,12 @@ export class DashboardService {
       position : this.demoKPIPosition
     }
   }
-  public GetDefaultChartObject(): ChartObject 
+  public GetDefaultDashboardObject(): DashboardObject 
   { 
     console.log(this.dashboardDummyData);
     return {
-      chartData : this.dashboardDummyData,
-      chartID : 0,
-      chartType : 'Dashboard',
-      position : this.demoDashboardPosition
+      title: 'test title',
+      description: 'test description'
     }
   }
 
