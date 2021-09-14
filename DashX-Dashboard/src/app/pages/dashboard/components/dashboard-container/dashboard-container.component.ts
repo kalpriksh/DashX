@@ -38,24 +38,11 @@ export class DashboardContainerComponent implements OnInit {
   description: string;
  // dashboardList: Dashboard;
 
-  dashboardList = [
-    {
-      title : "Sale",
-      description : "Description",
-      color : "blue",
-      position : {
-        rows : 3,
-        cols : 3,
-        x : 0,
-        y : 0
-      }
-    }
-  ]
+  dashboardList = []
 
 
   constructor(private _router : Router, private dashboardService: DashboardService, public dialog: MatDialog) { 
-    //this.dashboardList =  dashboardService.loadDashboardData();
-    
+   
   }
   
   ngOnInit() {
@@ -150,26 +137,31 @@ OpenDashboard(){
 }
 AddDashboard(result)
 {
-  this._dashboard = this.dashboardService.GetDefaultDashboardObject();
+  result.color = "blue"
+  result.position = {
+    rows : 3,
+    cols : 3,
+    x : 0,
+    y : 0
+  }
   this.dashboardList.push(result);
+  this.title = this.description = null;
 }
 
 
   openDialog(): void {
-    
     const dialogRef = this.dialog.open(AddDashboardComponent, {
-     
       data: {title: this.title, description: this.description}
-     
-    })
+    }) 
     ;
     
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      if(result)
+      {
       this.title = result.title;
       this.description = result.description;
- 
       this.AddDashboard(result);
+      }
     });
   }
 
