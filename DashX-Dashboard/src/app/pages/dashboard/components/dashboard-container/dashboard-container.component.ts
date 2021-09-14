@@ -137,18 +137,22 @@ OpenDashboard(){
 }
 AddDashboard(result)
 {
-  this._dashboard = this.dashboardService.GetDefaultDashboardObject();
+  result.color = "blue"
+  result.position = {
+    rows : 3,
+    cols : 3,
+    x : 0,
+    y : 0
+  }
   this.dashboardList.push(result);
+  this.title = this.description = null;
 }
 
 
   openDialog(): void {
-    
     const dialogRef = this.dialog.open(AddDashboardComponent, {
-     
       data: {title: this.title, description: this.description}
-     
-    })
+    }) 
     ;
     
     dialogRef.afterClosed().subscribe(result => {
