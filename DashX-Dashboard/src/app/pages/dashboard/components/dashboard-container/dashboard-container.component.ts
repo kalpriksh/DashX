@@ -38,24 +38,11 @@ export class DashboardContainerComponent implements OnInit {
   description: string;
  // dashboardList: Dashboard;
 
-  dashboardList = [
-    {
-      title : "Sale",
-      description : "Description",
-      color : "blue",
-      position : {
-        rows : 3,
-        cols : 3,
-        x : 0,
-        y : 0
-      }
-    }
-  ]
+  dashboardList = []
 
 
   constructor(private _router : Router, private dashboardService: DashboardService, public dialog: MatDialog) { 
-    //this.dashboardList =  dashboardService.loadDashboardData();
-    
+   
   }
   
   ngOnInit() {
