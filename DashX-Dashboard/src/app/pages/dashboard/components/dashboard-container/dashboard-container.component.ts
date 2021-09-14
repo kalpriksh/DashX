@@ -165,11 +165,12 @@ AddDashboard(result)
     ;
     
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      if(result)
+      {
       this.title = result.title;
       this.description = result.description;
- 
       this.AddDashboard(result);
+      }
     });
   }
 
