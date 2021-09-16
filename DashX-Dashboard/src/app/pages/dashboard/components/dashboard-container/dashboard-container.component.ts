@@ -12,7 +12,7 @@ export interface DialogData {
 //gridster
 import {CompactType, DisplayGrid, Draggable, GridsterConfig, GridsterItem, GridType, PushDirections, Resizable} from 'angular-gridster2';
 import { Dashboard, DashboardObject } from '../../models';
-import { DashboardService } from '../../services';
+import { ChartEditorService, DashboardService } from '../../services';
 import { AppConfig } from '../../services/app-config.service';
 import { AddDashboardComponent } from '../add-dashboard/add-dashboard.component';
 
@@ -39,9 +39,10 @@ export class DashboardContainerComponent implements OnInit {
  // dashboardList: Dashboard;
 
   dashboardList = []
+  
 
 
-  constructor(private _router : Router, private dashboardService: DashboardService, public dialog: MatDialog) { 
+  constructor(private editorData : ChartEditorService, private _router : Router, private dashboardService: DashboardService, public dialog: MatDialog ) { 
    
   }
   
@@ -127,7 +128,7 @@ removeItem($event: MouseEvent | TouchEvent, item): void {
 }
 
 addItem(): void {
-  this.dashboard.push({x: 0, y: 0, cols: 1, rows: 1});
+  this.dashboard.push({x: 0, y: 0, cols: 3, rows: 3});
 }
 openCreateDashboardDialog(): void {
 
@@ -137,6 +138,7 @@ OpenDashboard(){
 }
 AddDashboard(result)
 {
+  result.id = this.editorData.UID();
   result.color = "blue"
   result.position = {
     rows : 3,
