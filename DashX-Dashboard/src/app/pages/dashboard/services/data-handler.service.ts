@@ -85,9 +85,8 @@ export class DataHandlerService {
       }
     ]`
     var rowObject 
-    this.http.get('http://localhost:3000/sheetdata/').subscribe(rowData => {
-      rowObject = rowData
-      this.data_new = rowObject.rows
+    this.http.get('http://localhost:3000/data/?limit=10').subscribe(rowData => {
+      this.data_new = rowData
     })
   }
 
@@ -99,15 +98,7 @@ export class DataHandlerService {
   }
   
   GetHeaders(){
-    return this.http.get('http://localhost:3000/header/all')
-    // .subscribe(res => {
-    //   headersObject = res
-    //   if(headersObject != null){
-    //     return headers = headersObject.headers
-    //   }
-    // },error => {
-    //   console.log(error);
-    // })
+    return this.http.get('http://localhost:3000/header/all');
   }
 
   GetHeaderValue(chartType : string, dataType? : string, keyName? : string){

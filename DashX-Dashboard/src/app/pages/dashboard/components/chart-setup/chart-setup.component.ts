@@ -104,6 +104,7 @@ export class ChartSetupComponent implements OnInit {
   UpdateChartSetup(){
     let headersObject
     this.chartSetup.GetSeriesName().subscribe(res => {
+      debugger
       headersObject = res
       this.seriesNames = this.categoryNames = this.availableLabelNames = this.labelNames = headersObject.headers
     })
