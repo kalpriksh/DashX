@@ -36,6 +36,7 @@ export class DashboardContainerComponent implements OnInit {
   _dashboard : DashboardObject ;
   title: string;
   description: string;
+  deleteDashboard: any;
  // dashboardList: Dashboard;
 
   dashboardList = []
@@ -126,7 +127,9 @@ removeItem($event: MouseEvent | TouchEvent, item): void {
   $event.stopPropagation();
   this.dashboard.splice(this.dashboard.indexOf(item), 1);
 }
-
+DeleteDashboard(dashboardId){
+this.dashboardList = this.dashboardList.filter(dashboard => dashboard.id != dashboardId);
+}
 addItem(): void {
   this.dashboard.push({x: 0, y: 0, cols: 3, rows: 3});
 }
