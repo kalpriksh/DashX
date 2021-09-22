@@ -1,7 +1,7 @@
 <div class = "top-toolbar">
   <mat-toolbar class = "edit-toolbar-options" color = 'basic'>
     <div>
-      <button mat-button color = "primary" (click)="openDialog()">
+      <button mat-button color = "primary" (click)="OpenAddDashboardDialog(null)">
         Add Dashboard
       </button>
     </div>
@@ -15,10 +15,10 @@
   <gridster-item [item]="item.position" *ngFor="let item of dashboardList" class = "gridster-item">
 
         <div class="dashboard-heading">
-          <button mat-icon-button style="color: gray;" id="edit-icon" (click) = 'DeleteDashboard(item.id)' >
+          <button mat-icon-button style="color: gray;" id="delete-icon" (click) = 'DeleteDashboard(item.id)' >
             <mat-icon>delete</mat-icon>
           </button>
-          <button mat-icon-button style="color: gray;" id="edit-icon" >
+          <button mat-icon-button style="color: gray;" id="edit-icon" (click)="OpenAddDashboardDialog(item.id)">
             <mat-icon>more_vert</mat-icon>
           </button>
         </div>

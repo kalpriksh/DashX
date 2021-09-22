@@ -154,19 +154,28 @@ AddDashboard(result)
 }
 
 
-  openDialog(): void {
+OpenAddDashboardDialog(dashboardId): void {
+
     const dialogRef = this.dialog.open(AddDashboardComponent, {
       data: {title: this.title, description: this.description}
-    }) 
+    })
+  
     ;
     
     dialogRef.afterClosed().subscribe(result => {
+    
       if(result)
       {
+        if(dashboardId != null)
+        {
+          this.dashboardList.find(item => item.id === dashboardId && (item.title = result.title || item.title, item.description = result.description || item.description, true));
+        }
+        else{ 
       this.title = result.title;
       this.description = result.description;
       this.AddDashboard(result);
       }
+    }
     });
   }
 
