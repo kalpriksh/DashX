@@ -16,6 +16,8 @@ export interface Dashboard
 
 export interface ChartObject
 {
+  dataSource: any,
+  table: any
   chartType : string,
   chartID : number,
   position : GridsterItem
