@@ -1,6 +1,31 @@
     <mat-accordion>
         <form #myForm = "ngForm" (keydown) = "EnterSubmit($event, myForm.form)">
 
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    Data Integration
+                    </mat-panel-title>
+                </mat-expansion-panel-header> 
+                <div> Data Source </div>
+                    <mat-form-field>
+                    <input matInput type="text">
+                    <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="_chartSetupData.title.text=''">
+                    <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+             
+                <div> Table </div>
+                <mat-form-field>
+                <input matInput type="text">
+                <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="_chartSetupData.title.text=''">
+                <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+              
+             
+            </mat-expansion-panel>
+
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.title">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
@@ -14,6 +39,9 @@
                     </button>
                 </mat-form-field>                    
             </mat-expansion-panel>
+
+
+
 
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
