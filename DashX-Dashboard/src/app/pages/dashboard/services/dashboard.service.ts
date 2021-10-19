@@ -157,6 +157,8 @@ export class DashboardService {
   public GetDefaultBarChartObject(): ChartObject 
   {
     return {
+      dataSource: null,
+      table: null,
       chartData : this.barChartDummyData,
       chartID : 0,
       chartType : 'bar',
@@ -166,6 +168,8 @@ export class DashboardService {
   public GetDefaultLineChartObject(): ChartObject 
   { 
     return {
+      dataSource: null,
+      table: null,
       chartData : this.lineChartDummyData,
       chartID : 0,
       chartType : 'line',
@@ -175,6 +179,8 @@ export class DashboardService {
   public GetDefaultPieChartObject(): ChartObject
   {
     return {
+      dataSource: null,
+      table: null,
       chartData : this.pieChartDummyData,
       chartID : 0,
       chartType : 'pie',
@@ -184,6 +190,8 @@ export class DashboardService {
   public GetDefaultKpiChartObject(): ChartObject
   {
     return {
+      dataSource: null,
+      table: null,
       chartData : this.kpiDummyData,
       chartID : 0,
       chartType : 'kpi',
