@@ -15,7 +15,7 @@
   <gridster-item [item]="item.position" *ngFor="let item of dashboardList" class = "gridster-item">
 
         <div class="dashboard-heading">
-          <button mat-icon-button style="color: gray;" id="delete-icon" (click) = 'DeleteDashboard(item.id)' >
+          <button mat-icon-button style="color: gray;" id="delete-icon" (click) = 'openDeleteDialog(item.id)' >
             <mat-icon>delete</mat-icon>
           </button>
           <button mat-icon-button style="color: gray;" id="edit-icon" (click)="OpenAddDashboardDialog(item.id)">

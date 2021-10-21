@@ -7,23 +7,26 @@
                     Data Integration
                     </mat-panel-title>
                 </mat-expansion-panel-header> 
-                <div> Data Source </div>
-                    <mat-form-field>
-                    <input matInput type="text">
-                    <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="_chartSetupData.title.text=''">
-                    <mat-icon>close</mat-icon>
-                    </button>
-                </mat-form-field>
-             
-                <div> Table </div>
-                <mat-form-field>
-                <input matInput type="text">
-                <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="_chartSetupData.title.text=''">
-                <mat-icon>close</mat-icon>
-                </button>
-            </mat-form-field>
-              
-             
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                      Data Source
+                        </mat-panel-title>
+                    </mat-expansion-panel-header> 
+                <mat-selection-list [multiple]="false" >
+                    <mat-list-option *ngFor="let item of dataSourceList" aria-label="Select an option" >{{item}}</mat-list-option>
+                </mat-selection-list>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                      Table
+                        </mat-panel-title>
+                    </mat-expansion-panel-header> 
+                <mat-selection-list [multiple]="false" >
+                    <mat-list-option *ngFor="let item of dataSourceTablesList" aria-label="Select an option" >{{item}}</mat-list-option>
+                </mat-selection-list>
+                </mat-expansion-panel>
             </mat-expansion-panel>
 
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.title">
