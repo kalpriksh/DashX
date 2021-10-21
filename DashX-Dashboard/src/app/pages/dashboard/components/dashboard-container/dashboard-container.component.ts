@@ -4,7 +4,6 @@ import { Router } from '@angular/router'
 import { GridsterModule } from 'angular-gridster2';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
-
 export interface DialogData {
   title: string;
   description: string;
@@ -15,6 +14,7 @@ import { Dashboard, DashboardObject } from '../../models';
 import { ChartEditorService, DashboardService } from '../../services';
 import { AppConfig } from '../../services/app-config.service';
 import { AddDashboardComponent } from '../add-dashboard/add-dashboard.component';
+import { DeleteConfirmationDialogComponent } from '../delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -130,6 +130,19 @@ removeItem($event: MouseEvent | TouchEvent, item): void {
 DeleteDashboard(dashboardId){
 this.dashboardList = this.dashboardList.filter(dashboard => dashboard.id != dashboardId);
 }
+
+openDeleteDialog(dashboardId): void {
+  const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
+  });
+  dialogRef.afterClosed().subscribe(result => {
+ if(result)
+{
+  this.DeleteDashboard(dashboardId)
+}
+});
+}
+
+
 addItem(): void {
   this.dashboard.push({x: 0, y: 0, cols: 3, rows: 3});
 }

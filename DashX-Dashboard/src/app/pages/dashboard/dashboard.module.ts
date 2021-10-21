@@ -48,6 +48,7 @@ import { AppConfig } from './services/app-config.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AddDashboardComponent } from './components/add-dashboard/add-dashboard.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteConfirmationDialogComponent } from './components/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -55,7 +56,7 @@ export function initializeApp(appConfig: AppConfig) {
 }
 
 @NgModule({
-  declarations: [LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent, AddDashboardComponent],
+  declarations: [LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent, AddDashboardComponent,DeleteConfirmationDialogComponent],
 
   imports: [
     CommonModule,
