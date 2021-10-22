@@ -1,10 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { ApexOptions } from 'apexcharts';
+// import { table } from 'console';
 import { ChartSetup, PieChart, BarChart, BarChartOptions, PieChartOptions, LineChart, LineChartOptions } from '../../component-classes';
-import { CategoryData, PieChartData, SeriesData } from '../../models';
+import { CategoryData, DBTables, PieChartData, SeriesData } from '../../models';
 
 import { ChartEditorService, } from '../../services'
 import { DataHandlerService } from '../../services/data-handler.service';
+
+
 
 @Component({
   selector: 'app-chart-setup',
@@ -13,7 +18,16 @@ import { DataHandlerService } from '../../services/data-handler.service';
 })
 
 export class ChartSetupComponent implements OnInit {
-  
+
+  source_select = new FormControl('valid', [
+    Validators.required
+  ]);
+
+  table_select = new FormControl('valid', [
+    Validators.required
+  ]);
+
+
   panelOpenState = true;
   // binds _chartSetupData to the UI
   _chartSetupData
@@ -25,8 +39,12 @@ export class ChartSetupComponent implements OnInit {
   pieChart: PieChart
   lineChart: LineChart
   //#endregion
-  
+
   //#region UI variables
+  dbSource = ["mongo", "test_source_1", "test_source_2"]
+  dbTables : string[]
+
+
   seriesNames : string[];
   categoryNames : any[];
   availableCategoryNames: CategoryData[];
@@ -51,8 +69,8 @@ export class ChartSetupComponent implements OnInit {
     this.barChart = new BarChart();
     this.pieChart = new PieChart();
     this.lineChart = new LineChart();
-    
-        
+
+
     this.chartData.editorData_current.subscribe(_chartObject =>{
       this.Reset()
       this.LoadData(_chartObject)
@@ -65,7 +83,23 @@ export class ChartSetupComponent implements OnInit {
     this.categoryNames = ["null"]
 
   }
-  
+
+  //get available tables based on the data source
+  GetDBTables(source_selection){
+    this.dataHandler.GetDBTables(source_selection.value).subscribe(res => {
+      this.dbTables = res[Object.keys(res)[0]]
+    });
+  }
+
+  //get headers based on the table selected
+  UpdateTableHeaders(tableHeader){
+    let headersObject
+    this.dataHandler.GetHeadersForTable( this.source_select.value, tableHeader.value).subscribe(data => {
+      headersObject = data
+      this.seriesNames = this.categoryNames = this.availableLabelNames = this.labelNames = headersObject.headers
+    })
+  }
+
   DeleteSeries(deletedSeries)
   {
     this.seriesList = this.seriesList.filter(series => series !== deletedSeries);
@@ -75,7 +109,7 @@ export class ChartSetupComponent implements OnInit {
   }
 
   DeleteCategory(deletedCategory)
-  {  
+  {
 
     this.availableCategoryNames = this.availableCategoryNames.filter(category => category !== deletedCategory);
     this._chartSetupData.xaxis.categories.pop(deletedCategory)
@@ -84,7 +118,7 @@ export class ChartSetupComponent implements OnInit {
   }
 
   DeleteLabel(deletedLabel)
-  { 
+  {
     this.availableLabelNames = this.availableLabelNames.filter(label => label !== deletedLabel);
     this._chartSetupData.label.pop(deletedLabel)
     this._chartObject.chartData = this._chartSetupData
@@ -92,7 +126,7 @@ export class ChartSetupComponent implements OnInit {
   }
 
   /**
-   * initialize the lists as empty 
+   * initialize the lists as empty
    */
   Reset(){
     this.seriesList = [];
@@ -104,7 +138,6 @@ export class ChartSetupComponent implements OnInit {
   UpdateChartSetup(){
     let headersObject
     this.chartSetup.GetSeriesName().subscribe(res => {
-      debugger
       headersObject = res
       this.seriesNames = this.categoryNames = this.availableLabelNames = this.labelNames = headersObject.headers
     })
@@ -165,12 +198,12 @@ export class ChartSetupComponent implements OnInit {
       // TODO: Harcoding here, Pie object does not contain series object @pall97
       dataToPush.name = 'Teams'
       this.seriesList.push(dataToPush)
-      
+
     }
   }
-  
+
   /**
-   * function to update an orginal field(category/series) with selected one 
+   * function to update an orginal field(category/series) with selected one
    * @param updated updated field value
    * @param original original field value
    * @param fieldType type of field value (....can be series, category..)
@@ -190,9 +223,9 @@ export class ChartSetupComponent implements OnInit {
   }
 
   LoadData(chartObject){
-    
-    //load data from connected DB 
-    this.UpdateChartSetup();
+
+    //load data from connected DB
+    //this.UpdateChartSetup();
 
     if(chartObject){
 
@@ -207,7 +240,7 @@ export class ChartSetupComponent implements OnInit {
         this.ChartInit(_chartData)
       }
       else if(chartObject.chartType == "Line") {
-        
+
         let _lineChart : LineChart = chartObject
         let _chartData : Partial<LineChartOptions> = _lineChart.chartData
         this.ChartInit(_chartData)
@@ -219,44 +252,58 @@ export class ChartSetupComponent implements OnInit {
 
   AddData(dataTypeName : string, dataType : string){
     /**
-     * adds series/category to the ui    
+     * adds series/category to the ui
      * adds series/category to the chartData object
      */
     // default case
     if(dataTypeName == "null"){
       alert("need to add data file")
     }
-    else 
-    { 
-      var seriesData = this.chartSetup.GetSeriesData(this._chartObject.chartType, dataType, dataTypeName)
-        
-        this.addedSeries = this.barChart.CreateNewSeries(dataTypeName, seriesData);
-        // to prevent call by reference
-        let dataToPush : SeriesData = {
-          name : this.addedSeries.name,
-          data : this.addedSeries.data
-        } 
+    else
+    {
+        if(this.source_select.value == "" || this.table_select.value == "")
+        {
+          alert("source or table not specified");
+        }
+        var seriesData : any[] = []
+        let dataObject
 
-        if(dataType == 'series'){
-          this.seriesList.push(dataToPush)
-          this._chartSetupData.series.push(dataToPush)
+        // fetch data for a particular header
+        this.dataHandler.GetHeaderValue(this.source_select.value, this.table_select.value, dataTypeName).subscribe(res => {
 
-          if (this._chartObject.chartType == "Pie"){
-            this._chartSetupData.series = dataToPush.data
-            this.seriesList.push(dataToPush)
+          dataObject = res
+          dataObject.forEach(row =>{
+            seriesData.push(row[dataTypeName])
+          })
+
+          this.addedSeries = this.barChart.CreateNewSeries(dataTypeName, seriesData);
+          // to prevent call by reference
+          let dataToPush : SeriesData = {
+            name : this.addedSeries.name,
+            data : this.addedSeries.data
           }
-        }
-        else if(dataType == 'category'){
-          this._chartSetupData.xaxis.categories = dataToPush.data;
-          this.categoryList.push(dataToPush)
-          // this.availableCategoryNames.push(dataToPush.name)
-        }
-        else
-        if (dataType == 'label'){
-          this._chartSetupData.labels = dataToPush.data;
-          this.labelList.push(dataToPush)
-          this.availableLabelNames.push(dataToPush.name)
-        }
+
+          if(dataType == 'series'){
+            this.seriesList.push(dataToPush)
+            this._chartSetupData.series.push(dataToPush)
+
+            if (this._chartObject.chartType == "Pie"){
+              this._chartSetupData.series = dataToPush.data
+              this.seriesList.push(dataToPush)
+            }
+          }
+          else if(dataType == 'category'){
+            this._chartSetupData.xaxis.categories = dataToPush.data;
+            this.categoryList.push(dataToPush)
+            // this.availableCategoryNames.push(dataToPush.name)
+          }
+          else
+          if (dataType == 'label'){
+            this._chartSetupData.labels = dataToPush.data;
+            this.labelList.push(dataToPush)
+            this.availableLabelNames.push(dataToPush.name)
+          }
+        });
     }
 
       // update seriesList UI

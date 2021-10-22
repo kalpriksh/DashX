@@ -17,6 +17,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 import { NgApexchartsModule } from "ng-apexcharts";
@@ -47,7 +49,7 @@ import { DataHandlerService } from './services/data-handler.service';
 import { AppConfig } from './services/app-config.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AddDashboardComponent } from './components/add-dashboard/add-dashboard.component';
-import { MatDialogModule } from '@angular/material/dialog';
+
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -83,7 +85,8 @@ export function initializeApp(appConfig: AppConfig) {
     BrowserAnimationsModule,
     GridsterModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   exports: [
     

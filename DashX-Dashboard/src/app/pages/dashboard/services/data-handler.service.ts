@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DBTables } from "../models";
 import * as dummyData from "../services/chartTestData.json"
 
 
@@ -10,8 +11,10 @@ import * as dummyData from "../services/chartTestData.json"
 export class DataHandlerService {
   data : any
   data_new : any
-  
-  constructor(private http : HttpClient) { 
+  row_limit : number
+
+  constructor(private http : HttpClient, ) {
+    this.row_limit = 10
     this.data = `[
       {
         "Country": "Colombia",
@@ -84,32 +87,43 @@ export class DataHandlerService {
         "Metric" : 60000
       }
     ]`
-    var rowObject 
-    this.http.get('http://localhost:3000/data/?limit=10').subscribe(rowData => {
-      this.data_new = rowData
-    })
+  }
+
+  // fetched tables based on dbName specified
+  GetDBTables(dbName : string){
+    if(dbName == "mongo")
+    {
+      return this.http.get('http://localhost:3000/mongo/tables');
+    }
+    return null;
   }
 
   GetHeaders_(){
     var dummyData = JSON.parse(this.data);
     console.log(Object.keys(dummyData[0]));
-    
+
     return Object.keys(dummyData[0]);
   }
-  
+
   GetHeaders(){
-    return this.http.get('http://localhost:3000/header/all');
+    // fetches headers for mongo
+      return this.http.get(`http://localhost:3000/header/all/`);
   }
 
-  GetHeaderValue(chartType : string, dataType? : string, keyName? : string){
-    // var url = 'http://localhost:3000/header/?name=' + keyName;
-    debugger
-    // return this.http.get(url)
-    var values : any[] = []
-    this.data_new.forEach(row =>{
-      values.push(row[keyName])
-    },this)
-    return values
+  GetHeadersForTable(dbName, dbTableName){
+
+    if(dbName == "mongo"){
+      return this.http.get(`http://localhost:3000/headers/?tablename=${dbTableName}`);
+    }
+
+  }
+
+
+  GetHeaderValue(dbName : string, tableName : string, keyName? : string){
+    if(dbName == "mongo"){
+      return this.http.get(`http://localhost:3000/headerdata/?tablename=${tableName}&limit=10`);
+    }
+    return null;
   }
 
 }

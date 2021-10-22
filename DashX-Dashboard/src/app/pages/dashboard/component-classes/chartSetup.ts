@@ -12,7 +12,7 @@ export class ChartSetup {
     private barChart : BarChart
     private pieChart : PieChart
     private lineChart : LineChart
-    
+
     //#region properties
     //#endregion
 
@@ -24,16 +24,16 @@ export class ChartSetup {
     }
 
     //#region functions related to series
-    // functionality changes wrt to type of graph should be handled here 
+    // functionality changes wrt to type of graph should be handled here
 
     // to get series available as input for the chart
     GetSeriesName(){
         return this.dataHandler.GetHeaders()
     }
 
-    // to get data for a series based on series name 
-    GetSeriesData(chartType : string, dataType : string, name : string){
-        return this.dataHandler.GetHeaderValue(chartType, dataType, name)
+    // to get data for a series based on series name
+    GetSeriesData(dbName : string, dbTable : string, name : string){
+        return this.dataHandler.GetHeaderValue(dbName, dbTable, name)
     }
 
     // to create category data used by chart-setup component
@@ -46,4 +46,4 @@ export class ChartSetup {
     }
 
     //#endregion
-}    
+}

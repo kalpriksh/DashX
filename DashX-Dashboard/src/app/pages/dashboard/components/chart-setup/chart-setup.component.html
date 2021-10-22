@@ -4,26 +4,34 @@
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                    Data Integration
+                    Data
                     </mat-panel-title>
-                </mat-expansion-panel-header> 
-                <div> Data Source </div>
-                    <mat-form-field>
-                    <input matInput type="text">
-                    <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="_chartSetupData.title.text=''">
-                    <mat-icon>close</mat-icon>
-                    </button>
-                </mat-form-field>
-             
-                <div> Table </div>
-                <mat-form-field>
-                <input matInput type="text">
-                <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="_chartSetupData.title.text=''">
-                <mat-icon>close</mat-icon>
-                </button>
-            </mat-form-field>
-              
-             
+                </mat-expansion-panel-header>
+
+                <div>Source:
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose one</mat-label>
+                    <mat-select [formControl]="source_select" (selectionChange)="GetDBTables($event)">
+                    <mat-option value = "valid">none</mat-option>
+                    <mat-option *ngFor="let item of dbSource" value = "{{item}}">{{item}}</mat-option>
+                    </mat-select>
+                    <mat-hint>select data source</mat-hint>
+                  </mat-form-field>
+                </div>
+
+                <div>Table:
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Choose one</mat-label>
+                        <mat-select [formControl]="table_select" (selectionChange)="UpdateTableHeaders($event)">
+                        <mat-option value = "valid">none</mat-option>
+                        <mat-option *ngFor="let item of dbTables" value = "{{item}}">{{item}}</mat-option>
+                        </mat-select>
+                        <mat-hint>select data table</mat-hint>
+                   </mat-form-field>
+
+                </div>
+            
             </mat-expansion-panel>
 
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.title">
