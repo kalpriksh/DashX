@@ -56,6 +56,8 @@ export class ChartSetupComponent implements OnInit {
   categoryList : any[];
   chartTypeData : string; //test variable
   chartTypesList : string[];
+  dataSourceList : string[];
+  dataSourceTablesList : string[];
   updatedCategory : string;
   updatedSeriesOption : string[] = [''];
   updatedCategoryOption : string[] = [''];
@@ -79,6 +81,9 @@ export class ChartSetupComponent implements OnInit {
 
     this.Reset()
     this.chartTypesList = ["Bar","Line","Pie"]
+    this.dataSourceList = ["Mongo"]
+    this.dataSourceTablesList = ["Customers","Sales"]
+
     this.seriesNames = ["null"]
     this.categoryNames = ["null"]
 

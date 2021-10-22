@@ -31,7 +31,7 @@
                    </mat-form-field>
 
                 </div>
-            
+
             </mat-expansion-panel>
 
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.title">
@@ -45,7 +45,7 @@
                     <button mat-button *ngIf="_chartSetupData && _chartSetupData.title.text" matSuffix mat-icon-button aria-label="Clear" (click)="_chartSetupData.title.text=''">
                     <mat-icon>close</mat-icon>
                     </button>
-                </mat-form-field>                    
+                </mat-form-field>
             </mat-expansion-panel>
 
 
@@ -56,7 +56,7 @@
                     <mat-panel-title>
                     Chart Type
                     </mat-panel-title>
-                </mat-expansion-panel-header> 
+                </mat-expansion-panel-header>
                 <mat-selection-list [multiple]="false" >
                     <mat-list-option *ngFor="let item of chartTypesList" aria-label="Select an option" >{{item}}</mat-list-option>
                 </mat-selection-list>
@@ -69,7 +69,7 @@
                         X Axis
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                
+
                 <div style="margin-bottom: 10px;">
                     <button mat-button  [matMenuTriggerFor]="menu">
                         <mat-icon>add_circle</mat-icon>
@@ -93,7 +93,7 @@
                             </div>
                             <!-- <mat-icon>delete</mat-icon> -->
                         </mat-expansion-panel-header>
-                        
+
                         <!-- content -->
                         <mat-selection-list #categorySelectionList [(ngModel)]="updatedCategoryOption" (ngModelChange)="UpdateField($event, category,'category')" [multiple]="false" [ngModelOptions]="{standalone : true}">
                             <mat-list-option *ngFor="let option of categoryNames" [value]="option">
@@ -107,10 +107,10 @@
                 <mat-menu #menu="matMenu">
                     <div *ngFor="let item of categoryNames">
                         <button mat-menu-item (click) = "AddData(item,'category')">
-                            <mat-icon>playlist_add</mat-icon>{{item}} 
+                            <mat-icon>playlist_add</mat-icon>{{item}}
                         </button>
                     </div>
-                </mat-menu>                  
+                </mat-menu>
             </mat-expansion-panel>
 
             <!-- Series -->
@@ -154,10 +154,10 @@
                 <mat-menu #seriesMenu="matMenu">
                     <div *ngFor="let item of seriesNames">
                         <button mat-menu-item (click) = "AddData(item,'series')">
-                            <mat-icon>playlist_add</mat-icon>{{item}} 
+                            <mat-icon>playlist_add</mat-icon>{{item}}
                         </button>
                     </div>
-                </mat-menu>                  
+                </mat-menu>
             </mat-expansion-panel>
 
             <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -165,7 +165,7 @@
                     <mat-panel-title>
                     Labels
                     </mat-panel-title>
-                </mat-expansion-panel-header>  
+                </mat-expansion-panel-header>
                 <button mat-button  [matMenuTriggerFor]="labelMenu">
                     <mat-icon>add_circle</mat-icon>
                     Labels
@@ -173,7 +173,7 @@
                     <div *ngFor="let label of labelList">
                         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngIf="_chartSetupData && _chartSetupData.labels">
                             <mat-expansion-panel-header>
-                                <mat-panel-title class = "delete-labels"> 
+                                <mat-panel-title class = "delete-labels">
                                         <button mat-button (click) = 'DeleteLabel(label)'>
                                             <mat-icon>delete</mat-icon>
                                         </button>
@@ -185,11 +185,11 @@
                     <mat-menu #labelMenu="matMenu">
                         <div *ngFor="let item of labelNames">
                             <button mat-menu-item (click) = "AddData(item,'label')">
-                                <mat-icon>playlist_add</mat-icon>{{item}} 
+                                <mat-icon>playlist_add</mat-icon>{{item}}
                             </button>
                         </div>
-                    </mat-menu>                  
+                    </mat-menu>
             </mat-expansion-panel>
-            
+
         </form>
     </mat-accordion>

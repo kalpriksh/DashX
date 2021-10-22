@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule, routingComponents } from '../../app-routing.module';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms' 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -49,7 +49,7 @@ import { DataHandlerService } from './services/data-handler.service';
 import { AppConfig } from './services/app-config.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AddDashboardComponent } from './components/add-dashboard/add-dashboard.component';
-
+import { DeleteConfirmationDialogComponent } from './components/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 
 export function initializeApp(appConfig: AppConfig) {
@@ -57,7 +57,7 @@ export function initializeApp(appConfig: AppConfig) {
 }
 
 @NgModule({
-  declarations: [LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent, AddDashboardComponent],
+  declarations: [LineChartComponent, PieChartComponent, BarGraphComponent, ChartEditorComponent, ChartSetupComponent, ReadExcelDirective, KeyPerformanceIndicatorComponent, routingComponents, NewChartTabDirective, ChartCustomizerComponent, AddDashboardComponent,DeleteConfirmationDialogComponent],
 
   imports: [
     CommonModule,
@@ -89,11 +89,11 @@ export function initializeApp(appConfig: AppConfig) {
     MatSelectModule
   ],
   exports: [
-    
+
   ],
   providers: [
     AppConfig,
-    { 
+    {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
       deps: [AppConfig], multi: true
@@ -103,6 +103,6 @@ export function initializeApp(appConfig: AppConfig) {
     DataHandlerService,
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
   ]
-  
+
 })
 export class DashboardModule { }
